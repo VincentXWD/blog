@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kirai</title>
   
-  
+  <subtitle>我好菜啊 QAQ | I Good Vegetable A QAQ</subtitle>
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="http://vincentxwd.github.io/blog/"/>
