@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="用hexo搭了博客，以后就在这里写题解和随笔了。$$mathjax测试：C_i=\sum_{j×k=i}A_j*B_k$$复健开了一场CF div2，感觉非常不好啊。。 比赛链接是http://codeforces.com/contest/1011 A：n个字符取k个，不能取字典序相邻的，也不能取相同的。就这样取，问最小的ascii-‘a’+1的和是多少。 贪心，给字符排个序，取第一个，然后后面的">
+<meta name="keywords" content="Codeforces">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[CF1011] Codeforces Round #499 (Div. 2)">
+<meta property="og:url" content="http://vincentxwd.github.io/blog/2018/07/29/CF1011-Codeforces-Round-499-Div-2/index.html">
+<meta property="og:site_name" content="Kirai">
+<meta property="og:description" content="用hexo搭了博客，以后就在这里写题解和随笔了。$$mathjax测试：C_i=\sum_{j×k=i}A_j*B_k$$复健开了一场CF div2，感觉非常不好啊。。 比赛链接是http://codeforces.com/contest/1011 A：n个字符取k个，不能取字典序相邻的，也不能取相同的。就这样取，问最小的ascii-‘a’+1的和是多少。 贪心，给字符排个序，取第一个，然后后面的">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-30T03:55:28.265Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[CF1011] Codeforces Round #499 (Div. 2)">
+<meta name="twitter:description" content="用hexo搭了博客，以后就在这里写题解和随笔了。$$mathjax测试：C_i=\sum_{j×k=i}A_j*B_k$$复健开了一场CF div2，感觉非常不好啊。。 比赛链接是http://codeforces.com/contest/1011 A：n个字符取k个，不能取字典序相邻的，也不能取相同的。就这样取，问最小的ascii-‘a’+1的和是多少。 贪心，给字符排个序，取第一个，然后后面的">
+
+
+
+  <link rel="alternate" href="/blog/atom.xml" title="Kirai" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://vincentxwd.github.io/blog/2018/07/29/CF1011-Codeforces-Round-499-Div-2/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>[CF1011] Codeforces Round #499 (Div. 2) | Kirai</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kirai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/blog/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/blog/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archiv</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vincentxwd.github.io/blog/blog/2018/07/29/CF1011-Codeforces-Round-499-Div-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kirai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kirai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[CF1011] Codeforces Round #499 (Div. 2)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2018-07-29 21:01:44" itemprop="dateCreated datePublished" datetime="2018-07-29T21:01:44+08:00">2018-07-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2018-07-30 11:55:28" itemprop="dateModified" datetime="2018-07-30T11:55:28+08:00">2018-07-30</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>用hexo搭了博客，以后就在这里写题解和随笔了。<br>$$<br>mathjax测试：C_i=\sum_{j×k=i}A_j*B_k<br>$$<br>复健开了一场CF div2，感觉非常不好啊。。</p>
+<p>比赛链接是<a href="http://codeforces.com/contest/1011" target="_blank" rel="noopener">http://codeforces.com/contest/1011</a></p>
+<p>A：<strong>n个字符取k个，不能取字典序相邻的，也不能取相同的。就这样取，问最小的ascii-‘a’+1的和是多少。</strong></p>
+<p>贪心，给字符排个序，取第一个，然后后面的取最小的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">111</span>;</span><br><span class="line"><span class="keyword">char</span> s[maxn];</span><br><span class="line"><span class="keyword">int</span> n, k;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;k)) &#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, s);</span><br><span class="line">    sort(s, s+n);</span><br><span class="line">    <span class="keyword">int</span> pre = <span class="number">0</span>, ret = s[<span class="number">0</span>] - <span class="string">'a'</span> + <span class="number">1</span>, tot = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span>(tot &gt;= k) <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">if</span>(s[i] - s[pre] &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        ret += s[i] - <span class="string">'a'</span> + <span class="number">1</span>;</span><br><span class="line">        pre = i;</span><br><span class="line">        tot++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(tot &lt; k) &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"-1\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ret);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>B：<strong>n个人吃东西，一共m个东西，每个东西都有一类。每个人每天只能吃一个同一类东西，问怎么分配这m个东西，让这n个人吃得时间最久。</strong></p>
+<p>m很小，直接遍历天数day，然后贪心地check就ok了（数据量大了套个二分就行）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">111</span>;</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> a[maxn], vis[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ok</span><span class="params">(<span class="keyword">int</span> day)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> tot = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">101</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span>(vis[i] &gt;= day) tot += (<span class="keyword">int</span>)(vis[i] / (<span class="keyword">double</span>)day);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> tot &gt;= n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m)) &#123;</span><br><span class="line">    <span class="keyword">int</span> lo = <span class="number">0</span>, hi = <span class="number">100000</span>;</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">      vis[a[i]]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n &gt; m) &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"0\n"</span>);</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> mid = <span class="number">0</span>; mid &lt; <span class="number">101</span>; mid++) &#123;</span><br><span class="line">      <span class="keyword">if</span>(ok(mid)) ret = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ret);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>C：<strong>n个星球，一个人坐重量为m的飞船从1出发到n，需要走1-&gt;2-&gt;..-&gt;n-&gt;1这样的路径，从每个点起飞要消耗ai的燃油，在每个点降落要消耗bi的燃油，燃油只能从1上带，问这人要带多少燃油才能完成这个路径。</strong></p>
+<p>二分燃油的量，判断是否满足，或从1-&gt;n-&gt;n-1-&gt;…1逆推，上一次的燃油量是x*m/(x-1)，x为起飞or降落的消耗。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1010</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> eps = <span class="number">1e-9</span>;</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">double</span> a[maxn], b[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ok</span><span class="params">(<span class="keyword">double</span> fuel)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">double</span> tot = fuel + m;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">    tot -= (<span class="keyword">double</span>)tot / (<span class="keyword">double</span>)a[i];</span><br><span class="line">    tot -= (<span class="keyword">double</span>)tot / (<span class="keyword">double</span>)b[i+<span class="number">1</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &gt;= <span class="number">2</span>; i--) &#123;</span><br><span class="line">    tot -= (<span class="keyword">double</span>)tot / (<span class="keyword">double</span>)a[i];</span><br><span class="line">    tot -= (<span class="keyword">double</span>)tot / (<span class="keyword">double</span>)b[i<span class="number">-1</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> tot - m &gt;= eps;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m)) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="built_in">cin</span> &gt;&gt; b[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">double</span> ret = m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">    	ret = b[i] * ret / (b[i] - <span class="number">1.0</span>);</span><br><span class="line">    	ret = a[i+<span class="number">1</span>] * ret / (a[i+<span class="number">1</span>] - <span class="number">1.0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  	ret = b[n] * ret / (b[n] - <span class="number">1.0</span>);</span><br><span class="line">  	ret = a[<span class="number">1</span>] * ret / (a[<span class="number">1</span>] - <span class="number">1.0</span>);</span><br><span class="line">  	ret -= m;</span><br><span class="line">  	<span class="keyword">if</span>(ret &gt; <span class="number">1e9</span>) &#123;</span><br><span class="line">  		<span class="built_in">printf</span>(<span class="string">"-1\n"</span>);</span><br><span class="line">  	&#125;</span><br><span class="line">  	<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%.10f\n"</span>, ret);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>D：<strong>猜一个1到m的数字x，可以询问最多60次。每次回答有可能是假的，假的情况那么会输出真答案判别的相反数（大于的时候返回1，如果假的情况就返回-1，小于同理），回答的真假情况序列p的长为n，回答按照这个序列循环返回结果。求这个数字x。</strong></p>
+<p>可以用数字1去试探n次（当然答案是1的时候可以直接结束程序了），把n次询问的真假情况预处理出来记下，之后就可以愉快地二分x，根据上面预处理出来的真假情况修改返回结果了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100100</span>;</span><br><span class="line"><span class="keyword">int</span> p[maxn];</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, y);</span><br><span class="line">  fflush(<span class="built_in">stdout</span>);</span><br><span class="line">  <span class="keyword">int</span> t;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">  <span class="keyword">if</span>(t == <span class="number">0</span> || t == <span class="number">2</span>) <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;m,&amp;n)) &#123;</span><br><span class="line">    <span class="built_in">memset</span>(p, <span class="number">0</span>, <span class="keyword">sizeof</span>(p));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">      <span class="keyword">int</span> t = query(<span class="number">1</span>);</span><br><span class="line">      p[i] = (t == <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> lo = <span class="number">2</span>, hi = m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> q = <span class="number">0</span>; ; q++) &#123;</span><br><span class="line">      <span class="keyword">int</span> mid = (lo + hi) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">int</span> t = query(mid);</span><br><span class="line">      <span class="keyword">if</span>(!p[q%n]) t = -t;</span><br><span class="line">      <span class="keyword">if</span>(t == <span class="number">1</span>) lo = mid + <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">else</span> hi = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>E：<strong>n个数，每个数可以取任意次，相加后对k取模。求模的结果的个数。</strong></p>
+<p>统计k和每个数的gcd，答案就是k/gcd，依次取0,k/gcd,2k/gcd…就行了。过阵子尝试证明一下，相关概念有：有限域，生成元，生成多项式，循环群，裴蜀定理。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> LL = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100100</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line">LL k;</span><br><span class="line">LL a[maxn];</span><br><span class="line"><span class="keyword">bool</span> vis[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%lld"</span>,&amp;n,&amp;k)) &#123;</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">    LL x = k;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;a[i]);</span><br><span class="line">      x = __gcd(x, a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, k / x);</span><br><span class="line">    <span class="keyword">for</span>(LL i = <span class="number">0</span>; i &lt; k; i+=x) &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"%lld "</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/Codeforces/" rel="tag"># Codeforces</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Kirai</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/blog/archives/">
+                
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">Tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/blog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kirai</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
