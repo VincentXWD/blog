@@ -5,9 +5,9 @@
   <subtitle>我好菜啊 QAQ | I Good Vegetable A QAQ</subtitle>
   <link href="/blog/atom.xml" rel="self"/>
   
-  <link href="http://vincentxwd.github.io/blog/"/>
+  <link href="https://vincentxwd.github.io/blog/"/>
   <updated>2018-08-01T05:30:57.827Z</updated>
-  <id>http://vincentxwd.github.io/blog/</id>
+  <id>https://vincentxwd.github.io/blog/</id>
   
   <author>
     <name>Kirai</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>[Codeforces1015D] Walking Between Houses (构造)</title>
-    <link href="http://vincentxwd.github.io/blog/2018/08/01/Codeforces1015D-Walking-Between-Houses-%E6%9E%84%E9%80%A0/"/>
-    <id>http://vincentxwd.github.io/blog/2018/08/01/Codeforces1015D-Walking-Between-Houses-构造/</id>
+    <link href="https://vincentxwd.github.io/blog/2018/08/01/Codeforces1015D-Walking-Between-Houses-%E6%9E%84%E9%80%A0/"/>
+    <id>https://vincentxwd.github.io/blog/2018/08/01/Codeforces1015D-Walking-Between-Houses-构造/</id>
     <published>2018-08-01T03:50:49.000Z</published>
     <updated>2018-08-01T05:30:57.827Z</updated>
     
@@ -34,17 +34,17 @@
     
     </summary>
     
-      <category term="Codeforces" scheme="http://vincentxwd.github.io/blog/categories/Codeforces/"/>
+      <category term="Codeforces" scheme="https://vincentxwd.github.io/blog/categories/Codeforces/"/>
     
     
-      <category term="构造" scheme="http://vincentxwd.github.io/blog/tags/%E6%9E%84%E9%80%A0/"/>
+      <category term="构造" scheme="https://vincentxwd.github.io/blog/tags/%E6%9E%84%E9%80%A0/"/>
     
   </entry>
   
   <entry>
     <title>[Codeforces1013E] Hills(DP)</title>
-    <link href="http://vincentxwd.github.io/blog/2018/07/31/Codeforces1013E-Hills-DP/"/>
-    <id>http://vincentxwd.github.io/blog/2018/07/31/Codeforces1013E-Hills-DP/</id>
+    <link href="https://vincentxwd.github.io/blog/2018/07/31/Codeforces1013E-Hills-DP/"/>
+    <id>https://vincentxwd.github.io/blog/2018/07/31/Codeforces1013E-Hills-DP/</id>
     <published>2018-07-31T13:40:19.000Z</published>
     <updated>2018-07-31T13:40:36.192Z</updated>
     
@@ -59,17 +59,17 @@
     
     </summary>
     
-      <category term="Codeforces" scheme="http://vincentxwd.github.io/blog/categories/Codeforces/"/>
+      <category term="Codeforces" scheme="https://vincentxwd.github.io/blog/categories/Codeforces/"/>
     
     
-      <category term="DP" scheme="http://vincentxwd.github.io/blog/tags/DP/"/>
+      <category term="DP" scheme="https://vincentxwd.github.io/blog/tags/DP/"/>
     
   </entry>
   
   <entry>
     <title>[CF1013] Codeforces Round #500 (Div. 2) [based on EJOI]</title>
-    <link href="http://vincentxwd.github.io/blog/2018/07/30/CF1013-Codeforces-Round-500-Div-2-based-on-EJOI/"/>
-    <id>http://vincentxwd.github.io/blog/2018/07/30/CF1013-Codeforces-Round-500-Div-2-based-on-EJOI/</id>
+    <link href="https://vincentxwd.github.io/blog/2018/07/30/CF1013-Codeforces-Round-500-Div-2-based-on-EJOI/"/>
+    <id>https://vincentxwd.github.io/blog/2018/07/30/CF1013-Codeforces-Round-500-Div-2-based-on-EJOI/</id>
     <published>2018-07-30T12:54:12.000Z</published>
     <updated>2018-07-31T13:35:52.378Z</updated>
     
@@ -85,23 +85,23 @@
     
     </summary>
     
-      <category term="Codeforces" scheme="http://vincentxwd.github.io/blog/categories/Codeforces/"/>
+      <category term="Codeforces" scheme="https://vincentxwd.github.io/blog/categories/Codeforces/"/>
     
     
-      <category term="数学" scheme="http://vincentxwd.github.io/blog/tags/%E6%95%B0%E5%AD%A6/"/>
+      <category term="数学" scheme="https://vincentxwd.github.io/blog/tags/%E6%95%B0%E5%AD%A6/"/>
     
-      <category term="暴力" scheme="http://vincentxwd.github.io/blog/tags/%E6%9A%B4%E5%8A%9B/"/>
+      <category term="暴力" scheme="https://vincentxwd.github.io/blog/tags/%E6%9A%B4%E5%8A%9B/"/>
     
-      <category term="并查集" scheme="http://vincentxwd.github.io/blog/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
+      <category term="并查集" scheme="https://vincentxwd.github.io/blog/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
     
-      <category term="STL" scheme="http://vincentxwd.github.io/blog/tags/STL/"/>
+      <category term="STL" scheme="https://vincentxwd.github.io/blog/tags/STL/"/>
     
   </entry>
   
   <entry>
     <title>[CF1011] Codeforces Round #499 (Div. 2)</title>
-    <link href="http://vincentxwd.github.io/blog/2018/07/29/CF1011-Codeforces-Round-499-Div-2/"/>
-    <id>http://vincentxwd.github.io/blog/2018/07/29/CF1011-Codeforces-Round-499-Div-2/</id>
+    <link href="https://vincentxwd.github.io/blog/2018/07/29/CF1011-Codeforces-Round-499-Div-2/"/>
+    <id>https://vincentxwd.github.io/blog/2018/07/29/CF1011-Codeforces-Round-499-Div-2/</id>
     <published>2018-07-29T13:01:44.000Z</published>
     <updated>2018-07-31T04:22:48.963Z</updated>
     
@@ -117,23 +117,23 @@
     
     </summary>
     
-      <category term="Codeforces" scheme="http://vincentxwd.github.io/blog/categories/Codeforces/"/>
+      <category term="Codeforces" scheme="https://vincentxwd.github.io/blog/categories/Codeforces/"/>
     
     
-      <category term="贪心" scheme="http://vincentxwd.github.io/blog/tags/%E8%B4%AA%E5%BF%83/"/>
+      <category term="数学" scheme="https://vincentxwd.github.io/blog/tags/%E6%95%B0%E5%AD%A6/"/>
     
-      <category term="二分" scheme="http://vincentxwd.github.io/blog/tags/%E4%BA%8C%E5%88%86/"/>
+      <category term="贪心" scheme="https://vincentxwd.github.io/blog/tags/%E8%B4%AA%E5%BF%83/"/>
     
-      <category term="交互题" scheme="http://vincentxwd.github.io/blog/tags/%E4%BA%A4%E4%BA%92%E9%A2%98/"/>
+      <category term="二分" scheme="https://vincentxwd.github.io/blog/tags/%E4%BA%8C%E5%88%86/"/>
     
-      <category term="数学" scheme="http://vincentxwd.github.io/blog/tags/%E6%95%B0%E5%AD%A6/"/>
+      <category term="交互题" scheme="https://vincentxwd.github.io/blog/tags/%E4%BA%A4%E4%BA%92%E9%A2%98/"/>
     
   </entry>
   
   <entry>
     <title>2018牛客多校01 J Different Integers</title>
-    <link href="http://vincentxwd.github.io/blog/2018/07/20/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A101-J-Different-Integers/"/>
-    <id>http://vincentxwd.github.io/blog/2018/07/20/2018牛客多校01-J-Different-Integers/</id>
+    <link href="https://vincentxwd.github.io/blog/2018/07/20/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A101-J-Different-Integers/"/>
+    <id>https://vincentxwd.github.io/blog/2018/07/20/2018牛客多校01-J-Different-Integers/</id>
     <published>2018-07-20T04:17:33.000Z</published>
     <updated>2018-07-31T13:36:27.991Z</updated>
     
@@ -148,21 +148,21 @@
     
     </summary>
     
-      <category term="2018牛客多校01" scheme="http://vincentxwd.github.io/blog/categories/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A101/"/>
+      <category term="2018牛客多校01" scheme="https://vincentxwd.github.io/blog/categories/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A101/"/>
     
     
-      <category term="莫队算法" scheme="http://vincentxwd.github.io/blog/tags/%E8%8E%AB%E9%98%9F%E7%AE%97%E6%B3%95/"/>
+      <category term="莫队算法" scheme="https://vincentxwd.github.io/blog/tags/%E8%8E%AB%E9%98%9F%E7%AE%97%E6%B3%95/"/>
     
-      <category term="离线" scheme="http://vincentxwd.github.io/blog/tags/%E7%A6%BB%E7%BA%BF/"/>
+      <category term="离线" scheme="https://vincentxwd.github.io/blog/tags/%E7%A6%BB%E7%BA%BF/"/>
     
-      <category term="树状数组" scheme="http://vincentxwd.github.io/blog/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
+      <category term="树状数组" scheme="https://vincentxwd.github.io/blog/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
   </entry>
   
   <entry>
     <title>2018牛客多校01 D Two Graphs</title>
-    <link href="http://vincentxwd.github.io/blog/2018/07/20/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A101-D-Two-Graphs/"/>
-    <id>http://vincentxwd.github.io/blog/2018/07/20/2018牛客多校01-D-Two-Graphs/</id>
+    <link href="https://vincentxwd.github.io/blog/2018/07/20/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A101-D-Two-Graphs/"/>
+    <id>https://vincentxwd.github.io/blog/2018/07/20/2018牛客多校01-D-Two-Graphs/</id>
     <published>2018-07-20T04:10:51.000Z</published>
     <updated>2018-07-31T04:22:47.669Z</updated>
     
@@ -177,19 +177,19 @@
     
     </summary>
     
-      <category term="2018牛客多校01" scheme="http://vincentxwd.github.io/blog/categories/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A101/"/>
+      <category term="2018牛客多校01" scheme="https://vincentxwd.github.io/blog/categories/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A101/"/>
     
     
-      <category term="暴力" scheme="http://vincentxwd.github.io/blog/tags/%E6%9A%B4%E5%8A%9B/"/>
+      <category term="暴力" scheme="https://vincentxwd.github.io/blog/tags/%E6%9A%B4%E5%8A%9B/"/>
     
-      <category term="枚举" scheme="http://vincentxwd.github.io/blog/tags/%E6%9E%9A%E4%B8%BE/"/>
+      <category term="枚举" scheme="https://vincentxwd.github.io/blog/tags/%E6%9E%9A%E4%B8%BE/"/>
     
   </entry>
   
   <entry>
     <title>2018牛客多校01 A Monotonic Matrix</title>
-    <link href="http://vincentxwd.github.io/blog/2018/07/20/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A101-A-Monotonic-Matrix/"/>
-    <id>http://vincentxwd.github.io/blog/2018/07/20/2018牛客多校01-A-Monotonic-Matrix/</id>
+    <link href="https://vincentxwd.github.io/blog/2018/07/20/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A101-A-Monotonic-Matrix/"/>
+    <id>https://vincentxwd.github.io/blog/2018/07/20/2018牛客多校01-A-Monotonic-Matrix/</id>
     <published>2018-07-20T03:54:47.000Z</published>
     <updated>2018-07-31T13:35:34.402Z</updated>
     
@@ -204,10 +204,10 @@
     
     </summary>
     
-      <category term="2018牛客多校01" scheme="http://vincentxwd.github.io/blog/categories/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A101/"/>
+      <category term="2018牛客多校01" scheme="https://vincentxwd.github.io/blog/categories/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A101/"/>
     
     
-      <category term="数学" scheme="http://vincentxwd.github.io/blog/tags/%E6%95%B0%E5%AD%A6/"/>
+      <category term="数学" scheme="https://vincentxwd.github.io/blog/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
