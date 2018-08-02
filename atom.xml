@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://vincentxwd.github.io/blog/"/>
-  <updated>2018-08-01T15:49:20.605Z</updated>
+  <updated>2018-08-02T14:05:34.292Z</updated>
   <id>https://vincentxwd.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2018牛客多校05 A gpa (01分数规划)</title>
+    <link href="https://vincentxwd.github.io/blog/2018/08/02/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A105-A-gpa-01%E5%88%86%E6%95%B0%E8%A7%84%E5%88%92/"/>
+    <id>https://vincentxwd.github.io/blog/2018/08/02/2018牛客多校05-A-gpa-01分数规划/</id>
+    <published>2018-08-02T13:43:55.000Z</published>
+    <updated>2018-08-02T14:05:34.292Z</updated>
+    
+    <content type="html"><![CDATA[<p>链接：<a href="https://www.nowcoder.com/acm/contest/143/A" target="_blank" rel="noopener">https://www.nowcoder.com/acm/contest/143/A</a></p><p><strong>一个人有n个成绩，然后现在他可以删掉其中至多k个，使得目标方程$\frac{\sum[s[i]c[i]}{\sum s[i]}$的值最大，问这个值可以是多少。</strong></p><a id="more"></a><p>这题和<a href="https://www.cnblogs.com/kirai/p/5812548.html" target="_blank" rel="noopener">POJ2976</a>是很类似的，是用01分数规划可以解决的问题。01分数规划可以看做是一种思想，可以用二分查找实现。针对这一道题，我们希望让目标方程尽可能大，于是可以假设：<br>$$<br>\frac{\sum[s[i]c[i]}{\sum s[i]} \geq L<br>$$<br>移项后得：<br>$$<br>\sum{s_ic_i-L×s_i}\geq0<br>$$<br>于是我们可以二分$L$，对该式中的$s_ic_i-L×s_i$进行计算并排序，删掉最小的k个后，查看是否满足题意。当收敛时，即$L$近似为式子的最大值。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> eps = <span class="number">1e-9</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">101000</span>;</span><br><span class="line"><span class="keyword">int</span> n, k, m;</span><br><span class="line"><span class="keyword">int</span> s[maxn], c[maxn];</span><br><span class="line"><span class="keyword">double</span> d[maxn];</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ok</span><span class="params">(<span class="keyword">double</span> L)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) d[i] = (<span class="keyword">double</span>)(s[i] * c[i]) - L * (<span class="keyword">double</span>)s[i];</span><br><span class="line">  sort(d+<span class="number">1</span>, d+n+<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">double</span> tot = <span class="number">.0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = k+<span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    tot += d[i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> tot &gt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;k)) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;s[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;c[i]);</span><br><span class="line">    <span class="keyword">double</span> lo = <span class="number">.0</span>, hi = <span class="number">1e3</span>;</span><br><span class="line">    <span class="keyword">double</span> ret = <span class="number">.0</span>;</span><br><span class="line">    <span class="keyword">while</span>(hi - lo &gt; eps) &#123;</span><br><span class="line">      <span class="keyword">double</span> mid = (lo + hi) / <span class="number">2.0</span>;</span><br><span class="line">      <span class="keyword">if</span>(ok(mid)) lo = mid;</span><br><span class="line">      <span class="keyword">else</span> hi = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.11f\n"</span>, lo);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;链接：&lt;a href=&quot;https://www.nowcoder.com/acm/contest/143/A&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.nowcoder.com/acm/contest/143/A&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一个人有n个成绩，然后现在他可以删掉其中至多k个，使得目标方程$\frac{\sum[s[i]c[i]}{\sum s[i]}$的值最大，问这个值可以是多少。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018牛客多校05" scheme="https://vincentxwd.github.io/blog/categories/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A105/"/>
+    
+    
+      <category term="二分" scheme="https://vincentxwd.github.io/blog/tags/%E4%BA%8C%E5%88%86/"/>
+    
+      <category term="01分数规划" scheme="https://vincentxwd.github.io/blog/tags/01%E5%88%86%E6%95%B0%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
   
   <entry>
     <title>[Codeforces1006E] Military Problem(DFS)</title>
@@ -153,9 +178,9 @@
       <category term="Codeforces" scheme="https://vincentxwd.github.io/blog/categories/Codeforces/"/>
     
     
-      <category term="暴力" scheme="https://vincentxwd.github.io/blog/tags/%E6%9A%B4%E5%8A%9B/"/>
-    
       <category term="数学" scheme="https://vincentxwd.github.io/blog/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="暴力" scheme="https://vincentxwd.github.io/blog/tags/%E6%9A%B4%E5%8A%9B/"/>
     
       <category term="并查集" scheme="https://vincentxwd.github.io/blog/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
     
