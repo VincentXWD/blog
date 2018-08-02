@@ -3,6 +3,52 @@
   
     
     <entry>
+      <title>2018牛客多校05 J plan(数学，规律)</title>
+      <link href="/blog/2018/08/02/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A105-J-plan-%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%A7%84%E5%BE%8B/"/>
+      <url>/blog/2018/08/02/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A105-J-plan-%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%A7%84%E5%BE%8B/</url>
+      <content type="html"><![CDATA[<p>链接：<a href="https://www.nowcoder.com/acm/contest/143/J" target="_blank" rel="noopener">https://www.nowcoder.com/acm/contest/143/J</a></p><p><strong>n个人住宾馆，双人间价格为p2，三人间价格为p3，如何安排，使总花费最少。</strong></p><a id="more"></a><p>列方程，枚举最近的6个结果即可。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">using</span> LL = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line">LL n, a, b;</span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld"</span>,&amp;n,&amp;a,&amp;b)) &#123;</span><br><span class="line">    LL ret = <span class="number">1e18</span>;</span><br><span class="line">    <span class="keyword">for</span>(LL i = <span class="number">0</span>; i &lt;= <span class="number">6</span>; i++) &#123;</span><br><span class="line">      ret = min(ret, (n+<span class="number">1</span>-i)/<span class="number">2</span>*a+(i+<span class="number">2</span>)/<span class="number">3</span>*b);</span><br><span class="line">      ret = min(ret, (n+<span class="number">2</span>-i)/<span class="number">3</span>*b+(i+<span class="number">1</span>)/<span class="number">2</span>*a);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ret);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      <categories>
+          
+          <category> 2018牛客多校 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学 </tag>
+            
+            <tag> 规律 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>2018牛客多校05 G max(数学，规律)</title>
+      <link href="/blog/2018/08/02/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A105-G-max-%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%A7%84%E5%BE%8B/"/>
+      <url>/blog/2018/08/02/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A105-G-max-%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%A7%84%E5%BE%8B/</url>
+      <content type="html"><![CDATA[<p>链接：<a href="https://www.nowcoder.com/acm/contest/143/G" target="_blank" rel="noopener">https://www.nowcoder.com/acm/contest/143/G</a></p><p><strong>给定c、n，求两个整数a、b，使得$gcd(a,b)=c, 1≤a,b≤n$</strong></p><a id="more"></a><p>很容易发现只需要选择最接近n的c的倍数数、以及次接近n的c的倍数乘积就是最大的。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> LL = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line">LL c, n;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;c,&amp;n)) &#123;</span><br><span class="line">    <span class="keyword">if</span>(c &gt; n) &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"-1\n"</span>);</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(c == <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span>(n == <span class="number">1</span>) <span class="built_in">printf</span>(<span class="string">"1\n"</span>);</span><br><span class="line">      <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, n*(n<span class="number">-1</span>));</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(n == c) &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, c * c);</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n % c == <span class="number">0</span>) <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, n*(n-c));</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      LL t = n / c * c;</span><br><span class="line">      <span class="keyword">if</span>(t == c) <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, t*t);</span><br><span class="line">      <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, t*(t-c));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      <categories>
+          
+          <category> 2018牛客多校 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学 </tag>
+            
+            <tag> 规律 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>2018牛客多校05 A gpa (01分数规划)</title>
       <link href="/blog/2018/08/02/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A105-A-gpa-01%E5%88%86%E6%95%B0%E8%A7%84%E5%88%92/"/>
       <url>/blog/2018/08/02/2018%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A105-A-gpa-01%E5%88%86%E6%95%B0%E8%A7%84%E5%88%92/</url>
@@ -176,9 +222,9 @@
             
             <tag> 数学 </tag>
             
-            <tag> 贪心 </tag>
-            
             <tag> 二分 </tag>
+            
+            <tag> 贪心 </tag>
             
             <tag> 交互题 </tag>
             
