@@ -3,6 +3,29 @@
   
     
     <entry>
+      <title>[AtCoderSoundHound18C] Ordinary Beauty（概率, 期望）</title>
+      <link href="/blog/2018/08/07/AtCoderSoundHound18C-Ordinary-Beauty%EF%BC%88%E6%A6%82%E7%8E%87-%E6%9C%9F%E6%9C%9B%EF%BC%89/"/>
+      <url>/blog/2018/08/07/AtCoderSoundHound18C-Ordinary-Beauty%EF%BC%88%E6%A6%82%E7%8E%87-%E6%9C%9F%E6%9C%9B%EF%BC%89/</url>
+      <content type="html"><![CDATA[<p>链接：<a href="https://soundhound2018-summer-qual.contest.atcoder.jp/tasks/soundhound2018_summer_qual_c" target="_blank" rel="noopener">https://soundhound2018-summer-qual.contest.atcoder.jp/tasks/soundhound2018_summer_qual_c</a></p><p><strong>给你1~n这n个数，现在允许你随机在m个位置上方这n个数，问你放好后的数组中，相邻两个数字的差为d的数对的概率。</strong></p><a id="more"></a><p>m个位置存在m-1对数，由于期望的线性可加性，我们知道答案为$(m-1)</p><p>×在m个数字中挑选出一对差为d的概率$。</p><p>当$d=0$时，相邻两个数字相同的时候才会有贡献，则有一对数字相同的概率为$\frac{n}{n^2}$。</p><p>当$d≠0$时，我们有$(1,d+1),…,(n-d,n)$和$(d+1,1),…,(n,n-d)$这些可能，共有$2×(n-d-d-1+1)=2(n-d)$种，因此一对数字相同的概率是$\frac{2(n-d)}{n^2}$。</p><p>求期望的话，乘上$m-1$就行了。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> n, m, d;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; d) &#123;</span><br><span class="line">    <span class="keyword">if</span>(d == <span class="number">0</span>) <span class="built_in">printf</span>(<span class="string">"%.15f\n"</span>, (m<span class="number">-1</span>)/n);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%.15f\n"</span>, <span class="number">2.0</span>*(n-d)*(m<span class="number">-1</span>)/n/n);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      <categories>
+          
+          <category> 题解 </category>
+          
+          <category> AtCoder </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 概率 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>[POJ2096] Collecting Bugs （期望, DP）</title>
       <link href="/blog/2018/08/07/POJ2096-Collecting-Bugs-%EF%BC%88%E6%9C%9F%E6%9C%9B-DP%EF%BC%89/"/>
       <url>/blog/2018/08/07/POJ2096-Collecting-Bugs-%EF%BC%88%E6%9C%9F%E6%9C%9B-DP%EF%BC%89/</url>
@@ -227,9 +250,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 枚举 </tag>
+            
+            <tag> 数学 </tag>
             
         </tags>
       
@@ -590,9 +613,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 暴力 </tag>
+            
+            <tag> 数学 </tag>
             
             <tag> 并查集 </tag>
             
@@ -619,9 +642,9 @@
       
         <tags>
             
-            <tag> 二分 </tag>
-            
             <tag> 数学 </tag>
+            
+            <tag> 二分 </tag>
             
             <tag> 贪心 </tag>
             
