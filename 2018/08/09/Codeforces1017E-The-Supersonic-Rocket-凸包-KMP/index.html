@@ -108,21 +108,18 @@
 
 
 
-  <meta name="description" content="链接：https://www.nowcoder.com/acm/contest/139/A 求一个n*m的0、1、2矩阵（满足左上小于右下）的构造方案数。">
-<meta name="keywords" content="数学">
+  <meta name="description" content="链接：http://codeforces.com/contest/1017/problem/E 给你两组点，问你这两组点的凸包是不是同构的。">
+<meta name="keywords" content="计算几何,凸包,KMP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2018牛客多校01 A Monotonic Matrix">
-<meta property="og:url" content="https://vincentxwd.github.io/blog/2018/07/20/2018牛客多校01-A-Monotonic-Matrix/index.html">
+<meta property="og:title" content="[Codeforces1017E] The Supersonic Rocket (凸包, KMP)">
+<meta property="og:url" content="https://vincentxwd.github.io/blog/2018/08/09/Codeforces1017E-The-Supersonic-Rocket-凸包-KMP/index.html">
 <meta property="og:site_name" content="Kirai">
-<meta property="og:description" content="链接：https://www.nowcoder.com/acm/contest/139/A 求一个n*m的0、1、2矩阵（满足左上小于右下）的构造方案数。">
+<meta property="og:description" content="链接：http://codeforces.com/contest/1017/problem/E 给你两组点，问你这两组点的凸包是不是同构的。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://pcoln8jiu.bkt.clouddn.com/Untitled%20picture.png">
-<meta property="og:image" content="http://pcoln8jiu.bkt.clouddn.com/Untitled%20picture1.png">
-<meta property="og:updated_time" content="2018-08-06T16:28:15.918Z">
+<meta property="og:updated_time" content="2018-08-09T14:52:39.164Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2018牛客多校01 A Monotonic Matrix">
-<meta name="twitter:description" content="链接：https://www.nowcoder.com/acm/contest/139/A 求一个n*m的0、1、2矩阵（满足左上小于右下）的构造方案数。">
-<meta name="twitter:image" content="http://pcoln8jiu.bkt.clouddn.com/Untitled%20picture.png">
+<meta name="twitter:title" content="[Codeforces1017E] The Supersonic Rocket (凸包, KMP)">
+<meta name="twitter:description" content="链接：http://codeforces.com/contest/1017/problem/E 给你两组点，问你这两组点的凸包是不是同构的。">
 
 
 
@@ -131,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="https://vincentxwd.github.io/blog/2018/07/20/2018牛客多校01-A-Monotonic-Matrix/"/>
+  <link rel="canonical" href="https://vincentxwd.github.io/blog/2018/08/09/Codeforces1017E-The-Supersonic-Rocket-凸包-KMP/"/>
 
 
 
@@ -141,7 +138,7 @@
   };
 </script>
 
-  <title>2018牛客多校01 A Monotonic Matrix | Kirai</title>
+  <title>[Codeforces1017E] The Supersonic Rocket (凸包, KMP) | Kirai</title>
   
 
 
@@ -314,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://vincentxwd.github.io/blog/blog/2018/07/20/2018牛客多校01-A-Monotonic-Matrix/">
+    <link itemprop="mainEntityOfPage" href="https://vincentxwd.github.io/blog/blog/2018/08/09/Codeforces1017E-The-Supersonic-Rocket-凸包-KMP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kirai">
@@ -331,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2018牛客多校01 A Monotonic Matrix
+          <h1 class="post-title" itemprop="name headline">[Codeforces1017E] The Supersonic Rocket (凸包, KMP)
               
             
           </h1>
@@ -356,24 +353,12 @@
                 
               
 
-              <time title="创建时间：2018-07-20 11:54:47" itemprop="dateCreated datePublished" datetime="2018-07-20T11:54:47+08:00">2018-07-20</time>
+              <time title="创建时间：2018-08-09 22:50:12 / 修改时间：22:52:39" itemprop="dateCreated datePublished" datetime="2018-08-09T22:50:12+08:00">2018-08-09</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-07 00:28:15" itemprop="dateModified" datetime="2018-08-07T00:28:15+08:00">2018-08-07</time>
               
             
           </span>
@@ -397,7 +382,7 @@
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/题解/2018牛客多校/" itemprop="url" rel="index"><span itemprop="name">2018牛客多校</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/题解/Codeforces/" itemprop="url" rel="index"><span itemprop="name">Codeforces</span></a></span>
 
                 
                 
@@ -412,8 +397,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/blog/2018/07/20/2018牛客多校01-A-Monotonic-Matrix/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/blog/2018/07/20/2018牛客多校01-A-Monotonic-Matrix/" itemprop="commentsCount"></span>
+                <a href="/blog/2018/08/09/Codeforces1017E-The-Supersonic-Rocket-凸包-KMP/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/blog/2018/08/09/Codeforces1017E-The-Supersonic-Rocket-凸包-KMP/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -449,16 +434,11 @@
       
 
       
-        <p>链接：<a href="https://www.nowcoder.com/acm/contest/139/A" target="_blank" rel="noopener">https://www.nowcoder.com/acm/contest/139/A</a></p>
-<p><strong>求一个n*m的0、1、2矩阵（满足左上小于右下）的构造方案数。</strong></p>
-<a id="more"></a> 
-<p>方案数就等于这两条可以重合（不可相交）的分界线的种类数，如下图：</p>
-<p><img src="http://pcoln8jiu.bkt.clouddn.com/Untitled%20picture.png" alt="img"></p>
-<p>即：给定起点(n,0)、终点(0,m)，只能向上和向右走，问有多少种走法，其实就是向右走m步向上走n步的组合数：<br>$$<br>C_{n+m}^m或C_{n+m}^n<br>$$<br>这里给出<a href="https://en.wikipedia.org/wiki/Lindstr%C3%B6m%E2%80%93Gessel%E2%80%93Viennot_lemma" target="_blank" rel="noopener">Lindström–Gessel–Viennot</a>引理的应用：给一张无权有向无环图，给定n个起点和对应的n个终点，求n条不相交路径的方案数，引理给出结果为：</p>
-<p><img src="http://pcoln8jiu.bkt.clouddn.com/Untitled%20picture1.png" alt="img"></p>
-<p>其中$a_{i}$表示路径i的起点，$b_{i}$表示路径i的终点。答案就是M的行列式的值。</p>
-<p>对于本两条线的起点和终点不能重叠而且得和原方案等价（方案数等价即可），这就需要变换一下。把起终点向左上平移一下，将其中的一对起终点平移到$(n-1,-1)$和$(-1,m-1)$去，就有$e(a_1,b_1)=e(a_2,b_2)=C_{n+m}^n$，$e(a_1,b_2)=C_{n+m}^{n+1}$，$e(a_2,b_1)=C_{n+m}^{m+1}$那么针对本题的答案就是：<br>$$<br>{C_{n+m}^n}^2-C_{n+m}^{n+1}×C_{n+m}^{m+1}<br>$$</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> LL = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"><span class="keyword">const</span> LL mod = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">3010</span>;</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line">LL c[maxn][maxn];</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">memset</span>(c,<span class="number">0</span>,<span class="keyword">sizeof</span>(c));</span><br><span class="line">  c[<span class="number">0</span>][<span class="number">0</span>]=c[<span class="number">1</span>][<span class="number">0</span>]=c[<span class="number">1</span>][<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; maxn; i++) &#123;</span><br><span class="line">    c[i][<span class="number">0</span>] = c[i][i] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; i; j++) &#123;</span><br><span class="line">      c[i][j] = c[i<span class="number">-1</span>][j] + c[i<span class="number">-1</span>][j<span class="number">-1</span>];</span><br><span class="line">      c[i][j] %= mod;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  init();</span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m)) &#123;</span><br><span class="line">    LL ret = c[n+m][n]*c[n+m][n]; ret %= mod;</span><br><span class="line">    LL tmp = c[n+m][n+<span class="number">1</span>]*c[n+m][m+<span class="number">1</span>]; tmp %= mod;</span><br><span class="line">    ret -= tmp; ret += mod; ret %= mod;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ret);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>链接：<a href="http://codeforces.com/contest/1017/problem/E" target="_blank" rel="noopener">http://codeforces.com/contest/1017/problem/E</a></p>
+<p><strong>给你两组点，问你这两组点的凸包是不是同构的。</strong></p>
+<a id="more"></a>
+<p>先分别跑出两组点的凸包，判断一下点数是否相等，然后依次按照凸包的长度和拐点的角度记录下数列，然后可以用最小表示法都调成最小表示，或者对其中一个数列扩大两倍作匹配串，另一个作模式串跑KMP。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> LL = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"><span class="keyword">const</span> LL maxn = <span class="number">1500500</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Point</span> &#123;</span> LL x, y; &#125;Point;</span><br><span class="line">Point point[maxn];</span><br><span class="line">LL st[maxn], top;</span><br><span class="line"></span><br><span class="line"><span class="function">LL <span class="title">cross</span><span class="params">(Point p0, Point p1, Point p2)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (p1.x-p0.x)*(p2.y-p0.y)-(p1.y-p0.y)*(p2.x-p0.x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">LL <span class="title">dis</span><span class="params">(Point p1, Point p2)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (p2.x-p1.x)*(p2.x-p1.x)+(p2.y-p1.y)*(p2.y-p1.y);  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(Point p1, Point p2)</span> </span>&#123;</span><br><span class="line">  LL tmp = cross(point[<span class="number">0</span>], p1, p2);</span><br><span class="line">  <span class="keyword">if</span>(tmp &gt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span>(tmp == <span class="number">0</span>) <span class="keyword">return</span> dis(point[<span class="number">0</span>], p1) &lt; dis(point[<span class="number">0</span>], p2);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">graham</span><span class="params">(LL n, <span class="built_in">vector</span>&lt;Point&gt; &amp;ret)</span> </span>&#123;</span><br><span class="line">  ret.clear();</span><br><span class="line">  <span class="keyword">for</span>(LL i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span>(point[<span class="number">0</span>].y &gt;= point[i].y) &#123;</span><br><span class="line">      <span class="keyword">if</span>(point[<span class="number">0</span>].y == point[i].y) &#123;</span><br><span class="line">        <span class="keyword">if</span>(point[<span class="number">0</span>].x &gt; point[i].x) swap(point[i], point[i]);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> swap(point[<span class="number">0</span>], point[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  sort(point+<span class="number">1</span>, point+n, cmp);</span><br><span class="line">  top = <span class="number">0</span>;</span><br><span class="line">  st[top++] = <span class="number">0</span>, st[top++] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>(LL i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="keyword">while</span>(top<span class="number">-2</span> &gt;= <span class="number">0</span> &amp;&amp; cross(point[st[top<span class="number">-2</span>]], point[st[top<span class="number">-1</span>]], point[i]) &lt;= <span class="number">0</span>) --top;</span><br><span class="line">    st[top++] = i;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span>(LL i = <span class="number">0</span>; i &lt; top; i++) ret.emplace_back(point[st[i]]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Point a[maxn], b[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;Point&gt; conv1, conv2;</span><br><span class="line">LL n, m;</span><br><span class="line"></span><br><span class="line">LL na, nb;</span><br><span class="line">LL x[maxn];</span><br><span class="line">LL y[maxn];</span><br><span class="line">LL pre[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getpre</span><span class="params">(LL *y, LL *pre)</span> </span>&#123;</span><br><span class="line">  LL j, k;</span><br><span class="line">  <span class="built_in">memset</span>(pre, <span class="number">-1</span>, <span class="keyword">sizeof</span>(<span class="number">-1</span>));</span><br><span class="line">  pre[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">  j = <span class="number">0</span>; k = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">while</span>(j &lt; nb) &#123;</span><br><span class="line">    <span class="keyword">if</span>(k == <span class="number">-1</span> || y[j] == y[k]) &#123;</span><br><span class="line">      j++; k++;</span><br><span class="line">      <span class="keyword">if</span>(y[j] != y[k]) pre[j] = k;</span><br><span class="line">      <span class="keyword">else</span> pre[j] = pre[k];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> k = pre[k];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">LL <span class="title">kmp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  LL ans = <span class="number">0</span>;</span><br><span class="line">  LL i = <span class="number">0</span>;</span><br><span class="line">  LL j = <span class="number">0</span>;</span><br><span class="line">  getpre(y, pre);</span><br><span class="line">  <span class="keyword">while</span>(i &lt; na) &#123;</span><br><span class="line">    <span class="keyword">if</span>(j == <span class="number">-1</span> || x[i] == y[j]) &#123;</span><br><span class="line">      i++; j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> j = pre[j];</span><br><span class="line">    <span class="keyword">if</span>(j == nb) ans++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;m)) &#123;</span><br><span class="line">    <span class="built_in">memset</span>(x, <span class="number">0</span>, <span class="keyword">sizeof</span>(x));</span><br><span class="line">    <span class="built_in">memset</span>(y, <span class="number">0</span>, <span class="keyword">sizeof</span>(y));</span><br><span class="line">    <span class="keyword">for</span>(LL i = <span class="number">0</span>; i &lt; n; i++) <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;a[i].x,&amp;a[i].y);</span><br><span class="line">    <span class="keyword">for</span>(LL i = <span class="number">0</span>; i &lt; m; i++) <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;b[i].x,&amp;b[i].y);</span><br><span class="line">    conv1.clear(); conv2.clear();</span><br><span class="line">    <span class="keyword">for</span>(LL i = <span class="number">0</span>; i &lt; n; i++) point[i] = a[i];</span><br><span class="line">    graham(n, conv1);</span><br><span class="line">    <span class="keyword">for</span>(LL i = <span class="number">0</span>; i &lt; m; i++) point[i] = b[i];</span><br><span class="line">    graham(m, conv2);</span><br><span class="line">    <span class="keyword">if</span>(conv1.size() != conv2.size()) <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      na = conv1.size() * <span class="number">6</span>, nb = conv2.size() * <span class="number">3</span>;</span><br><span class="line">      <span class="keyword">for</span>(LL i = <span class="number">0</span>; i &lt; conv1.size(); i++) &#123;</span><br><span class="line">        x[i*<span class="number">3</span>] = dis(conv1[i],conv1[(i+<span class="number">1</span>)%conv1.size()]);</span><br><span class="line">        x[i*<span class="number">3</span>+<span class="number">1</span>] = cross(conv1[(i+<span class="number">1</span>)%conv1.size()],conv1[i],conv1[(i+<span class="number">2</span>)%conv1.size()]);</span><br><span class="line">        x[i*<span class="number">3</span>+<span class="number">2</span>] = dis(conv1[(i+<span class="number">1</span>)%conv1.size()],conv1[(i+<span class="number">2</span>)%conv1.size()]);</span><br><span class="line">        <span class="comment">// cout &lt;&lt; x[i*3]&lt;&lt;" "&lt;&lt;x[i*3+1]&lt;&lt;" "&lt;&lt;x[i*3+2]&lt;&lt;" ";</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">for</span>(LL i = <span class="number">0</span>; i &lt; conv1.size(); i++) &#123;</span><br><span class="line">        x[i*<span class="number">3</span>+na/<span class="number">2</span>] = x[i*<span class="number">3</span>];</span><br><span class="line">        x[i*<span class="number">3</span>+<span class="number">1</span>+na/<span class="number">2</span>] = x[i*<span class="number">3</span>+<span class="number">1</span>];</span><br><span class="line">        x[i*<span class="number">3</span>+<span class="number">2</span>+na/<span class="number">2</span>] = x[i*<span class="number">3</span>+<span class="number">2</span>];</span><br><span class="line">        <span class="comment">// cout &lt;&lt; x[i*3+na/2]&lt;&lt;" "&lt;&lt;x[i*3+1+na/2]&lt;&lt;" "&lt;&lt;x[i*3+2+na/2]&lt;&lt;" ";</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// cout&lt;&lt;endl;</span></span><br><span class="line">      <span class="keyword">for</span>(LL i = <span class="number">0</span>; i &lt; conv2.size(); i++) &#123;</span><br><span class="line">        y[i*<span class="number">3</span>] = dis(conv2[i],conv2[(i+<span class="number">1</span>)%conv2.size()]);</span><br><span class="line">        y[i*<span class="number">3</span>+<span class="number">1</span>] = cross(conv2[(i+<span class="number">1</span>)%conv2.size()],conv2[i],conv2[(i+<span class="number">2</span>)%conv2.size()]);</span><br><span class="line">        y[i*<span class="number">3</span>+<span class="number">2</span>] = dis(conv2[(i+<span class="number">1</span>)%conv2.size()],conv2[(i+<span class="number">2</span>)%conv2.size()]);</span><br><span class="line">        <span class="comment">// cout &lt;&lt; y[i*3]&lt;&lt;" "&lt;&lt;y[i*3+1]&lt;&lt;" "&lt;&lt;y[i*3+2]&lt;&lt;" ";</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// cout&lt;&lt;endl;</span></span><br><span class="line">      LL ret = kmp();</span><br><span class="line">      <span class="keyword">if</span>(ret) <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">      <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -479,7 +459,11 @@
       
         <div class="post-tags">
           
-            <a href="/blog/tags/数学/" rel="tag"><i class="fa fa-tag"></i>数学</a>
+            <a href="/blog/tags/计算几何/" rel="tag"><i class="fa fa-tag"></i>计算几何</a>
+          
+            <a href="/blog/tags/凸包/" rel="tag"><i class="fa fa-tag"></i>凸包</a>
+          
+            <a href="/blog/tags/KMP/" rel="tag"><i class="fa fa-tag"></i>KMP</a>
           
         </div>
       
@@ -492,15 +476,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/blog/2018/08/09/Codeforces1017A-D-Codeforces-Round-502-Div-1-Div-2/" rel="next" title="[Codeforces1017A-D] Codeforces Round 502 (Div.1+Div.2)">
+                <i class="fa fa-chevron-left"></i> [Codeforces1017A-D] Codeforces Round 502 (Div.1+Div.2)
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2018/07/20/2018牛客多校01-D-Two-Graphs/" rel="prev" title="2018牛客多校01 D Two Graphs">
-                2018牛客多校01 D Two Graphs <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
