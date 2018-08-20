@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://vincentxwd.github.io/blog/"/>
-  <updated>2018-08-20T06:37:44.766Z</updated>
+  <updated>2018-08-20T14:37:03.816Z</updated>
   <id>https://vincentxwd.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://vincentxwd.github.io/blog/2018/08/20/HDOJ6425-Rikka-with-Badminton/"/>
+    <id>https://vincentxwd.github.io/blog/2018/08/20/HDOJ6425-Rikka-with-Badminton/</id>
+    <published>2018-08-20T14:01:21.499Z</published>
+    <updated>2018-08-20T14:37:03.816Z</updated>
+    
+    <content type="html"><![CDATA[<p>title: ‘[HDOJ6425] Rikka with Badminton (组合数学)’<br>date: 2018-08-20 22:01:21<br>tags: [组合, 数学]<br>categories: [题解, HDOJ]<br>mathjax: true</p><p>链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=6425" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6425</a></p><p><strong>$n$个人去打羽毛球，其中$a$个人没球没拍，$b$个人只有拍，$c$个人只有球，$d$个人什么都有。现在规定只要有两个人有拍，一个人有球就能去打。问有多少种组合不能去打。</strong></p><a id="more"></a><p>JLS给的解居然是个dp，惊了。</p><p>直接考虑有几种情况不能去打：球和拍都不够、球够拍不够、拍够球不够。</p><p>($a$个白嫖哥去不去都无所谓，因此他们对答案的整体贡献是$2^a$。)</p><p>球和拍都不够：分两种情况，完全没有拍和只有一个拍。第一种的贡献只有$a$出，第二种贡献从$a$和$b$里出。因此总体答案是$2^a+2^a×C_{b}^{1}$。</p><p>球够拍不够：这个贡献可以拆分成$a$和$c$、$a$和$b$、$a$和$b$和$d$里出。第一种（没有拍子）$c$类人随意去就可以（不能不去），贡献是$2^{a}×(2^{c}-1)$。第二种（只有一个拍子，$b$类人出拍子，$c$类人出球），贡献是$2^{a}×C_{b}^{1}×(2^c-1)$。第三种（只有一个拍子，$d$类人出拍子），贡献是$2^{a}×C^{d}^{1}×2^c$。</p><p>拍够球不够：只有$b$类人，且至少去$2$个，贡献是$2^a×C_{b}^{2}$。</p><p>全加起来就完事了。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> LL = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"><span class="keyword">const</span> LL mod = <span class="number">998244353</span>;</span><br><span class="line">LL a, b, c, d;</span><br><span class="line"></span><br><span class="line"><span class="function">LL <span class="title">mul</span><span class="params">(LL x, LL n)</span> </span>&#123;</span><br><span class="line">  LL ret = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>(n) &#123;</span><br><span class="line">    <span class="keyword">if</span>(n &amp; <span class="number">1</span>) ret = x * ret % mod;</span><br><span class="line">    n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    x = x * x % mod;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">int</span> T;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">  <span class="keyword">while</span>(T--) &#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld%lld"</span>,&amp;a,&amp;b,&amp;c,&amp;d);</span><br><span class="line">    LL p1 = mul(<span class="number">2L</span>L, a) * (b + <span class="number">1</span>) % mod;</span><br><span class="line">    LL p2 = mul(<span class="number">2L</span>L, a) * (mul(<span class="number">2L</span>L, c) - <span class="number">1</span>) % mod;</span><br><span class="line">       p2 += ((mul(<span class="number">2L</span>L, a) * b % mod) * (mul(<span class="number">2L</span>L, c) - <span class="number">1</span>)) % mod; p2 %= mod;</span><br><span class="line">       p2 +=(( mul(<span class="number">2L</span>L, a) * d % mod) * mul(<span class="number">2L</span>L, c)) % mod; p2 %= mod;</span><br><span class="line">    LL p3 = (mul(<span class="number">2L</span>L, a) * (mul(<span class="number">2L</span>L, b) - b - <span class="number">1</span> + mod) % mod) % mod;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, (((p1+p2)%mod)+p3)%mod);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;title: ‘[HDOJ6425] Rikka with Badminton (组合数学)’&lt;br&gt;date: 2018-08-20 22:01:21&lt;br&gt;tags: [组合, 数学]&lt;br&gt;categories: [题解, HDOJ]&lt;br&gt;mathjax: true&lt;/p&gt;
+&lt;p&gt;链接：&lt;a href=&quot;http://acm.hdu.edu.cn/showproblem.php?pid=6425&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://acm.hdu.edu.cn/showproblem.php?pid=6425&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;$n$个人去打羽毛球，其中$a$个人没球没拍，$b$个人只有拍，$c$个人只有球，$d$个人什么都有。现在规定只要有两个人有拍，一个人有球就能去打。问有多少种组合不能去打。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>[HDOJ6418] Rikka with Stone-Paper-Scissors (纳什均衡)</title>
+    <link href="https://vincentxwd.github.io/blog/2018/08/20/HDOJ6418-Rikka-with-Stone-Paper-Scissors/"/>
+    <id>https://vincentxwd.github.io/blog/2018/08/20/HDOJ6418-Rikka-with-Stone-Paper-Scissors/</id>
+    <published>2018-08-20T13:48:02.000Z</published>
+    <updated>2018-08-20T14:03:02.805Z</updated>
+    
+    <content type="html"><![CDATA[<p>链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=6418" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6418</a></p><p><strong>A和B玩剪子石头布，每个人要出$n$步，现在给你它们剪子、石头、布分别出的次数，每赢一次，获胜方得一分。已知A会随机出，现在求B的分数的最大期望。</strong></p><a id="more"></a><p>一共玩$n$局，每一次出不同的手势，得分的概率和对方守中对应手势的数目有关系，直接把能赢和能输的概率加加减减就OK。证明涉及纳什均衡，JLS直播讲的也没太听懂orz。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> LL = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line">LL a,b,c,a1,b1,c1;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">int</span> T;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">  <span class="keyword">while</span>(T--) &#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld%lld%lld%lld"</span>,&amp;a,&amp;b,&amp;c,&amp;a1,&amp;b1,&amp;c1);</span><br><span class="line">    LL n = a + b + c;</span><br><span class="line">    LL m = -a*c1-b*a1-c*b1+a1*c+b1*a+c1*b;</span><br><span class="line">    <span class="keyword">if</span>(m % n == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, m / n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld/%lld\n"</span>, m/__gcd((LL)<span class="built_in">abs</span>(m),n), n/__gcd((LL)<span class="built_in">abs</span>(m),n));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;链接：&lt;a href=&quot;http://acm.hdu.edu.cn/showproblem.php?pid=6418&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://acm.hdu.edu.cn/showproblem.php?pid=6418&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A和B玩剪子石头布，每个人要出$n$步，现在给你它们剪子、石头、布分别出的次数，每赢一次，获胜方得一分。已知A会随机出，现在求B的分数的最大期望。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="题解" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="HDOJ" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/HDOJ/"/>
+    
+    
+      <category term="数学" scheme="https://vincentxwd.github.io/blog/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="博弈" scheme="https://vincentxwd.github.io/blog/tags/%E5%8D%9A%E5%BC%88/"/>
+    
+      <category term="期望" scheme="https://vincentxwd.github.io/blog/tags/%E6%9C%9F%E6%9C%9B/"/>
+    
+  </entry>
   
   <entry>
     <title>[CF1025] Codeforces Round #504 (Div.1+Div.2)</title>
@@ -242,9 +291,9 @@
       <category term="2018百度之星" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/HDOJ/2018%E7%99%BE%E5%BA%A6%E4%B9%8B%E6%98%9F/"/>
     
     
-      <category term="二分" scheme="https://vincentxwd.github.io/blog/tags/%E4%BA%8C%E5%88%86/"/>
-    
       <category term="规律" scheme="https://vincentxwd.github.io/blog/tags/%E8%A7%84%E5%BE%8B/"/>
+    
+      <category term="二分" scheme="https://vincentxwd.github.io/blog/tags/%E4%BA%8C%E5%88%86/"/>
     
   </entry>
   
@@ -522,60 +571,6 @@
     
     
       <category term="最短路" scheme="https://vincentxwd.github.io/blog/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[AtCoderSoundHound18C] Ordinary Beauty（概率, 期望）</title>
-    <link href="https://vincentxwd.github.io/blog/2018/08/07/AtCoderSoundHound18C-Ordinary-Beauty%EF%BC%88%E6%A6%82%E7%8E%87-%E6%9C%9F%E6%9C%9B%EF%BC%89/"/>
-    <id>https://vincentxwd.github.io/blog/2018/08/07/AtCoderSoundHound18C-Ordinary-Beauty（概率-期望）/</id>
-    <published>2018-08-07T08:52:12.000Z</published>
-    <updated>2018-08-07T09:00:37.953Z</updated>
-    
-    <content type="html"><![CDATA[<p>链接：<a href="https://soundhound2018-summer-qual.contest.atcoder.jp/tasks/soundhound2018_summer_qual_c" target="_blank" rel="noopener">https://soundhound2018-summer-qual.contest.atcoder.jp/tasks/soundhound2018_summer_qual_c</a></p><p><strong>给你1~n这n个数，现在允许你随机在m个位置上方这n个数，问你放好后的数组中，相邻两个数字的差为d的数对的概率。</strong></p><a id="more"></a><p>m个位置存在m-1对数，由于期望的线性可加性，我们知道答案为$(m-1)</p><p>×在m个数字中挑选出一对差为d的概率$。</p><p>当$d=0$时，相邻两个数字相同的时候才会有贡献，则有一对数字相同的概率为$\frac{n}{n^2}$。</p><p>当$d≠0$时，我们有$(1,d+1),…,(n-d,n)$和$(d+1,1),…,(n,n-d)$这些可能，共有$2×(n-d-d-1+1)=2(n-d)$种，因此一对数字相同的概率是$\frac{2(n-d)}{n^2}$。</p><p>求期望的话，乘上$m-1$就行了。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> n, m, d;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; d) &#123;</span><br><span class="line">    <span class="keyword">if</span>(d == <span class="number">0</span>) <span class="built_in">printf</span>(<span class="string">"%.15f\n"</span>, (m<span class="number">-1</span>)/n);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%.15f\n"</span>, <span class="number">2.0</span>*(n-d)*(m<span class="number">-1</span>)/n/n);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;链接：&lt;a href=&quot;https://soundhound2018-summer-qual.contest.atcoder.jp/tasks/soundhound2018_summer_qual_c&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://soundhound2018-summer-qual.contest.atcoder.jp/tasks/soundhound2018_summer_qual_c&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;给你1~n这n个数，现在允许你随机在m个位置上方这n个数，问你放好后的数组中，相邻两个数字的差为d的数对的概率。&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="题解" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/"/>
-    
-      <category term="AtCoder" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/AtCoder/"/>
-    
-    
-      <category term="概率" scheme="https://vincentxwd.github.io/blog/tags/%E6%A6%82%E7%8E%87/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[POJ2096] Collecting Bugs （期望, DP）</title>
-    <link href="https://vincentxwd.github.io/blog/2018/08/07/POJ2096-Collecting-Bugs-%EF%BC%88%E6%9C%9F%E6%9C%9B-DP%EF%BC%89/"/>
-    <id>https://vincentxwd.github.io/blog/2018/08/07/POJ2096-Collecting-Bugs-（期望-DP）/</id>
-    <published>2018-08-07T07:32:54.000Z</published>
-    <updated>2018-08-07T08:04:54.581Z</updated>
-    
-    <content type="html"><![CDATA[<p>链接：<a href="https://cn.vjudge.net/problem/POJ-2096" target="_blank" rel="noopener">https://cn.vjudge.net/problem/POJ-2096</a></p><p><strong>有一个程序员要在$s$个子系统里找$n$个不同的BUG，问在$s$种子系统里找到$n$个BUG的天数期望。</strong></p><a id="more"></a><p>这题是求期望的入门经典，我想拿这道题来做一个总结。</p><p>首先是最重要的、也就是期望的一些性质：</p><p>1：当$X$和$Y$两个<strong>并不一定相互独立</strong>随机变量时，我们有如下性质：<br>$$<br>E(aX+bY)=aE(X)+bE(Y)<br>$$<br>上述性质称为<strong>期望的线性性（可加性）</strong>，证明很容易，略。</p><p>2：<strong>全期望公式</strong>：<br>$$<br>E(Y)=E(E(Y|X))=\sum_{i}P(X=x_i)E(Y|X=x_i)<br>$$<br>当期望存在条件时，可以类比全概率公式获得全期望公式。</p><p>以及解决期望问题的常用方法：</p><p>解决期望问题有两种方法：<strong>高斯消元</strong>或者<strong>DP</strong>。</p><p>1：高斯消元不必多说，我们根据题意枚举出所有状态，并根据状态列出期望方程组，使用高斯消元求得各个状态的期望解。</p><p>2：当所求状态的期望之间存在一定关系的时候，可以使用<strong>动态规划</strong>解决期望问题：首先做的事自然是找准<strong>递推状态</strong>，这是肯定的。找到状态后，接下来要枚举出所有的<strong>状态转移</strong>，同时计算出转移的<strong>条件</strong>和<strong>代价</strong>。我们描述一下上述步骤执行后应该得到的结果：状态$i$、状态$i$下的期望$E(i)$、状态$i$下的递推状态$(j|j由i转移得到)$，每一种状态转移所需的代价$w_i$。</p><p>我们可以由状态i下递推出来的状态j获得i状态的期望：$\sum w_jE(j)$。我们利用<strong>期望的可加性</strong>，就可以得到$i$的期望了。</p><p>对于本题，我们可以设$f(i,j)$表示在$j$个系统中找到$i$个BUG后期望天数。很明显，当$n$天$s$个系统中找到BUG后，该天的期望$E(n,s)=0$。</p><p>接下来我们以找到一个BUG为转移条件，由$(i,j)$可以转移出四个不同的状态：</p><p>$(i,j)$表示在$j$个系统中没有再找到新BUG，转移代价为$p_1=\frac{i}{n} × \frac{j}{s}$。</p><p>$(i+1,j)$表示在$j$个系统中找到了一个新BUG，转移代价为$p_2=\frac{n-i}{n} × \frac{j}{s}$。</p><p>$(i,j+1)$表示在一个新系统中找到了一个已有BUG，转移代价为$p_3=\frac{i}{n} × \frac{s-j}{s}$。</p><p>$(i+1,j+1)$表示在一个新系统中找到了一个新BUG，转移代价为$p_4=\frac{n-i}{n} × \frac{s-j}{s}$。</p><p>我们可以列出状态$(i,j)$的期望等式：<br>$$<br>E(i,j)=p_1E(i,j)+p_2E(i+1,j)+p_3E(i,j+1)+p_4E(i+1,j+1)<br>$$<br>移项得：<br>$$<br>E(i,j)=\frac{p_2E(i+1,j)+p_3E(i,j+1)+p_4E(i+1,j+1)}{1-p_1}<br>$$<br>我们由$(n,s)$倒着递推，递推到$(0,0)$时即为要在s个系统中找到n个BUG的期望了。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1010</span>;</span><br><span class="line"><span class="keyword">double</span> f[maxn][maxn];</span><br><span class="line"><span class="keyword">int</span> n, s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;s)) &#123;</span><br><span class="line">    f[n][s] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">double</span> q = n * s;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> j = s; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">        <span class="keyword">if</span>(i == n &amp;&amp; j == s) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">double</span> p1 = <span class="keyword">double</span>(i * j) / q;</span><br><span class="line">        <span class="keyword">double</span> p2 = <span class="keyword">double</span>((n - i) * j) / q;</span><br><span class="line">        <span class="keyword">double</span> p3 = <span class="keyword">double</span>(i * (s - j)) / q;</span><br><span class="line">        <span class="keyword">double</span> p4 = <span class="keyword">double</span>((n - i) * (s - j)) / q;</span><br><span class="line">        f[i][j] = (p2*f[i+<span class="number">1</span>][j]+p3*f[i][j+<span class="number">1</span>]+p4*f[i+<span class="number">1</span>][j+<span class="number">1</span>]+<span class="number">1.</span>)/(<span class="number">1.0</span>-p1);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.4f\n"</span>, f[<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;链接：&lt;a href=&quot;https://cn.vjudge.net/problem/POJ-2096&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://cn.vjudge.net/problem/POJ-2096&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;有一个程序员要在$s$个子系统里找$n$个不同的BUG，问在$s$种子系统里找到$n$个BUG的天数期望。&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="题解" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/"/>
-    
-      <category term="POJ" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/POJ/"/>
-    
-    
-      <category term="DP" scheme="https://vincentxwd.github.io/blog/tags/DP/"/>
-    
-      <category term="概率" scheme="https://vincentxwd.github.io/blog/tags/%E6%A6%82%E7%8E%87/"/>
-    
-      <category term="算法总结" scheme="https://vincentxwd.github.io/blog/tags/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
