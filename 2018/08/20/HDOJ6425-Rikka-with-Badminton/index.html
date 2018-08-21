@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="Kirai">
 <meta property="og:description" content="链接：http://acm.hdu.edu.cn/showproblem.php?pid=6425 $n$个人去打羽毛球，其中$a$个人没球没拍，$b$个人只有拍，$c$个人只有球，$d$个人什么都有。现在规定只要有两个人有拍，一个人有球就能去打。问有多少种组合不能去打。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-20T14:38:36.677Z">
+<meta property="og:updated_time" content="2018-08-21T04:22:33.135Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[HDOJ6425] Rikka with Badminton (组合数学)">
 <meta name="twitter:description" content="链接：http://acm.hdu.edu.cn/showproblem.php?pid=6425 $n$个人去打羽毛球，其中$a$个人没球没拍，$b$个人只有拍，$c$个人只有球，$d$个人什么都有。现在规定只要有两个人有拍，一个人有球就能去打。问有多少种组合不能去打。">
@@ -353,12 +353,24 @@
                 
               
 
-              <time title="创建时间：2018-08-20 22:01:21 / 修改时间：22:38:36" itemprop="dateCreated datePublished" datetime="2018-08-20T22:01:21+08:00">2018-08-20</time>
+              <time title="创建时间：2018-08-20 22:01:21" itemprop="dateCreated datePublished" datetime="2018-08-20T22:01:21+08:00">2018-08-20</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-21 12:22:33" itemprop="dateModified" datetime="2018-08-21T12:22:33+08:00">2018-08-21</time>
               
             
           </span>
@@ -441,7 +453,7 @@
 <p>直接考虑有几种情况不能去打：球和拍都不够、球够拍不够、拍够球不够。</p>
 <p>($a$个白嫖哥去不去都无所谓，因此他们对答案的整体贡献是$2^a$。)</p>
 <p>球和拍都不够：分两种情况，完全没有拍和只有一个拍。第一种的贡献只有$a$出，第二种贡献从$a$和$b$里出。因此总体答案是$2^a+2^a×C_{b}^{1}$。</p>
-<p>球够拍不够：这个贡献可以拆分成$a$和$c$、$a$和$b$、$a$和$b$和$d$里出。第一种（没有拍子）$c$类人随意去就可以（不能不去），贡献是$2^{a}×(2^{c}-1)$。第二种（只有一个拍子，$b$类人出拍子，$c$类人出球），贡献是$2^{a}×C_{b}^{1}×(2^c-1)$。第三种（只有一个拍子，$d$类人出拍子），贡献是$2^{a}×C^{d}^{1}×2^c$。</p>
+<p>球够拍不够：这个贡献可以拆分成$a$和$c$、$a$和$b$、$a$和$b$和$d$里出。第一种（没有拍子）$c$类人随意去就可以（不能不去），贡献是$2^{a}×(2^{c}-1)$。第二种（只有一个拍子，$b$类人出拍子，$c$类人出球），贡献是$2^{a}×C_{b}^{1}×(2^c-1)$。第三种（只有一个拍子，$d$类人出拍子），贡献是$2^{a}×C_{d}^{1}×2^c$。</p>
 <p>拍够球不够：只有$b$类人，且至少去$2$个，贡献是$2^a×C_{b}^{2}$。</p>
 <p>全加起来就完事了。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> LL = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"><span class="keyword">const</span> LL mod = <span class="number">998244353</span>;</span><br><span class="line">LL a, b, c, d;</span><br><span class="line"></span><br><span class="line"><span class="function">LL <span class="title">mul</span><span class="params">(LL x, LL n)</span> </span>&#123;</span><br><span class="line">  LL ret = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>(n) &#123;</span><br><span class="line">    <span class="keyword">if</span>(n &amp; <span class="number">1</span>) ret = x * ret % mod;</span><br><span class="line">    n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    x = x * x % mod;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">int</span> T;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">  <span class="keyword">while</span>(T--) &#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld%lld"</span>,&amp;a,&amp;b,&amp;c,&amp;d);</span><br><span class="line">    LL p1 = mul(<span class="number">2L</span>L, a) * (b + <span class="number">1</span>) % mod;</span><br><span class="line">    LL p2 = mul(<span class="number">2L</span>L, a) * (mul(<span class="number">2L</span>L, c) - <span class="number">1</span>) % mod;</span><br><span class="line">       p2 += ((mul(<span class="number">2L</span>L, a) * b % mod) * (mul(<span class="number">2L</span>L, c) - <span class="number">1</span>)) % mod; p2 %= mod;</span><br><span class="line">       p2 +=(( mul(<span class="number">2L</span>L, a) * d % mod) * mul(<span class="number">2L</span>L, c)) % mod; p2 %= mod;</span><br><span class="line">    LL p3 = (mul(<span class="number">2L</span>L, a) * (mul(<span class="number">2L</span>L, b) - b - <span class="number">1</span> + mod) % mod) % mod;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, (((p1+p2)%mod)+p3)%mod);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
