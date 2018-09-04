@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://vincentxwd.github.io/blog/"/>
-  <updated>2018-08-27T09:52:31.559Z</updated>
+  <updated>2018-09-04T09:35:33.320Z</updated>
   <id>https://vincentxwd.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SG函数学习笔记</title>
+    <link href="https://vincentxwd.github.io/blog/2018/09/04/Note-of-Learning-SG-Function/"/>
+    <id>https://vincentxwd.github.io/blog/2018/09/04/Note-of-Learning-SG-Function/</id>
+    <published>2018-09-04T09:29:57.856Z</published>
+    <updated>2018-09-04T09:35:33.320Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>这是之前学习SG函数时所记的笔记。</strong></p><a id="more"></a><p><img src="http://pcoln8jiu.bkt.clouddn.com/sgfunction.png" alt="img"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;这是之前学习SG函数时所记的笔记。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="算法总结" scheme="https://vincentxwd.github.io/blog/categories/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/"/>
+    
+    
+      <category term="博弈" scheme="https://vincentxwd.github.io/blog/tags/%E5%8D%9A%E5%BC%88/"/>
+    
+      <category term="总结" scheme="https://vincentxwd.github.io/blog/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>[Codeforces1029E] Tree with Small Distances (贪心)</title>
@@ -381,9 +405,9 @@
       <category term="2018百度之星" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/HDOJ/2018%E7%99%BE%E5%BA%A6%E4%B9%8B%E6%98%9F/"/>
     
     
-      <category term="暴力" scheme="https://vincentxwd.github.io/blog/tags/%E6%9A%B4%E5%8A%9B/"/>
-    
       <category term="规律" scheme="https://vincentxwd.github.io/blog/tags/%E8%A7%84%E5%BE%8B/"/>
+    
+      <category term="暴力" scheme="https://vincentxwd.github.io/blog/tags/%E6%9A%B4%E5%8A%9B/"/>
     
       <category term="DP" scheme="https://vincentxwd.github.io/blog/tags/DP/"/>
     
@@ -551,35 +575,6 @@
       <category term="枚举" scheme="https://vincentxwd.github.io/blog/tags/%E6%9E%9A%E4%B8%BE/"/>
     
       <category term="二分" scheme="https://vincentxwd.github.io/blog/tags/%E4%BA%8C%E5%88%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[POJ3744] Scout YYF I（概率, DP, 矩阵优化）</title>
-    <link href="https://vincentxwd.github.io/blog/2018/08/07/POJ3744-Scout-YYF-I%EF%BC%88%E6%A6%82%E7%8E%87-DP-%E7%9F%A9%E9%98%B5%E4%BC%98%E5%8C%96%EF%BC%89/"/>
-    <id>https://vincentxwd.github.io/blog/2018/08/07/POJ3744-Scout-YYF-I（概率-DP-矩阵优化）/</id>
-    <published>2018-08-07T15:08:37.000Z</published>
-    <updated>2018-08-07T15:17:10.568Z</updated>
-    
-    <content type="html"><![CDATA[<p>链接：<a href="https://cn.vjudge.net/problem/POJ-3744" target="_blank" rel="noopener">https://cn.vjudge.net/problem/POJ-3744</a></p><p><strong>一个人在一条线上走，线上有n个点有地雷，这个人每次有一定概率$p$走一步，也有$1-p$的概率跳两步。问这个人不踩地雷的概率是多少</strong>。</p><a id="more"></a><p>我们根据题意能推出递推式：$f(i)$表示走到$i$处的概率为多少。$f(1)=1$，$f(i)=p×f(i-1)+(1-p)×f(i-2)$。</p><p>由于线很长，但是地雷很少。我们观察这个递推式是线性的，于是可以用矩阵快速幂优化，构造矩阵：<br>$$<br>\begin{pmatrix}f(n)\f(n-1)\end{pmatrix}=\begin{pmatrix}p&amp;1-p\1&amp;0\end{pmatrix}\begin{pmatrix}f(n-1)\f(n-2)\end{pmatrix}<br>$$<br>对于每一个雷的位置进行分段，计算到那个地方不踩中的概率，递推所有段走到雷处不中的概率，用乘法原理就能求出来结果了。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Matrix</span> &#123;</span></span><br><span class="line">  <span class="keyword">double</span> m[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line">&#125;Matrix;</span><br><span class="line"></span><br><span class="line"><span class="function">Matrix <span class="title">mul</span><span class="params">(Matrix a, Matrix b)</span> </span>&#123;</span><br><span class="line">  Matrix ret;</span><br><span class="line">  <span class="built_in">memset</span>(ret.m, <span class="number">0</span>, <span class="keyword">sizeof</span>(ret.m));</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++) &#123;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(b.m[j][k] == <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">        ret.m[i][k] += a.m[i][j] * b.m[j][k];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Matrix <span class="title">M</span><span class="params">(Matrix a, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">  Matrix ret;</span><br><span class="line">  <span class="built_in">memset</span>(ret.m, <span class="number">0</span>, <span class="keyword">sizeof</span>(ret.m));</span><br><span class="line">  ret.m[<span class="number">0</span>][<span class="number">0</span>] = ret.m[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">  Matrix tmp = a;</span><br><span class="line">  <span class="keyword">while</span>(n) &#123;</span><br><span class="line">    <span class="keyword">if</span>(n &amp; <span class="number">1</span>) &#123;</span><br><span class="line">      ret = mul(ret, tmp);</span><br><span class="line">    &#125;</span><br><span class="line">    n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    tmp = mul(tmp, tmp);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">11</span>;</span><br><span class="line"><span class="keyword">int</span> x[maxn];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">double</span> q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; q) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="built_in">cin</span> &gt;&gt; x[i];</span><br><span class="line">    sort(x, x+n);</span><br><span class="line">    Matrix ret;</span><br><span class="line">    <span class="keyword">double</span> tot = <span class="number">1.0</span>;</span><br><span class="line">    Matrix p;</span><br><span class="line">    p.m[<span class="number">0</span>][<span class="number">0</span>] = q, p.m[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">1</span>-q;</span><br><span class="line">    p.m[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>, p.m[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    ret = M(p, x[<span class="number">0</span>]<span class="number">-1</span>);</span><br><span class="line">    tot *= (<span class="number">1</span> - ret.m[<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span>(x[i] == x[i<span class="number">-1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">      ret = M(p, x[i]-x[i<span class="number">-1</span>]<span class="number">-1</span>);</span><br><span class="line">      tot *= (<span class="number">1</span> - ret.m[<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.7f\n"</span>, tot);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;链接：&lt;a href=&quot;https://cn.vjudge.net/problem/POJ-3744&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://cn.vjudge.net/problem/POJ-3744&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;一个人在一条线上走，线上有n个点有地雷，这个人每次有一定概率$p$走一步，也有$1-p$的概率跳两步。问这个人不踩地雷的概率是多少&lt;/strong&gt;。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="题解" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/"/>
-    
-      <category term="POJ" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/POJ/"/>
-    
-    
-      <category term="DP" scheme="https://vincentxwd.github.io/blog/tags/DP/"/>
-    
-      <category term="概率" scheme="https://vincentxwd.github.io/blog/tags/%E6%A6%82%E7%8E%87/"/>
-    
-      <category term="矩阵快速幂" scheme="https://vincentxwd.github.io/blog/tags/%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82/"/>
     
   </entry>
   

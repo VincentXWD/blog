@@ -3,6 +3,29 @@
   
     
     <entry>
+      <title>SG函数学习笔记</title>
+      <link href="/blog/2018/09/04/Note-of-Learning-SG-Function/"/>
+      <url>/blog/2018/09/04/Note-of-Learning-SG-Function/</url>
+      <content type="html"><![CDATA[<p><strong>这是之前学习SG函数时所记的笔记。</strong></p><a id="more"></a><p><img src="http://pcoln8jiu.bkt.clouddn.com/sgfunction.png" alt="img"></p>]]></content>
+      
+      <categories>
+          
+          <category> 算法总结 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博弈 </tag>
+            
+            <tag> 总结 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>[Codeforces1029E] Tree with Small Distances (贪心)</title>
       <link href="/blog/2018/08/27/CF1029E-Tree-with-Small-Distances-%E8%B4%AA%E5%BF%83/"/>
       <url>/blog/2018/08/27/CF1029E-Tree-with-Small-Distances-%E8%B4%AA%E5%BF%83/</url>
@@ -335,9 +358,9 @@
       
         <tags>
             
-            <tag> 暴力 </tag>
-            
             <tag> 规律 </tag>
+            
+            <tag> 暴力 </tag>
             
             <tag> DP </tag>
             
@@ -553,9 +576,7 @@
       
       <categories>
           
-          <category> 题解 </category>
-          
-          <category> AtCoder </category>
+          <category> 算法总结 </category>
           
       </categories>
       
@@ -589,7 +610,7 @@
             
             <tag> 概率 </tag>
             
-            <tag> 算法总结 </tag>
+            <tag> 总结 </tag>
             
         </tags>
       
