@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://vincentxwd.github.io/blog/"/>
-  <updated>2018-09-04T09:35:33.320Z</updated>
+  <updated>2018-09-04T10:33:16.034Z</updated>
   <id>https://vincentxwd.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>你好，UCAS</title>
+    <link href="https://vincentxwd.github.io/blog/2018/09/04/Hello-UCAS/"/>
+    <id>https://vincentxwd.github.io/blog/2018/09/04/Hello-UCAS/</id>
+    <published>2018-09-04T09:37:15.000Z</published>
+    <updated>2018-09-04T10:33:16.034Z</updated>
+    
+    <content type="html"><![CDATA[<p>70多公里，坐了一小时左右的车，终于到这里了。</p><p><img src="http://pcoln8jiu.bkt.clouddn.com/tsg.jpg" alt="img"></p><a id="more"></a><p>还真是蛮激动的，毕竟在所里的时候就听师兄师姐们说雁栖湖环境特别好。我来报到的这一天还在下雨，空气极度清晰。</p><p>坐车在学校绕了好久才找到了宿舍，宿舍可以说完全就是在山脚下。。。</p><p>这是宿舍的“客厅”。</p><p><img src="http://pcoln8jiu.bkt.clouddn.com/kt.jpg" alt="img"></p><p>一个屋子里一共有9个套间，每个套间只住一个人（单人间好评）。</p><p>套间是这样的。</p><p><img src="http://pcoln8jiu.bkt.clouddn.com/ss.jpg" alt="img"></p><p>有一个小窗户，我这里的位置不算太好，但是靠近向左看还是可以看到骆驼山的。</p><p><img src="http://pcoln8jiu.bkt.clouddn.com/ch.jpg" alt="img"></p><p>袋子里的全部东西（手写学生证预定）。</p><p><img src="http://pcoln8jiu.bkt.clouddn.com/zb.jpg" alt="img"></p><p>简单收拾了一下 ，于是跑路去买被窝还有一些日常用品了。由于太拥挤，并没有拍食堂。</p><p>下午在学校里转了转，感觉校园有点大啊。。晚上跑回宿舍洗衣服洗澡写论文。</p><hr><p>以上是报到当天的实况，然而最近有点自闭。大概是因为突然到一个新环境，有点不适应吧…</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;70多公里，坐了一小时左右的车，终于到这里了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://pcoln8jiu.bkt.clouddn.com/tsg.jpg&quot; alt=&quot;img&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="只言片语" scheme="https://vincentxwd.github.io/blog/categories/%E5%8F%AA%E8%A8%80%E7%89%87%E8%AF%AD/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>SG函数学习笔记</title>
@@ -405,9 +426,9 @@
       <category term="2018百度之星" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/HDOJ/2018%E7%99%BE%E5%BA%A6%E4%B9%8B%E6%98%9F/"/>
     
     
-      <category term="规律" scheme="https://vincentxwd.github.io/blog/tags/%E8%A7%84%E5%BE%8B/"/>
-    
       <category term="暴力" scheme="https://vincentxwd.github.io/blog/tags/%E6%9A%B4%E5%8A%9B/"/>
+    
+      <category term="规律" scheme="https://vincentxwd.github.io/blog/tags/%E8%A7%84%E5%BE%8B/"/>
     
       <category term="DP" scheme="https://vincentxwd.github.io/blog/tags/DP/"/>
     
@@ -548,33 +569,6 @@
       <category term="构造" scheme="https://vincentxwd.github.io/blog/tags/%E6%9E%84%E9%80%A0/"/>
     
       <category term="预处理" scheme="https://vincentxwd.github.io/blog/tags/%E9%A2%84%E5%A4%84%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[AtCoderARC100D] Equal Cut (枚举, 二分)</title>
-    <link href="https://vincentxwd.github.io/blog/2018/08/08/AtCoderARC100D-Equal-Cut-%E6%9E%9A%E4%B8%BE-%E4%BA%8C%E5%88%86/"/>
-    <id>https://vincentxwd.github.io/blog/2018/08/08/AtCoderARC100D-Equal-Cut-枚举-二分/</id>
-    <published>2018-08-07T17:00:12.000Z</published>
-    <updated>2018-08-07T17:03:45.746Z</updated>
-    
-    <content type="html"><![CDATA[<p>链接：<a href="https://arc100.contest.atcoder.jp/tasks/arc100_b" target="_blank" rel="noopener">https://arc100.contest.atcoder.jp/tasks/arc100_b</a></p><p><strong>给你n个数，要求你不改变顺序将这n个数字切分成4段，问四段中各段求和后最大和与最小和之间的差</strong></p><a id="more"></a><p>切三刀，可以首先枚举中间拿刀，然后再在两边分别二分各自的那一刀，让各自拆分成的两个集合的和的差值最小，这样才能保证整体的差值最小。这题对我来说挺难写的。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> LL = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="built_in">vector</span>&lt;LL&gt; a, s;</span><br><span class="line"></span><br><span class="line"><span class="function">LL <span class="title">gao</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">  LL ret = <span class="number">1E18</span>, tmp = <span class="number">1E18</span>;</span><br><span class="line">  <span class="keyword">int</span> lo = <span class="number">1</span>, hi = id, s1 = <span class="number">1</span>, s2 = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>(lo &lt;= hi) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (lo + hi) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(tmp == <span class="number">1E18</span> || tmp &gt; (LL)<span class="built_in">abs</span>(s[id]-s[mid]-s[mid])) &#123;</span><br><span class="line">      tmp = (LL)<span class="built_in">abs</span>(s[id]-s[mid]-s[mid]);</span><br><span class="line">      s1 = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(s[id]-s[mid]&lt;s[mid]) hi = mid - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> lo = mid + <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  lo = id + <span class="number">1</span>, hi = n, tmp = <span class="number">1E18</span>;</span><br><span class="line">  <span class="keyword">while</span>(lo &lt;= hi) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (lo + hi) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(tmp == <span class="number">1E18</span> || tmp &gt; (LL)<span class="built_in">abs</span>(s[n]-s[mid]-(s[mid]-s[id]))) &#123;</span><br><span class="line">      tmp = (LL)<span class="built_in">abs</span>(s[n]-s[mid]-(s[mid]-s[id]));</span><br><span class="line">      s2 = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(s[n]-s[mid]&lt;s[mid]-s[id]) hi = mid - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> lo = mid + <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  LL L = min(&#123;s[s1], s[id]-s[s1], s[s2]-s[id], s[n]-s[s2]&#125;);</span><br><span class="line">  LL R = max(&#123;s[s1], s[id]-s[s1], s[s2]-s[id], s[n]-s[s2]&#125;);</span><br><span class="line">  ret = min(ret, R-L);</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n) &#123;</span><br><span class="line">    a.resize(n+<span class="number">1</span>); s.resize(n+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">      s[i] = s[i<span class="number">-1</span>] + a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    LL ret = <span class="number">1E18</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      ret = min(ret, gao(i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ret &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><a href="https://arc100.contest.atcoder.jp/tasks/arc100_b" target="_blank" rel="noopener">https://arc100.contest.atcoder.jp/tasks/arc100_b</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;链接：&lt;a href=&quot;https://arc100.contest.atcoder.jp/tasks/arc100_b&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://arc100.contest.atcoder.jp/tasks/arc100_b&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;给你n个数，要求你不改变顺序将这n个数字切分成4段，问四段中各段求和后最大和与最小和之间的差&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="题解" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/"/>
-    
-      <category term="AtCoder" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/AtCoder/"/>
-    
-    
-      <category term="枚举" scheme="https://vincentxwd.github.io/blog/tags/%E6%9E%9A%E4%B8%BE/"/>
-    
-      <category term="二分" scheme="https://vincentxwd.github.io/blog/tags/%E4%BA%8C%E5%88%86/"/>
     
   </entry>
   

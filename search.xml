@@ -3,6 +3,21 @@
   
     
     <entry>
+      <title>你好，UCAS</title>
+      <link href="/blog/2018/09/04/Hello-UCAS/"/>
+      <url>/blog/2018/09/04/Hello-UCAS/</url>
+      <content type="html"><![CDATA[<p>70多公里，坐了一小时左右的车，终于到这里了。</p><p><img src="http://pcoln8jiu.bkt.clouddn.com/tsg.jpg" alt="img"></p><a id="more"></a><p>还真是蛮激动的，毕竟在所里的时候就听师兄师姐们说雁栖湖环境特别好。我来报到的这一天还在下雨，空气极度清晰。</p><p>坐车在学校绕了好久才找到了宿舍，宿舍可以说完全就是在山脚下。。。</p><p>这是宿舍的“客厅”。</p><p><img src="http://pcoln8jiu.bkt.clouddn.com/kt.jpg" alt="img"></p><p>一个屋子里一共有9个套间，每个套间只住一个人（单人间好评）。</p><p>套间是这样的。</p><p><img src="http://pcoln8jiu.bkt.clouddn.com/ss.jpg" alt="img"></p><p>有一个小窗户，我这里的位置不算太好，但是靠近向左看还是可以看到骆驼山的。</p><p><img src="http://pcoln8jiu.bkt.clouddn.com/ch.jpg" alt="img"></p><p>袋子里的全部东西（手写学生证预定）。</p><p><img src="http://pcoln8jiu.bkt.clouddn.com/zb.jpg" alt="img"></p><p>简单收拾了一下 ，于是跑路去买被窝还有一些日常用品了。由于太拥挤，并没有拍食堂。</p><p>下午在学校里转了转，感觉校园有点大啊。。晚上跑回宿舍洗衣服洗澡写论文。</p><hr><p>以上是报到当天的实况，然而最近有点自闭。大概是因为突然到一个新环境，有点不适应吧…</p>]]></content>
+      
+      <categories>
+          
+          <category> 只言片语 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    <entry>
       <title>SG函数学习笔记</title>
       <link href="/blog/2018/09/04/Note-of-Learning-SG-Function/"/>
       <url>/blog/2018/09/04/Note-of-Learning-SG-Function/</url>
@@ -358,9 +373,9 @@
       
         <tags>
             
-            <tag> 规律 </tag>
-            
             <tag> 暴力 </tag>
+            
+            <tag> 规律 </tag>
             
             <tag> DP </tag>
             
@@ -762,9 +777,9 @@
       
         <tags>
             
-            <tag> 树状数组 </tag>
-            
             <tag> DP </tag>
+            
+            <tag> 树状数组 </tag>
             
         </tags>
       
