@@ -3,6 +3,33 @@
   
     
     <entry>
+      <title>[Nowcoder190H] CSL的校园卡</title>
+      <link href="/blog/2018/09/15/nowcoder190h/"/>
+      <url>/blog/2018/09/15/nowcoder190h/</url>
+      <content type="html"><![CDATA[<p>题目链接：<a href="https://www.nowcoder.com/acm/contest/190/H" target="_blank" rel="noopener">https://www.nowcoder.com/acm/contest/190/H</a></p><p><strong>中文题面不解释。</strong></p><a id="more"></a><p>很容易想到dp，但是要仔细设计一下状态。</p><p>两个人一起走，可以直接定义状态为dp(ax,ay,bx,by)，但是要维护每个可行点都遍历过，那么可以二进制位压。状态记成dp(sta,ax,ay,bx,by)，然后常规dfs就行了。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> ax, ay, bx, by, st;</span><br><span class="line">&#125;Node;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> dx[<span class="number">5</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> dy[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> n, m, es;</span><br><span class="line"><span class="keyword">char</span> G[maxn][maxn];</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">1</span>&lt;&lt;<span class="number">16</span>][maxn][maxn][maxn][maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">ok</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x &gt;= <span class="number">0</span> &amp;&amp; x &lt; n &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; y &lt; m &amp;&amp; (G[x][y] == <span class="string">'S'</span> || G[x][y] == <span class="string">'O'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">id</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x * m + y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bfs</span><span class="params">(<span class="keyword">int</span> sx, <span class="keyword">int</span> sy)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">memset</span>(dp, <span class="number">-1</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">  <span class="built_in">queue</span>&lt;Node&gt; q;</span><br><span class="line">  dp[<span class="number">1</span>&lt;&lt;id(sx, sy)][sx][sy][sx][sy] = <span class="number">0</span>;</span><br><span class="line">  q.push(&#123;sx, sy, sx, sy, <span class="number">1</span> &lt;&lt; id(sx, sy)&#125;);</span><br><span class="line">  <span class="keyword">while</span>(!q.empty()) &#123;</span><br><span class="line">    Node t = q.front(); q.pop();</span><br><span class="line">    <span class="keyword">if</span>(t.st == es) <span class="keyword">return</span> dp[es][t.ax][t.ay][t.bx][t.by];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">int</span> ax = t.ax + dx[i], ay = t.ay + dy[i];</span><br><span class="line">      <span class="keyword">if</span>(!ok(ax, ay)) <span class="keyword">continue</span>;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">int</span> bx = t.bx + dx[j], by = t.by + dy[j];</span><br><span class="line">        <span class="keyword">if</span>(!ok(bx, by)) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">int</span> st = t.st | (<span class="number">1</span> &lt;&lt; id(ax, ay));</span><br><span class="line">        st |= (<span class="number">1</span> &lt;&lt; id(bx, by));</span><br><span class="line">        <span class="keyword">if</span>(dp[st][ax][ay][bx][by] == <span class="number">-1</span>) dp[st][ax][ay][bx][by] = dp[t.st][t.ax][t.ay][t.bx][t.by] + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">continue</span>;</span><br><span class="line">        q.push(&#123;ax, ay, bx, by, st&#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m)) &#123;</span><br><span class="line">    <span class="keyword">int</span> x, y;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">"%s"</span>, G[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    es = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; m; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(G[i][j] == <span class="string">'O'</span>) es |= (<span class="number">1</span> &lt;&lt; id(i, j));</span><br><span class="line">        <span class="keyword">if</span>(G[i][j] == <span class="string">'S'</span>) &#123;</span><br><span class="line">          x = i, y = j;</span><br><span class="line">          es |= (<span class="number">1</span> &lt;&lt; id(i, j));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, bfs(x, y));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      <categories>
+          
+          <category> 题解 </category>
+          
+          <category> Nowcoder </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> bfs </tag>
+            
+            <tag> dp </tag>
+            
+            <tag> 状态压缩 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>[Nowcoder180D] xor序列 (线性基)</title>
       <link href="/blog/2018/09/08/Nowcoder-180D/"/>
       <url>/blog/2018/09/08/Nowcoder-180D/</url>
@@ -344,9 +371,9 @@
       
         <tags>
             
-            <tag> 规律 </tag>
-            
             <tag> 二分 </tag>
+            
+            <tag> 规律 </tag>
             
         </tags>
       
@@ -396,9 +423,9 @@
       
         <tags>
             
-            <tag> 规律 </tag>
-            
             <tag> 暴力 </tag>
+            
+            <tag> 规律 </tag>
             
             <tag> DP </tag>
             
@@ -548,9 +575,9 @@
       
         <tags>
             
-            <tag> 枚举 </tag>
-            
             <tag> 二分 </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -852,9 +879,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 枚举 </tag>
+            
+            <tag> 数学 </tag>
             
         </tags>
       
@@ -1215,9 +1242,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 暴力 </tag>
+            
+            <tag> 数学 </tag>
             
             <tag> 并查集 </tag>
             
@@ -1244,9 +1271,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 二分 </tag>
+            
+            <tag> 数学 </tag>
             
             <tag> 贪心 </tag>
             
