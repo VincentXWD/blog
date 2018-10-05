@@ -111,7 +111,7 @@
   <meta name="description" content="有的时候化繁为简不一定是好事。相反地，化简为繁反而能更接近预期。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Kirai">
-<meta property="og:url" content="https://vincentxwd.github.io/blog/tags/dfs/index.html">
+<meta property="og:url" content="https://vincentxwd.github.io/blog/tags/DFS/index.html">
 <meta property="og:site_name" content="Kirai">
 <meta property="og:description" content="有的时候化繁为简不一定是好事。相反地，化简为繁反而能更接近预期。">
 <meta property="og:locale" content="zh-CN">
@@ -126,7 +126,7 @@
 
 
 
-  <link rel="canonical" href="https://vincentxwd.github.io/blog/tags/dfs/"/>
+  <link rel="canonical" href="https://vincentxwd.github.io/blog/tags/DFS/"/>
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>标签: dfs | Kirai</title>
+  <title>标签: DFS | Kirai</title>
   
 
 
@@ -322,7 +322,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>dfs<small>标签</small>
+        <h1>DFS<small>标签</small>
         </h1>
       </div>
 
@@ -334,9 +334,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/blog/2018/08/12/CF1020A-C-Codeforces-Round-503-Div-2/" itemprop="url">
+            <a class="post-title-link" href="/blog/2018/08/27/CF1029E-Tree-with-Small-Distances-贪心/" itemprop="url">
               
-                <span itemprop="name">[CF1020A-C] Codeforces Round #503 (Div.2)</span>
+                <span itemprop="name">[Codeforces1029E] Tree with Small Distances (贪心)</span>
               
             </a>
         
@@ -344,9 +344,37 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-12T13:15:17+08:00"
-              content="2018-08-12" >
-          08-12
+              datetime="2018-08-27T17:41:34+08:00"
+              content="2018-08-27" >
+          08-27
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/blog/2018/08/01/Codeforces1006E-Military-Problem-DFS/" itemprop="url">
+              
+                <span itemprop="name">[Codeforces1006E] Military Problem(DFS)</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-08-01T23:40:55+08:00"
+              content="2018-08-01" >
+          08-01
         </time>
       </div>
 
@@ -407,7 +435,7 @@
                 
                   <a href="/blog/archives">
                 
-                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-count">55</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -547,7 +575,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">44</span>
+                      
+                    
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -683,7 +713,7 @@
 </br>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共32.8k字</span>
+  <span class="post-count">博客全站共33.6k字</span>
 </div>
         
 <div class="busuanzi-count">
@@ -924,32 +954,6 @@
       $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
         var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
           return $(e).text()
-        }).toArray().join('\n')
-        var ta = document.createElement('textarea')
-        document.body.appendChild(ta)
-        ta.style.position = 'absolute'
-        ta.style.top = '0px'
-        ta.style.left = '0px'
-        ta.value = code
-        ta.select()
-        ta.focus()
-        var result = document.execCommand('copy')
-        document.body.removeChild(ta)
-        
-        $(this).blur()
-      })).on('mouseleave', function (e) {
-        var $b = $(this).find('.copy-btn')
-        setTimeout(function () {
-          $b.text('复制')
-        }, 300)
-      }).append(e)
-    })
-  </script>
-
-
-<script type="text/javascript" src="/blog/js/src/love.js"></script>
-</body>
-</html>      return $(e).text()
         }).toArray().join('\n')
         var ta = document.createElement('textarea')
         document.body.appendChild(ta)
