@@ -3,15 +3,6 @@
   
     
     <entry>
-      <title>ch1</title>
-      <link href="/blog/2018/10/06/ch1/"/>
-      <url>/blog/2018/10/06/ch1/</url>
-      <content type="html"><![CDATA[]]></content>
-      
-      
-    </entry>
-    
-    <entry>
       <title>[总结] 反素数</title>
       <link href="/blog/2018/10/05/emirp/"/>
       <url>/blog/2018/10/05/emirp/</url>
@@ -863,9 +854,9 @@
       
         <tags>
             
-            <tag> DP </tag>
-            
             <tag> 树状数组 </tag>
+            
+            <tag> DP </tag>
             
         </tags>
       
