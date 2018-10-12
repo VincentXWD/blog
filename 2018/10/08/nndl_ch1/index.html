@@ -125,7 +125,7 @@
 <meta property="og:image" content="http://neuralnetworksanddeeplearning.com/images/tikz12.png">
 <meta property="og:image" content="http://neuralnetworksanddeeplearning.com/images/valley_with_ball.png">
 <meta property="og:image" content="http://pcoln8jiu.bkt.clouddn.com/1539092769209.png">
-<meta property="og:updated_time" content="2018-10-09T14:04:57.954Z">
+<meta property="og:updated_time" content="2018-10-12T02:29:47.127Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[读书笔记] Neural Networks and Deep Learning Chapter 1">
 <meta name="twitter:description" content="这是我阅读在线书籍《Neural Networks and Deep Learning》的笔记，这篇博文是第一章的。没什么营养，因为大部分都知道了，于是草草略过。 章节链接： http://neuralnetworksanddeeplearning.com/chap1.html">
@@ -380,7 +380,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-09 22:04:57" itemprop="dateModified" datetime="2018-10-09T22:04:57+08:00">2018-10-09</time>
+                <time title="修改时间：2018-10-12 10:29:47" itemprop="dateModified" datetime="2018-10-12T10:29:47+08:00">2018-10-12</time>
               
             
           </span>
@@ -604,8 +604,8 @@
 </ol>
 <hr>
 <h3 id="Exercise"><a href="#Exercise" class="headerlink" title="Exercise"></a><strong>Exercise</strong></h3><p><a href="http://neuralnetworksanddeeplearning.com/chap1.html#exercises_647181" target="_blank" rel="noopener">http://neuralnetworksanddeeplearning.com/chap1.html#exercises_647181</a></p>
-<p>Part I. 证明上述的假设，即：当$\left|v\right| = \epsilon, \Delta v =-\eta \nabla C$时，其中$\epsilon &gt;0$为很小的一个数，且当$\eta =\dfrac{\epsilon}{\left| \nabla C\right|}$时，$\Delta C=\nabla C \sdot \Delta v$可以取到最小值。（也就是要证给定步长，我们沿着梯度的方向总能找到最小值）</p>
-<p>证明：当$\Delta C = \nabla C \sdot \Delta v$且$\left|v\right|=\epsilon$时，令$\Delta v=-\eta \nabla C=(-\epsilon/\left|\Delta C\right|)\nabla C$，则有：<br>$$<br>\begin{align<em>}<br>\Delta C &amp;= \nabla C \cdot \Delta v \<br>&amp;=  \nabla C \cdot  ( -\epsilon/\left|\nabla C\right| ) \nabla C \<br>&amp;= \nabla C ^2 ( -\epsilon/\left|\nabla C\right| ) \<br>&amp;= \left|\nabla C\right| ^2 ( -\epsilon/\left|\nabla C\right| ) \<br>&amp;= -\epsilon \left|\nabla C\right| \<br>&amp;= -\left|\Delta v\right|\left|\nabla C\right|<br>\end{align</em>}<br>$$<br>由柯西-施瓦兹不等式，$\left|u\right|\left|v\right| \ge \left|u \sdot v\right|$得，$\left|\Delta v\right|\left|\nabla C\right|\ge \left| \Delta v \cdot \nabla C \right|$，$-\left|\Delta v\right|\left|\nabla C\right|$必为最小值。</p>
+<p>Part I. 证明上述的假设，即：当$\left|v\right| = \epsilon, \Delta v =-\eta \nabla C$时，其中$\epsilon &gt;0$为很小的一个数，且当$\eta =\dfrac{\epsilon}{\left| \nabla C\right|}$时，$\Delta C=\nabla C \cdot \Delta v$可以取到最小值。（也就是要证给定步长，我们沿着梯度的方向总能找到最小值）</p>
+<p>证明：当$\Delta C = \nabla C \cdot \Delta v$且$\left|v\right|=\epsilon$时，令$\Delta v=-\eta \nabla C=(-\epsilon/\left|\Delta C\right|)\nabla C$，则有：<br>$$<br>\begin{align<em>}<br>\Delta C &amp;= \nabla C \cdot \Delta v \<br>&amp;=  \nabla C \cdot  ( -\epsilon/\left|\nabla C\right| ) \nabla C \<br>&amp;= \nabla C ^2 ( -\epsilon/\left|\nabla C\right| ) \<br>&amp;= \left|\nabla C\right| ^2 ( -\epsilon/\left|\nabla C\right| ) \<br>&amp;= -\epsilon \left|\nabla C\right| \<br>&amp;= -\left|\Delta v\right|\left|\nabla C\right|<br>\end{align</em>}<br>$$<br>由柯西-施瓦兹不等式，$\left|u\right|\left|v\right| \ge \left|u \cdot v\right|$得，$\left|\Delta v\right|\left|\nabla C\right|\ge \left| \Delta v \cdot \nabla C \right|$，$-\left|\Delta v\right|\left|\nabla C\right|$必为最小值。</p>
 <p>Part II. 给出一个在多维和一维情况下梯度下降的几何解释。</p>
 <p>答：一维的话就退化成函数求导问题了，就是在一个曲线上找极小值，也就是一个圆点往地势低的地方滚。</p>
 <hr>
