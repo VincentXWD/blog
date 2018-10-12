@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="Kirai">
 <meta property="og:description" content="今天晚上又被问起01背包和完全背包的遍历顺序了，我决定写一篇博文，这样再有人问我就可以直接把这篇文章发给他了。 我要不要先以我的方式来介绍一下这两个问题？首先我们知道01背包和完全背包的状态转移方程： 01背包：$f(i,j)=max{f(i-1,j), f(i-1,j-w_i)+v_i}$ 完全背包：$f(i,j)=max{f(i-1,j),f(i-1,j-kw_i)+kv_i}$ 简单解释一下">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-10T18:02:04.132Z">
+<meta property="og:updated_time" content="2018-10-12T03:28:55.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[总结] 关于01背包和完全背包以及优化">
 <meta name="twitter:description" content="今天晚上又被问起01背包和完全背包的遍历顺序了，我决定写一篇博文，这样再有人问我就可以直接把这篇文章发给他了。 我要不要先以我的方式来介绍一下这两个问题？首先我们知道01背包和完全背包的状态转移方程： 01背包：$f(i,j)=max{f(i-1,j), f(i-1,j-w_i)+v_i}$ 完全背包：$f(i,j)=max{f(i-1,j),f(i-1,j-kw_i)+kv_i}$ 简单解释一下">
@@ -353,12 +353,24 @@
                 
               
 
-              <time title="创建时间：2018-08-11 01:22:48 / 修改时间：02:02:04" itemprop="dateCreated datePublished" datetime="2018-08-11T01:22:48+08:00">2018-08-11</time>
+              <time title="创建时间：2018-08-11 01:22:48" itemprop="dateCreated datePublished" datetime="2018-08-11T01:22:48+08:00">2018-08-11</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-12 11:28:55" itemprop="dateModified" datetime="2018-10-12T11:28:55+08:00">2018-10-12</time>
               
             
           </span>
@@ -435,7 +447,8 @@
 <a id="more"></a>
 <p>我们回到最开始的问题：01背包和完全背包的遍历顺序为什么会不一样？究竟有什么关系？</p>
 <p>在我初学背包问题的时候也想到了这个问题，但是很久之后才去想着弄明白这件事。一般提出这个问题的是已经了解了这两种背包问题并且知道了他们的优化算法的同学。能提出这个问题也说明实际上并没有真正理解这两个状态转移的内涵（以及没认真看背包九讲2333）。</p>
-<p>首先介绍一下01背包的优化，针对01背包的时间复杂度是无法再优化的了，但是朴素地开二维数组是冗余的。有人发现了这个问题，并且进一步发现了01背包的更新规律：<strong>在更新$i,j$时，并不会用到比$j$大的位置，即$f(i-1,k), k&gt;j$。</strong>这很显而易见，因为<strong>物品的重量（花费）是大于等于0的，因此$j-w_i≥j$是一定成立的</strong>。所以我们才会有那个喜闻乐见的一位数组优化，只不过内层的更新顺序是从背包容量到物品重量（花费）的递减遍历顺序，<strong>这样能保证我们的递推是由扫到上一个物品时留下的数组中更新过来的</strong>，我贴一下喜闻乐见的代码：</p>
+<p>首先介绍一下01背包的优化，针对01背包的时间复杂度是无法再优化的了，但是朴素地开二维数组是冗余的。有人发现了这个问题，并且进一步发现了01背包的更新规律：<strong>在更新$i,j$时，并不会用到比$j$大的位置，即$f(i-1,k), k&gt;j$。</strong>这很显而易见，因为<strong>物品的重量（花费）是大于等于0的，因此$j-w_i \leq j$</strong></p>
+<p><strong>是一定成立的</strong>。所以我们才会有那个喜闻乐见的一位数组优化，只不过内层的更新顺序是从背包容量到物品重量（花费）的递减遍历顺序，<strong>这样能保证我们的递推是由扫到上一个物品时留下的数组中更新过来的</strong>，我贴一下喜闻乐见的代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = m; j &gt;= w[i]; j--) &#123;</span><br><span class="line">        dp[j] = max(dp[j], dp[j-w[i]]+v[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果觉得还不够清楚，那我贴一个二维的、滚动数组形式的来帮你理解：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= W; j++) &#123;</span><br><span class="line">    <span class="keyword">if</span>(j &lt; w[i]) &#123;</span><br><span class="line">      f[i][j] = f[i<span class="number">-1</span>][j];</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    f[i][j] = max(f[i][j], f[i<span class="number">-1</span>][j-w[i]]+v[i]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
