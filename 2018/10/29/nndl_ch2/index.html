@@ -119,7 +119,7 @@
 <meta property="og:image" content="http://pcoln8jiu.bkt.clouddn.com/gsddyyyy.png">
 <meta property="og:image" content="http://neuralnetworksanddeeplearning.com/images/tikz21.png">
 <meta property="og:image" content="http://neuralnetworksanddeeplearning.com/images/tikz25.png">
-<meta property="og:updated_time" content="2018-10-29T14:41:57.064Z">
+<meta property="og:updated_time" content="2018-10-30T03:36:26.779Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[读书笔记] Neural Networks and Deep Learning Chapter 2">
 <meta name="twitter:description" content="这是我阅读在线书籍《Neural Networks and Deep Learning》第二章的笔记。 手残不小心把整个笔记的文件夹误删了，原来这种事是真的会发生的啊，还好对第一章笔记做了备份= =、 章节链接： http://neuralnetworksanddeeplearning.com/chap2.html">
@@ -357,12 +357,24 @@
                 
               
 
-              <time title="创建时间：2018-10-29 22:28:00 / 修改时间：22:41:57" itemprop="dateCreated datePublished" datetime="2018-10-29T22:28:00+08:00">2018-10-29</time>
+              <time title="创建时间：2018-10-29 22:28:00" itemprop="dateCreated datePublished" datetime="2018-10-29T22:28:00+08:00">2018-10-29</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-30 11:36:26" itemprop="dateModified" datetime="2018-10-30T11:36:26+08:00">2018-10-30</time>
               
             
           </span>
@@ -444,7 +456,7 @@
 <p>以及介绍了哈达玛积（Hadamard product）：$(s \odot t)_j = s_j t_j$，就是对应项相乘，例：<br>$$<br>\left[\begin{array}{c} 1 \ 2 \end{array}\right]<br>  \odot \left[\begin{array}{c} 3 \ 4\end{array} \right]<br>= \left[ \begin{array}{c} 1 <em> 3 \ 2 </em> 4 \end{array} \right]<br>= \left[ \begin{array}{c} 3 \ 8 \end{array} \right]<br>$$</p>
 <hr>
 <h3 id="The-four-fundamental-equations-behind-backpropagation"><a href="#The-four-fundamental-equations-behind-backpropagation" class="headerlink" title="The four fundamental equations behind backpropagation"></a><strong>The four fundamental equations behind backpropagation</strong></h3><p>反向传播会计算出$\delta_j^l$，表示为第$l$层的第$j$个神经元的误差。</p>
-<p>定义：\delta^l_j \equiv \frac{\partial  C}{<span class="md-search-hit">\partial</span> z^l_j}，$z_j^l$为第$l$层的第$j$个神经元的加权输入结果。反向传播的目标就是计算每一层的$\delta^l$，称之为measure of error。反向传播总的来说是4个方程。</p>
+<p>定义：$\delta^l_j = \frac{\partial  C}{\partial z^l_j}$，$z_j^l$为第$l$层的第$j$个神经元的加权输入结果。反向传播的目标就是计算每一层的$\delta^l$，称之为measure of error。反向传播总的来说是4个方程。</p>
 <p><strong>words</strong></p>
 <ol>
 <li>intermediate：中间的</li>
@@ -457,7 +469,7 @@
 <p>再次重申，$\delta^L$表示的是第$L$层（也就是最后一层）的传播误差。<strong>for the error in the output layer</strong>。</p>
 <p>接着看看隐层的传播如何计算：<br>$$<br>\delta^l = ((w^{l+1})^T \delta^{l+1}) \odot \sigma’(z^l)<br>$$<br>式子中很明显，$l$层的误差就是由下一层（$l+1$层）反传回去的。</p>
 <p>关于对$w^{l+1}$参数矩阵求转置：我是这么理解的，因为输出的时候$l$层用的是$n \times m$的矩阵，想要传回去的话，下层的size就不能是$n\times m$了，而是$m\times n$。转置和下一层的误差相乘，可以把误差传回对应的神经元。</p>
-<p>网络中偏差（bias）的损失的计算：<br>$$<br>\frac{\partial C}{\partial b^l_j} =  \delta^l_j<br>$$<br>模型直接可以用该层的损失来更新某个神经元的bias，于是可以简写：\partial C / \partial b=\delta。</p>
+<p>网络中偏差（bias）的损失的计算：<br>$$<br>\frac{\partial C}{\partial b^l_j} =  \delta^l_j<br>$$<br>模型直接可以用该层的损失来更新某个神经元的bias，于是可以简写：$\partial C / \partial b=\delta$。</p>
 <p>网络中权重的损失的计算：<br>$$<br>\frac{\partial C}{\partial w^l_{jk}} = a^{l-1}_k \delta^l_j<br>$$<br>某层某个神经元的输入乘以该神经元的偏差可以认为是这个神经元对于最终损失的影响值。简写为：$\frac{\partial<br>​    C}{\partial w} = a_{\rm in} \delta_{\rm out}$。</p>
 <p>总结四个BP的关键等式：</p>
 <p><img src="http://neuralnetworksanddeeplearning.com/images/tikz21.png" alt="img"></p>
@@ -489,7 +501,7 @@
 <p>而反向传播可以<strong>DP</strong>地把损失传回去。</p>
 <hr>
 <h3 id="Backpropagation-the-big-picture"><a href="#Backpropagation-the-big-picture" class="headerlink" title="Backpropagation: the big picture"></a><strong>Backpropagation: the big picture</strong></h3><p><img src="http://neuralnetworksanddeeplearning.com/images/tikz25.png" alt="img"></p>
-<p>对于每层输出产生的误差$\Delta a_j^l$，可以用下式做近似：<br>$$<br>\Delta a^l_j \approx \frac{\partial a^l_j}{\partial w^l_{jk}} \Delta w^l_{jk}<br>$$<br>那么对于这层而言其中一条由输出反传回来的结果则是：<br>$$<br>\Delta C \approx \frac{\partial C}{\partial a^L_m}<br>  \frac{\partial a^L_m}{\partial a^{L-1}_n}<br>  \frac{\partial a^{L-1}_n}{\partial a^{L-2}_p} \ldots<br>  \frac{\partial a^{l+1}_q}{\partial a^l_j}<br>  \frac{\partial a^l_j}{\partial w^l_{jk}} \Delta w^l_{jk}<br>$$<br>于是考虑所有连通的情况：<br>$$<br>  \Delta C \approx \sum_{mnp\ldots q} \frac{\partial C}{\partial a^L_m}<br>  \frac{\partial a^L_m}{\partial a^{L-1}_n}<br>  \frac{\partial a^{L-1}_n}{\partial a^{L-2}_p} \ldots<br>  \frac{\partial a^{l+1}_q}{\partial a^l_j}<br>  \frac{\partial a^l_j}{\partial w^l_{jk}} \Delta w^l_{jk}<br>$$<br>这就是反向传播对于某一条边更新时需要的计算：<br>$$<br>\frac{\partial C}{\partial w^l_{jk}} = \sum_{mnp\ldots q} \frac{\partial C}{\partial a^L_m}<br>  \frac{\partial a^L_m}{\partial a^{L-1}_n}<br>  \frac{\partial a^{L-1}_n}{\partial a^{L-2}_p} \ldots<br>  \frac{\partial a^{l+1}_q}{\partial a^l_j}<br>  \frac{\partial a^l_j}{\partial w^l_{jk}}<br>$$</p>
+<p>对于每层输出产生的误差$\Delta a_j^l$，可以用下式做近似：<br>$$<br>\Delta a^l_j \approx \frac{\partial a^l_j}{\partial w^l_{jk}} \Delta w^l_{jk}<br>$$<br>那么对于这层而言其中一条由输出反传回来的结果则是：<br>$$<br>\Delta C \approx \frac{\partial C}{\partial a^L_m}<br>  \frac{\partial a^L_m}{\partial a^{L-1}_n}<br>  \frac{\partial a^{L-1}_n}{\partial a^{L-2}_p} \ldots<br>  \frac{\partial a^{l+1}_q}{\partial a^l_j}<br>  \frac{\partial a^l_j}{\partial w^l_{jk}} \Delta w^l_{jk}<br>$$<br>于是考虑所有连通的情况：<br>$$<br>\Delta C \approx \sum_{mnp\ldots q} \frac{\partial C}{\partial a^L_m}<br>  \frac{\partial a^L_m}{\partial a^{L-1}_n}<br>  \frac{\partial a^{L-1}_n}{\partial a^{L-2}_p} \ldots<br>  \frac{\partial a^{l+1}_q}{\partial a^l_j}<br>  \frac{\partial a^l_j}{\partial w^l_{jk}} \Delta w^l_{jk}<br>$$<br>这就是反向传播对于某一条边更新时需要的计算：<br>$$<br>\frac{\partial C}{\partial w^l_{jk}} = \sum_{mnp\ldots q} \frac{\partial C}{\partial a^L_m}<br>  \frac{\partial a^L_m}{\partial a^{L-1}_n}<br>  \frac{\partial a^{L-1}_n}{\partial a^{L-2}_p} \ldots<br>  \frac{\partial a^{l+1}_q}{\partial a^l_j}<br>  \frac{\partial a^l_j}{\partial w^l_{jk}}<br>$$</p>
 
       
     </div>
