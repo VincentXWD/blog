@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://vincentxwd.github.io/blog/"/>
-  <updated>2018-10-30T03:36:26.779Z</updated>
+  <updated>2018-11-03T16:36:32.887Z</updated>
   <id>https://vincentxwd.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[读书笔记-西瓜书] 线性模型、Logistic回归</title>
+    <link href="https://vincentxwd.github.io/blog/2018/11/03/logistic/"/>
+    <id>https://vincentxwd.github.io/blog/2018/11/03/logistic/</id>
+    <published>2018-11-03T15:39:00.000Z</published>
+    <updated>2018-11-03T16:36:32.887Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是阅读周志华教授的《机器学习》中关于Logistic回归部分的笔记（在模识老师的安利下，最终还是买了西瓜书）。</p><p><strong>Logistic回归音译为“逻辑回归”实在是太蠢了。</strong></p><a id="more"></a><p>Logistic回归是西瓜书第三章“线性模型”中的内容，首先总结一下在logistic回归之前的知识点。</p><p>所谓线性回归就是定义一个线性函数$f(x)=w^Tx+b$，经过在一个特定数据集上学习后获得参数$w$和$b$的过程。通常需要搭配优化算法使用，例如最小二乘法、梯度下降法、牛顿法、拟牛顿法$^{[1,2]}$等，我将它们的特点总结如下：</p><p>最小二乘法：希望找到一条n维空间上的直线，使得所有数据点到这条线上的欧几里德距离最短（均方差误差最小），因为均方误差损失函数是凸的，所以最小二乘法直接对该损失函数关于$w$和$b$进行求导。</p><p>梯度下降法：这是一种迭代求解最优的算法，方法就是将参数沿着梯度负方向更新。这种算法经常陷入局部最优，而且速度未必快。有很多延伸的优化，比如随机梯度下降、带惯性的梯度下降等。</p><p>牛顿法：对拟合目标函数泰勒展开后求导后迭代，需要计算任意两个变量的二阶偏导的逆（海森矩阵的逆）所以计算复杂度高，但是收敛快。过程一图以蔽之：</p><p><img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/NewtonIteration_Ani.gif" alt="img"></p><p>拟牛顿法：添加了步长的牛顿法。</p><p>但是通常的拟合任务并非是线性的，数据可能是符合某种非线性函数的变化（例如指数），因此有了对数线性回归（log-linear regression）。由于自变量的变化还是$w^Tx+b$，因此还属于线性回归模型。更一般的形式如下：<br>$$<br>g(y)=w^Tx+b\y=g^{-1}(w^Tx+b)<br>$$<br>此处$g(\cdot)$是一个非线性函数，这个函数需要“<strong>连续且充分光滑</strong>”。</p><p>分类任务和回归任务最大的区别是，分类需要一个hard-label，而回归通常是一个实数值的soft-label（hard-label和soft-label是我自己起的）。想用回归的方法进行分类，则需要有一个soft-&gt;hard的映射函数。</p><p>可以手动设阈值（阶跃，就是分段函数），但是不满足作为$g(\cdot)$需要的充分条件。于是有人构造了更加光滑的logistic function（对数几率函数）：<br>$$<br>y=\dfrac{1}{1+e^{-z}}<br>$$<br>这是一种sigmoid函数：形似S的函数。我们想表示成$g(y)=w^Tx+b$的形式，可以推：<br>$$<br>y=\dfrac{1}{1+e^{-z}} \<br>y+ye^{-z}=1 \<br>\dfrac{1-y}{y}=e^{-z} \<br>\ln\dfrac{1-y}{y}=-z \<br>\ln\dfrac{y}{1-y}=z<br>$$<br>其中$z=w^Tx+b$，$y$和$1-y$分别可看作是正反例的可能性（logits），二者的比值取对数称为“对数几率 ”。通常写作：<br>$$<br>\ln\dfrac{p(y=1|x)}{p(y=0|x)}=z<br>$$<br>有：<br>$$<br>p(y=1|x)=\dfrac{e^{z}}{1+e^z}<br>$$<br>由于$p(y=0|x)=1-p(y=1|x)$，则：<br>$$<br>p(y=0|x)=\dfrac{1}{1+e^z}<br>$$<br>使用极大似然估计$w$和$b$，构造损失函数$l(w,b)=\sum_{i=1}^{m}\ln p(y_i|x_i;w,b)$，最大化该函数，整理一下就能得到loss函数的形式，之后就能用上述的最优化算法求它的最优解了。</p><p><strong>Reference</strong></p><p>[1]. <a href="https://www.cnblogs.com/shixiangwan/p/7532830.html" target="_blank" rel="noopener">https://www.cnblogs.com/shixiangwan/p/7532830.html</a></p><p>[2]. <a href="https://www.cnblogs.com/xiaohuahua108/p/6011105.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaohuahua108/p/6011105.html</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是阅读周志华教授的《机器学习》中关于Logistic回归部分的笔记（在模识老师的安利下，最终还是买了西瓜书）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Logistic回归音译为“逻辑回归”实在是太蠢了。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="https://vincentxwd.github.io/blog/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Deep Learning" scheme="https://vincentxwd.github.io/blog/tags/Deep-Learning/"/>
+    
+  </entry>
   
   <entry>
     <title>[读书笔记] Neural Networks and Deep Learning Chapter 2</title>
@@ -493,35 +516,6 @@
       <category term="数学" scheme="https://vincentxwd.github.io/blog/tags/%E6%95%B0%E5%AD%A6/"/>
     
       <category term="组合" scheme="https://vincentxwd.github.io/blog/tags/%E7%BB%84%E5%90%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[HDOJ6418] Rikka with Stone-Paper-Scissors (纳什均衡)</title>
-    <link href="https://vincentxwd.github.io/blog/2018/08/20/HDOJ6418-Rikka-with-Stone-Paper-Scissors/"/>
-    <id>https://vincentxwd.github.io/blog/2018/08/20/HDOJ6418-Rikka-with-Stone-Paper-Scissors/</id>
-    <published>2018-08-20T13:48:02.000Z</published>
-    <updated>2018-08-20T14:03:02.805Z</updated>
-    
-    <content type="html"><![CDATA[<p>链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=6418" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6418</a></p><p><strong>A和B玩剪子石头布，每个人要出$n$步，现在给你它们剪子、石头、布分别出的次数，每赢一次，获胜方得一分。已知A会随机出，现在求B的分数的最大期望。</strong></p><a id="more"></a><p>一共玩$n$局，每一次出不同的手势，得分的概率和对方守中对应手势的数目有关系，直接把能赢和能输的概率加加减减就OK。证明涉及纳什均衡，JLS直播讲的也没太听懂orz。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> LL = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line">LL a,b,c,a1,b1,c1;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">int</span> T;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">  <span class="keyword">while</span>(T--) &#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld%lld%lld%lld"</span>,&amp;a,&amp;b,&amp;c,&amp;a1,&amp;b1,&amp;c1);</span><br><span class="line">    LL n = a + b + c;</span><br><span class="line">    LL m = -a*c1-b*a1-c*b1+a1*c+b1*a+c1*b;</span><br><span class="line">    <span class="keyword">if</span>(m % n == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, m / n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld/%lld\n"</span>, m/__gcd((LL)<span class="built_in">abs</span>(m),n), n/__gcd((LL)<span class="built_in">abs</span>(m),n));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;链接：&lt;a href=&quot;http://acm.hdu.edu.cn/showproblem.php?pid=6418&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://acm.hdu.edu.cn/showproblem.php?pid=6418&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A和B玩剪子石头布，每个人要出$n$步，现在给你它们剪子、石头、布分别出的次数，每赢一次，获胜方得一分。已知A会随机出，现在求B的分数的最大期望。&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="题解" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/"/>
-    
-      <category term="HDOJ" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/HDOJ/"/>
-    
-    
-      <category term="数学" scheme="https://vincentxwd.github.io/blog/tags/%E6%95%B0%E5%AD%A6/"/>
-    
-      <category term="博弈" scheme="https://vincentxwd.github.io/blog/tags/%E5%8D%9A%E5%BC%88/"/>
-    
-      <category term="期望" scheme="https://vincentxwd.github.io/blog/tags/%E6%9C%9F%E6%9C%9B/"/>
     
   </entry>
   
