@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://vincentxwd.github.io/blog/"/>
-  <updated>2018-11-03T16:40:38.763Z</updated>
+  <updated>2018-11-03T17:52:48.139Z</updated>
   <id>https://vincentxwd.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[读书笔记-西瓜书] 线性判别分析：LDA</title>
+    <link href="https://vincentxwd.github.io/blog/2018/11/04/lda/"/>
+    <id>https://vincentxwd.github.io/blog/2018/11/04/lda/</id>
+    <published>2018-11-03T16:50:10.000Z</published>
+    <updated>2018-11-03T17:52:48.139Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>线性判别分析（Linear Discriminant Analysis, LDA）又称Fisher判别分析，是一种数据降维的方法，主要思想是使属于同一类的投影点距离尽可能地接近（类内方差小），不同类的中心点距离尽可能地远（类间中点距离大）。</strong></p><a id="more"></a><p>LDA就是模识课上黄老板讲的Fisher判别，名字不同而已。思想也很简单，计算也不复杂。首先定义一些变量：<br>$$<br>x_i：i类数据的训练样本<br>$$</p><p>$$<br>\mu_i：i类数据的均值向量<br>$$</p><p>$$<br>\Sigma_i：i类数据的协方差矩阵<br>$$</p><p>投影到直线$w$上后，样本中心（均值）所在的投影就变为$w^T\mu_i$，协方差变为$w^T\Sigma_i w$，推一下协方差：<br>$$<br>展开协方差的定义：\Sigma_i=\sum_{j=1}^n(x_j-u_i)^2<br>$$</p><p>$$<br>变换后的协方差定义：\Sigma’<em>i=\sum</em>{j=1}^n(w^Tx_j-w^Tu_i)^2<br>$$</p><p>则有：<br>$$<br>\Sigma’<em>i=\sum</em>{j=1}^n(w^Tx_j-w^Tu_i)^2=\sum_{j=1}^n(w^T(x_j-u_i))^2<br>$$</p><p>$$<br>=\sum_{j=1}^nw^T(x_j-u_i)(w^T(x_j-u_i))^T<br>$$</p><p>$$<br>=\sum_{j=1}^nw^T(x_j-u_i)(x_j-u_i)^Tw<br>$$</p><p>$$<br>=w^T\sum_{j=1}^n(x_j-u_i)^2w<br>$$</p><p>$$<br>=w^T\Sigma_iw<br>$$</p><p>用变换后的协方差作为衡量类内点的“集中”程度，我们尽可能想让这个值小。于是第一个目标可以用这个值逼近。</p><p>为了叙述方便，现在假设分类任务是二分类，分别是0、1类。第二个目标类间距离可以直接比较类内中点之间的距离测度，定义类间距为中点的Euclidean Distance平方：$Dis(0,1)=|w^T\mu_0-w^T\mu_1|^2$来衡量。我们希望这个值尽可能大</p><p>定义：$S_w’=\Sigma’_0+\Sigma’_1$，$S_b’=Dis(0,1)$。</p><p>同时考虑上述两个指标，于是做商合成一个目标函数（突然想起自己的paper里也搞过这种设计）：<br>$$<br>J=\dfrac{S_b’}{S_w’}=\dfrac{|w^T\mu_0w-w^T\mu_1|^2}{w^T\Sigma_0w+w^T\Sigma_1w}<br>$$</p><p>$$<br>=\dfrac{w^T(\mu_0-\mu_1)(\mu_0-\mu_1)^Tw}{w^T(\Sigma_0+\Sigma_1)w}<br>$$</p><p>目标即为通过调整$w$最大化$J$，$S’_b$和$S’_w$的比值称为“广义瑞利商”。由于分子和分布都是关于$w$的二次项，因此解只与$w$的方向有关。方程等价于优化下式：<br>$$<br>\min_w -w^TS’_bw<br>$$</p><p>$$<br>st.\ w^TS’_ww=1<br>$$</p><p>这是个带约束的极值求解问题，可以用高数中学过的拉格朗日乘数法解决，构造拉格朗日函数：<br>$$<br>L(w)=-w^TS’_bw+\lambda(w^TS’_ww-1)<br>$$<br>令上式的导数得0，即可得：<br>$$<br>w=S_w’^{-1}(\mu_0-\mu_1)<br>$$<br>问题转换成求解$S’_w$的逆。注意该阵通常情况下不可逆，原因是数据维数和数据条目数通常是不匹配，就是说数据集并不能确定地体现数据的分布情况。</p><p>书上介绍的实际是PCA方法，直接给$S’_w$进行SVD分解，得到$S’_w=U\Sigma V^T$，于是$S_w’^{-1}=(U\Sigma V^T)^{-1}=V\Sigma^{-1}U^T$。</p><p>最终我们可推得：<br>$$<br>w=V\Sigma^{-1}U^T(\mu_0-\mu_1)<br>$$</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;线性判别分析（Linear Discriminant Analysis, LDA）又称Fisher判别分析，是一种数据降维的方法，主要思想是使属于同一类的投影点距离尽可能地接近（类内方差小），不同类的中心点距离尽可能地远（类间中点距离大）。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="https://vincentxwd.github.io/blog/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Deep Learning" scheme="https://vincentxwd.github.io/blog/tags/Deep-Learning/"/>
+    
+  </entry>
   
   <entry>
     <title>[读书笔记-西瓜书] 线性模型、Logistic回归</title>
@@ -489,33 +511,6 @@
       <category term="贪心" scheme="https://vincentxwd.github.io/blog/tags/%E8%B4%AA%E5%BF%83/"/>
     
       <category term="DFS" scheme="https://vincentxwd.github.io/blog/tags/DFS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[HDOJ6425] Rikka with Badminton (组合数学)</title>
-    <link href="https://vincentxwd.github.io/blog/2018/08/20/HDOJ6425-Rikka-with-Badminton/"/>
-    <id>https://vincentxwd.github.io/blog/2018/08/20/HDOJ6425-Rikka-with-Badminton/</id>
-    <published>2018-08-20T14:01:21.000Z</published>
-    <updated>2018-08-21T04:22:33.135Z</updated>
-    
-    <content type="html"><![CDATA[<p>链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=6425" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6425</a></p><p><strong>$n$个人去打羽毛球，其中$a$个人没球没拍，$b$个人只有拍，$c$个人只有球，$d$个人什么都有。现在规定只要有两个人有拍，一个人有球就能去打。问有多少种组合不能去打。</strong></p><a id="more"></a><p>JLS给的解居然是个dp，惊了。</p><p>直接考虑有几种情况不能去打：球和拍都不够、球够拍不够、拍够球不够。</p><p>($a$个白嫖哥去不去都无所谓，因此他们对答案的整体贡献是$2^a$。)</p><p>球和拍都不够：分两种情况，完全没有拍和只有一个拍。第一种的贡献只有$a$出，第二种贡献从$a$和$b$里出。因此总体答案是$2^a+2^a×C_{b}^{1}$。</p><p>球够拍不够：这个贡献可以拆分成$a$和$c$、$a$和$b$、$a$和$b$和$d$里出。第一种（没有拍子）$c$类人随意去就可以（不能不去），贡献是$2^{a}×(2^{c}-1)$。第二种（只有一个拍子，$b$类人出拍子，$c$类人出球），贡献是$2^{a}×C_{b}^{1}×(2^c-1)$。第三种（只有一个拍子，$d$类人出拍子），贡献是$2^{a}×C_{d}^{1}×2^c$。</p><p>拍够球不够：只有$b$类人，且至少去$2$个，贡献是$2^a×C_{b}^{2}$。</p><p>全加起来就完事了。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> LL = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"><span class="keyword">const</span> LL mod = <span class="number">998244353</span>;</span><br><span class="line">LL a, b, c, d;</span><br><span class="line"></span><br><span class="line"><span class="function">LL <span class="title">mul</span><span class="params">(LL x, LL n)</span> </span>&#123;</span><br><span class="line">  LL ret = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>(n) &#123;</span><br><span class="line">    <span class="keyword">if</span>(n &amp; <span class="number">1</span>) ret = x * ret % mod;</span><br><span class="line">    n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    x = x * x % mod;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">int</span> T;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">  <span class="keyword">while</span>(T--) &#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld%lld"</span>,&amp;a,&amp;b,&amp;c,&amp;d);</span><br><span class="line">    LL p1 = mul(<span class="number">2L</span>L, a) * (b + <span class="number">1</span>) % mod;</span><br><span class="line">    LL p2 = mul(<span class="number">2L</span>L, a) * (mul(<span class="number">2L</span>L, c) - <span class="number">1</span>) % mod;</span><br><span class="line">       p2 += ((mul(<span class="number">2L</span>L, a) * b % mod) * (mul(<span class="number">2L</span>L, c) - <span class="number">1</span>)) % mod; p2 %= mod;</span><br><span class="line">       p2 +=(( mul(<span class="number">2L</span>L, a) * d % mod) * mul(<span class="number">2L</span>L, c)) % mod; p2 %= mod;</span><br><span class="line">    LL p3 = (mul(<span class="number">2L</span>L, a) * (mul(<span class="number">2L</span>L, b) - b - <span class="number">1</span> + mod) % mod) % mod;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, (((p1+p2)%mod)+p3)%mod);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;链接：&lt;a href=&quot;http://acm.hdu.edu.cn/showproblem.php?pid=6425&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://acm.hdu.edu.cn/showproblem.php?pid=6425&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;$n$个人去打羽毛球，其中$a$个人没球没拍，$b$个人只有拍，$c$个人只有球，$d$个人什么都有。现在规定只要有两个人有拍，一个人有球就能去打。问有多少种组合不能去打。&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="题解" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/"/>
-    
-      <category term="HDOJ" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/HDOJ/"/>
-    
-    
-      <category term="数学" scheme="https://vincentxwd.github.io/blog/tags/%E6%95%B0%E5%AD%A6/"/>
-    
-      <category term="组合" scheme="https://vincentxwd.github.io/blog/tags/%E7%BB%84%E5%90%88/"/>
     
   </entry>
   
