@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://vincentxwd.github.io/blog/"/>
-  <updated>2018-11-03T17:55:25.332Z</updated>
+  <updated>2018-11-03T17:56:30.998Z</updated>
   <id>https://vincentxwd.github.io/blog/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://vincentxwd.github.io/blog/2018/11/04/lda/"/>
     <id>https://vincentxwd.github.io/blog/2018/11/04/lda/</id>
     <published>2018-11-03T16:50:10.000Z</published>
-    <updated>2018-11-03T17:55:25.332Z</updated>
+    <updated>2018-11-03T17:56:30.998Z</updated>
     
     <content type="html"><![CDATA[<p><strong>线性判别分析（Linear Discriminant Analysis, LDA）又称Fisher判别分析，是一种数据降维的方法，主要思想是使属于同一类的投影点距离尽可能地接近（类内方差小），不同类的中心点距离尽可能地远（类间中点距离大）。</strong></p><a id="more"></a><p>LDA就是模识课上黄老板讲的Fisher判别，名字不同而已。思想也很简单，计算也不复杂。首先定义一些变量：<br>$$<br>x_i：i类数据的训练样本<br>$$</p><p>$$<br>\mu_i：i类数据的均值向量<br>$$</p><p>$$<br>\Sigma_i：i类数据的协方差矩阵<br>$$</p><p>投影到直线$w$上后，样本中心（均值）所在的投影就变为$w^T\mu_i$，协方差变为$w^T\Sigma_i w$，推一下协方差：<br>$$<br>展开协方差的定义：\Sigma_i=\sum_{j=1}^n(x_j-u_i)^2<br>$$</p><p>$$<br>变换后的协方差定义：\Sigma’<em>i=\sum</em>{j=1}^n(w^Tx_j-w^Tu_i)^2<br>$$</p><p>则有：<br>$$<br>\Sigma’<em>i=\sum</em>{j=1}^n(w^Tx_j-w^Tu_i)^2=\sum_{j=1}^n(w^T(x_j-u_i))^2<br>$$</p><p>$$<br>=\sum_{j=1}^nw^T(x_j-u_i)(w^T(x_j-u_i))^T<br>$$</p><p>$$<br>=\sum_{j=1}^nw^T(x_j-u_i)(x_j-u_i)^Tw<br>$$</p><p>$$<br>=w^T\sum_{j=1}^n(x_j-u_i)^2w<br>$$</p><p>$$<br>=w^T\Sigma_iw<br>$$</p><p>用变换后的协方差作为衡量类内点的“集中”程度，我们尽可能想让这个值小。于是第一个目标可以用这个值逼近。</p><p>为了叙述方便，现在假设分类任务是二分类，分别是0、1类。第二个目标类间距离可以直接比较类内中点之间的距离测度，定义类间距为中点的Euclidean Distance平方：$Dis(0,1)=|w^T\mu_0-w^T\mu_1|^2$来衡量。我们希望这个值尽可能大</p><p>定义：$S_w’=\Sigma’_0+\Sigma’_1$，$S_b’=Dis(0,1)$。</p><p>同时考虑上述两个指标，于是做商合成一个目标函数（突然想起自己的paper里也搞过这种设计）：<br>$$<br>J=\dfrac{S_b’}{S_w’}=\dfrac{|w^T\mu_0w-w^T\mu_1|^2}{w^T\Sigma_0w+w^T\Sigma_1w}<br>$$</p><p>$$<br>=\dfrac{w^T(\mu_0-\mu_1)(\mu_0-\mu_1)^Tw}{w^T(\Sigma_0+\Sigma_1)w}<br>$$</p><p>目标即为通过调整$w$最大化$J$，$S’_b$和$S’_w$的比值称为“广义瑞利商”。由于分子和分布都是关于$w$的二次项，因此解只与$w$的方向有关。方程等价于优化下式：<br>$$<br>\min_w -w^TS’_bw<br>$$</p><p>$$<br>st.\ w^TS’_ww=1<br>$$</p><p>这是个带约束的极值求解问题，可以用高数中学过的拉格朗日乘数法解决，构造拉格朗日函数：<br>$$<br>L(w)=-w^TS’_bw+\lambda(w^TS’_ww-1)<br>$$<br>令上式的导数得0，即可得：<br>$$<br>w=S_w’^{-1}(\mu_0-\mu_1)<br>$$<br>问题转换成求解$S’_w$的逆。注意该阵通常情况下不可逆，原因是数据维数和数据条目数通常是不匹配，就是说数据集并不能确定地体现数据的分布情况。</p><p>书上介绍的实际是PCA方法，直接给$S’_w$进行SVD分解，得到$S’_w=U\Sigma V^T$，于是$S_w’^{-1}=(U\Sigma V^T)^{-1}=V\Sigma^{-1}U^T$。</p><p>最终我们可推得：<br>$$<br>w=V\Sigma^{-1}U^T(\mu_0-\mu_1)<br>$$</p>]]></content>
     
@@ -34,7 +34,7 @@
       <category term="读书笔记" scheme="https://vincentxwd.github.io/blog/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="Deep Learning" scheme="https://vincentxwd.github.io/blog/tags/Deep-Learning/"/>
+      <category term="Machine Learning" scheme="https://vincentxwd.github.io/blog/tags/Machine-Learning/"/>
     
   </entry>
   
@@ -43,7 +43,7 @@
     <link href="https://vincentxwd.github.io/blog/2018/11/03/logistic/"/>
     <id>https://vincentxwd.github.io/blog/2018/11/03/logistic/</id>
     <published>2018-11-03T15:39:00.000Z</published>
-    <updated>2018-11-03T16:40:38.763Z</updated>
+    <updated>2018-11-03T17:56:27.818Z</updated>
     
     <content type="html"><![CDATA[<p>这是阅读周志华教授的《机器学习》中关于Logistic回归部分的笔记（在模识老师的安利下，最终还是买了西瓜书）。</p><p><strong>Logistic回归音译为“逻辑回归”实在是太蠢了。</strong></p><a id="more"></a><p>Logistic回归是西瓜书第三章“线性模型”中的内容，首先总结一下在logistic回归之前的知识点。</p><p>所谓线性回归就是定义一个线性函数$f(x)=w^Tx+b$，经过在一个特定数据集上学习后获得参数$w$和$b$的过程。通常需要搭配优化算法使用，例如最小二乘法、梯度下降法、牛顿法、拟牛顿法$^{[1,2]}$等，我将它们的特点总结如下：</p><p>最小二乘法：希望找到一条n维空间上的直线，使得所有数据点到这条线上的欧几里德距离最短（均方差误差最小），因为均方误差损失函数是凸的，所以最小二乘法直接对该损失函数关于$w$和$b$进行求导。</p><p>梯度下降法：这是一种迭代求解最优的算法，方法就是将参数沿着梯度负方向更新。这种算法经常陷入局部最优，而且速度未必快。有很多延伸的优化，比如随机梯度下降、带惯性的梯度下降等。</p><p>牛顿法：对拟合目标函数泰勒展开后求导后迭代，需要计算任意两个变量的二阶偏导的逆（海森矩阵的逆）所以计算复杂度高，但是收敛快。过程一图以蔽之：</p><p><img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/NewtonIteration_Ani.gif" alt="img"></p><p>拟牛顿法：添加了步长的牛顿法。</p><p>但是通常的拟合任务并非是线性的，数据可能是符合某种非线性函数的变化（例如指数），因此有了对数线性回归（log-linear regression）。由于自变量的变化还是$w^Tx+b$，因此还属于线性回归模型。更一般的形式如下：<br>$$<br>g(y)=w^Tx+b<br>$$<br>$$<br>y=g^{-1}(w^Tx+b)<br>$$</p><p>此处$g(\cdot)$是一个非线性函数，这个函数需要“<strong>连续且充分光滑</strong>”。</p><p>分类任务和回归任务最大的区别是，分类需要一个hard-label，而回归通常是一个实数值的soft-label（hard-label和soft-label是我自己起的）。想用回归的方法进行分类，则需要有一个soft-&gt;hard的映射函数。</p><p>可以手动设阈值（阶跃，就是分段函数），但是不满足作为$g(\cdot)$需要的充分条件。于是有人构造了更加光滑的logistic function（对数几率函数）：<br>$$<br>y=\dfrac{1}{1+e^{-z}}<br>$$<br>这是一种sigmoid函数：形似S的函数。我们想表示成$g(y)=w^Tx+b$的形式，可以推：<br>$$<br>y=\dfrac{1}{1+e^{-z}}<br>$$<br>$$<br>y+ye^{-z}=1<br>$$</p><p>$$<br>\dfrac{1-y}{y}=e^{-z}<br>$$</p><p>$$<br>\ln\dfrac{1-y}{y}=-z<br>$$</p><p>$$<br>\ln\dfrac{y}{1-y}=z<br>$$</p><p>其中$z=w^Tx+b$，$y$和$1-y$分别可看作是正反例的可能性（logits），二者的比值取对数称为“对数几率 ”。通常写作：<br>$$<br>\ln\dfrac{p(y=1|x)}{p(y=0|x)}=z<br>$$<br>有：<br>$$<br>p(y=1|x)=\dfrac{e^{z}}{1+e^z}<br>$$<br>由于$p(y=0|x)=1-p(y=1|x)$，则：<br>$$<br>p(y=0|x)=\dfrac{1}{1+e^z}<br>$$<br>使用极大似然估计$w$和$b$，构造损失函数$l(w,b)=\sum_{i=1}^{m}\ln p(y_i|x_i;w,b)$，最大化该函数，整理一下就能得到loss函数的形式，之后就能用上述的最优化算法求它的最优解了。</p><p><strong>Reference</strong></p><p>[1]. <a href="https://www.cnblogs.com/shixiangwan/p/7532830.html" target="_blank" rel="noopener">https://www.cnblogs.com/shixiangwan/p/7532830.html</a></p><p>[2]. <a href="https://www.cnblogs.com/xiaohuahua108/p/6011105.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaohuahua108/p/6011105.html</a></p>]]></content>
     
@@ -57,7 +57,7 @@
       <category term="读书笔记" scheme="https://vincentxwd.github.io/blog/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="Deep Learning" scheme="https://vincentxwd.github.io/blog/tags/Deep-Learning/"/>
+      <category term="Machine Learning" scheme="https://vincentxwd.github.io/blog/tags/Machine-Learning/"/>
     
   </entry>
   
