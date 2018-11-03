@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="Kirai">
 <meta property="og:description" content="线性判别分析（Linear Discriminant Analysis, LDA）又称Fisher判别分析，是一种数据降维的方法，主要思想是使属于同一类的投影点距离尽可能地接近（类内方差小），不同类的中心点距离尽可能地远（类间中点距离大）。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-03T17:56:30.998Z">
+<meta property="og:updated_time" content="2018-11-03T17:57:44.442Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[读书笔记-西瓜书] 线性判别分析：LDA">
 <meta name="twitter:description" content="线性判别分析（Linear Discriminant Analysis, LDA）又称Fisher判别分析，是一种数据降维的方法，主要思想是使属于同一类的投影点距离尽可能地接近（类内方差小），不同类的中心点距离尽可能地远（类间中点距离大）。">
@@ -353,7 +353,7 @@
                 
               
 
-              <time title="创建时间：2018-11-04 00:50:10 / 修改时间：01:56:30" itemprop="dateCreated datePublished" datetime="2018-11-04T00:50:10+08:00">2018-11-04</time>
+              <time title="创建时间：2018-11-04 00:50:10 / 修改时间：01:57:44" itemprop="dateCreated datePublished" datetime="2018-11-04T00:50:10+08:00">2018-11-04</time>
             
 
             
@@ -432,8 +432,9 @@
 <p>LDA就是模识课上黄老板讲的Fisher判别，名字不同而已。思想也很简单，计算也不复杂。首先定义一些变量：<br>$$<br>x_i：i类数据的训练样本<br>$$</p>
 <p>$$<br>\mu_i：i类数据的均值向量<br>$$</p>
 <p>$$<br>\Sigma_i：i类数据的协方差矩阵<br>$$</p>
-<p>投影到直线$w$上后，样本中心（均值）所在的投影就变为$w^T\mu_i$，协方差变为$w^T\Sigma_i w$，推一下协方差：<br>$$<br>展开协方差的定义：\Sigma_i=\sum_{j=1}^n(x_j-u_i)^2<br>$$</p>
-<p>$$<br>变换后的协方差定义：\Sigma’<em>i=\sum</em>{j=1}^n(w^Tx_j-w^Tu_i)^2<br>$$</p>
+<p>投影到直线$w$上后，样本中心（均值）所在的投影就变为$w^T\mu_i$，协方差变为$w^T\Sigma_i w$，推一下协方差：</p>
+<p>展开协方差的定义：$\Sigma_i=\sum_{j=1}^n(x_j-u_i)^2$</p>
+<p>变换后的协方差定义：$\Sigma’<em>i=\sum</em>{j=1}^n(w^Tx_j-w^Tu_i)^2$</p>
 <p>则有：<br>$$<br>\Sigma’<em>i=\sum</em>{j=1}^n(w^Tx_j-w^Tu_i)^2=\sum_{j=1}^n(w^T(x_j-u_i))^2<br>$$</p>
 <p>$$<br>=\sum_{j=1}^nw^T(x_j-u_i)(w^T(x_j-u_i))^T<br>$$</p>
 <p>$$<br>=\sum_{j=1}^nw^T(x_j-u_i)(x_j-u_i)^Tw<br>$$</p>
