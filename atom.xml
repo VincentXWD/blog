@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://vincentxwd.github.io/blog/"/>
-  <updated>2018-11-05T12:11:43.585Z</updated>
+  <updated>2018-11-10T16:31:11.137Z</updated>
   <id>https://vincentxwd.github.io/blog/</id>
   
   <author>
@@ -17,13 +17,35 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>[读书笔记-西瓜书] Bayes分类器</title>
+    <link href="https://vincentxwd.github.io/blog/2018/11/10/bayes/"/>
+    <id>https://vincentxwd.github.io/blog/2018/11/10/bayes/</id>
+    <published>2018-11-10T14:08:12.000Z</published>
+    <updated>2018-11-10T16:31:11.137Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是阅读周志华教授《机器学习》中第七章（贝叶斯分类器）的笔记。</p><a id="more"></a><hr><h2 id="贝叶斯决策论"><a href="#贝叶斯决策论" class="headerlink" title="贝叶斯决策论"></a>贝叶斯决策论</h2><p>使用贝叶斯决策论解决问题时的目标实际上是“最小化总体风险”，可以形式化表示成下式：<br>$$<br>R(c_i|x)=\sum_{j=1}^{n}\lambda_{ij}P(c_j|x)<br>$$<br>$\lambda_{ij}$：$i$类误分类成$j$类的代价。</p><p>$P(c_i|x)$：样本$x$分类成$c_i$的概率。</p><p>贝叶斯决策论希望找到一个最小化总体风险的判别准则$h(x)$，对于分类任务则是一个分类准则（$h(x)$表示将$x$归类为$h(x)$类），使得上述总体风险最小：<br>$$<br>h(x)=\mbox{argmin}\ R(c|x)<br>$$</p><hr><h2 id="贝叶斯准则"><a href="#贝叶斯准则" class="headerlink" title="贝叶斯准则"></a>贝叶斯准则</h2><p>贝叶斯准则可以简单理解为“整体风险最小化=每个样本的风险最小化”，风险指的是（比如在分类问题中）被分成错误类的期望。</p><p>能够使用贝叶斯准则的前提是获得后验概率$P(c|x)$，贝叶斯分类器此类生成模型则会考虑使用贝叶斯定理来求解这个后验概率：<br>$$<br>P(c|x)=\dfrac{P(c)P(x|c)}{P(x)}<br>$$<br>解释一下公式中的每一个量的意义：</p><p>$P(c|x)$：后验概率，认为$x$分类成$c$的概率。</p><p>$P(c)$：先验概率，从公式上直观上看就是“偏见”、“第一眼看到这个人就觉得他是坏人”这样的概率。</p><p>$P(x|c)$：$x$相对于$c$的类条件概率，也称似然。指的是已知某些观测所得到结果（类别是$c$）时，对有关事物的性质（恰好是样本$x$）的参数进行估计[1]。</p><p>$P(x)$：用于归一化的因子，$P(x)=\sum_{i=1}^{n}P(x|c=i)P(c=i)$.</p><p>贝叶斯定理实际上就是希望通过已知相当数量的训练数据集合$D$，我们希望找到一个合理的方法来估计$D$中的$P(c)$和$P(x|c)$：</p><p>我们假设训练集中的训练数据独立同分布，那么根据大数定律，$P(c)$可以用每一类样本的<strong>频率</strong>来估计。</p><p>$P(x|c)$很难使用频率估计，因为$D$中的样本$x$通常无法完全覆盖所有情况：未被数据集覆盖$\not=$出现概率为0。于是需要使用<strong>极大似然估计</strong>.</p><hr><h2 id="极大似然估计-MLE"><a href="#极大似然估计-MLE" class="headerlink" title="极大似然估计(MLE)"></a>极大似然估计(MLE)</h2><p>书中首先在介绍Logistic回归的时候使用了MLE（对数似然），但是没有仔细介绍。</p><p>首先假设数据集符合某种概率分布$D(\theta_c)$，被分成不同类完全取决于参数向量$\theta_c$.训练模型的过程就是参数估计的过程。</p><p>极大似然估计（MLE）就是一种参数估计方法，估计方法完全写在名字里了：似然（$P(x|c)$）极大化。由于分类结果完全取决于$\theta_c$，因此这个似然可以表示成$P(x|\theta_c)$.介绍贝叶斯准则的时候也讲了，“整体风险最小化=每个样本的风险最小化”。因此$\theta_c$对于整个数据集$D​$的似然就是：<br>$$<br>P(D|\theta_c)=\prod_{x\in D}P(x|\theta_c)<br>$$<br>我们给它取对数（因为小数连乘会导致精度损失）：<br>$$<br>L(\theta_c)=logP(D|\theta_c)=\sum_{x\in D}\mbox{log}P(x|\theta_c)<br>$$<br>我们对$\theta_c$的估计为：<br>$$<br>\hat{\theta_c}=\mbox{argmax}_{\theta_c}L(\theta_c)<br>$$<br>分析到这里这个式子已经展不开了，因为每个样本具体的似然取决于<strong>我们假设的是哪个分布</strong>，比如概率密度函数服从正态分布$\N(\mu_c,\sigma^2_c)$，那么对于它的参数$\mu_c$和$\sigma_c^2$的极大似然估计分别为数据集的均值$\dfrac{\sum_{x\in D}x}{|D|}$和方差$\dfrac{\sum_{x\in D}(x-\hat{\mu_c})^2}{|D|}$。</p><p>（然而我认为通常这么随意假设数据分布是不科学的= =）</p><hr><h2 id="朴素贝叶斯分类器"><a href="#朴素贝叶斯分类器" class="headerlink" title="朴素贝叶斯分类器"></a>朴素贝叶斯分类器</h2><p>由于$P(x|c)$是所有属性的联合概率，难以估计属性之间的关系，为了避免计算上的问题，引入属性条件独立性假设。</p><p>属性条件独立性假设：假设所有属性（理解：样本$x$中的每一维）相互独立。</p><p>于是$P(c|x)$重写为：<br>$$<br>P(c|x)=\dfrac{P(c)P(x|c)}{P(x)}=\dfrac{P(c)}{P(x)}\sum_{i=1}^dP(x_i|c)<br>$$<br>$d$为属性数，$x_i$为样本$x$在第$i$个属性的取值。对于每个类$c$，$P(x)$都一样。在计算过程中可以忽略，于是：<br>$$<br>h(x)=\mbox{argmin}\ R(c|x)<br>$$</p><p>$$<br>=\mbox{argmax}\ P(c|x)<br>$$</p><p>$$<br>=\mbox{argmax}\ P(c)\prod_{i=1}^dP(x_i|c)<br>$$</p><p>$P(c)$：可以由每类的样本出现<strong>频率</strong>获得。</p><p>$P(x_i|c)$：针对离散的情况，可以根据类别是$c$并且含有属性$x_i$的出现<strong>频率</strong>获得；针对连续的情况，用密度函数。</p><hr><p>Reference：</p><p>[1]. <a href="https://blog.csdn.net/lwq1026/article/details/70161857" target="_blank" rel="noopener">https://blog.csdn.net/lwq1026/article/details/70161857</a></p><p>[2]. <a href="https://blog.csdn.net/yzheately/article/details/51164441" target="_blank" rel="noopener">https://blog.csdn.net/yzheately/article/details/51164441</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是阅读周志华教授《机器学习》中第七章（贝叶斯分类器）的笔记。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="https://vincentxwd.github.io/blog/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Machine Learning" scheme="https://vincentxwd.github.io/blog/tags/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
     <title>[读书笔记] Bias-Variance Dilemma</title>
     <link href="https://vincentxwd.github.io/blog/2018/11/05/BiasVarianceTradeoff/"/>
     <id>https://vincentxwd.github.io/blog/2018/11/05/BiasVarianceTradeoff/</id>
     <published>2018-11-05T04:08:12.000Z</published>
-    <updated>2018-11-05T12:11:43.585Z</updated>
+    <updated>2018-11-08T14:26:18.237Z</updated>
     
-    <content type="html"><![CDATA[<p><strong>Deliberate Practice$\ ^{[1]}$：to identify your weakest areas and direct a massive effort on improving those areas without worrying about areas in which you are already good.</strong></p><p>这是我在阅读西瓜书第二章时的一个遗留问题，是关于偏差-方差窘境（Bias-Variance Dilemma）的内容。</p><a id="more"></a><p>首先要解释Bias-Variance Tradeoff，也就是偏差-方差权衡，譬如当前有一个拟合任务，需要构造一个多项式函数去拟合它，函数可以构造成这样：<br>$$<br>y=a_0+a_1x+a_2x^2+…+a_nx^n<br>$$<br>如何确定$n$的大小就是一个偏差-方差的权衡问题，。图像上直观地看则是为了确定这条曲线的“弯曲程度”。</p><p>曲线拟合和机器学习：前者是利用数据尽可能地拟合出一条完美的曲线；后者则是在有限的数据规模内进行学习，目的是遇到未知数据时能够做出最好的判断。</p><p>模型的泛化能力可以由泛化误差来描述，泛化误差越小，模型的期望泛化能力越强。模型$f$在数据集$D$上的泛化误差可以分解为偏差$bias$、方差$var$、噪声$\epsilon$之和：<br>$$<br>E(f;D)=\mbox{bias}^2(x)+\mbox{var}(x)+\epsilon^2<br>$$<br>递推可以在西瓜书P45翻到。</p><p>噪声指的是学习算法本身固有的误差（系统误差）和数据集的噪声。当保证数据集十分纯净的时候，人为可控的部分就只有偏差和方差了。于是机器学习中存在偏差-方差窘境：<strong>偏差描述的是模型的拟合能力，偏差过大可以认为是欠拟合；方差则描述的是数据集的情况，方差过大可以认为是在数据集上过拟合。</strong>二者无法同时达到最小，只能取一个平衡点。    </p><p>总结一下特点：</p><ul><li>高偏差的模型：训练集的错误率高，验证集和训练集的错误率类似。</li><li>高方差的模型：训练集错误率低，验证集高。</li></ul><p>下图描述了一些简单的处理方法：<br><img src="https://www.learnopencv.com/wp-content/uploads/2017/02/Machine-Learning-Workflow.png" alt="img"></p><hr><p><strong>Reference</strong></p><p>[1]. <a href="https://www.learnopencv.com/bias-variance-tradeoff-in-machine-learning/" target="_blank" rel="noopener">https://www.learnopencv.com/bias-variance-tradeoff-in-machine-learning/</a></p>]]></content>
+    <content type="html"><![CDATA[<p><strong>Deliberate Practice$\ ^{[1]}$：to identify your weakest areas and direct a massive effort on improving those areas without worrying about areas in which you are already good.</strong></p><p>这是我在阅读西瓜书第二章时的一个遗留问题，是关于偏差-方差窘境（Bias-Variance Dilemma）的内容。</p><a id="more"></a><p>首先要解释Bias-Variance Tradeoff，也就是偏差-方差权衡，譬如当前有一个拟合任务，需要构造一个多项式函数去拟合它，函数可以构造成这样：<br>$$<br>y=a_0+a_1x+a_2x^2+…+a_nx^n<br>$$<br>如何确定$n$的大小就是一个偏差-方差的权衡问题，。图像上直观地看则是为了确定这条曲线的“弯曲程度”。</p><p>曲线拟合和机器学习：前者是利用数据尽可能地拟合出一条完美的曲线；后者则是在有限的数据规模内进行学习，目的是遇到未知数据时能够做出最好的判断。</p><p>模型的泛化能力可以由泛化误差来描述，泛化误差越小，模型的期望泛化能力越强。模型$f$在数据集$D$上的泛化误差可以分解为偏差$bias$、方差$var$、噪声$\epsilon$之和：<br>$$<br>E(f;D)=\mbox{bias}^2(x)+\mbox{var}(x)+\epsilon^2<br>$$<br>递推可以在西瓜书P45翻到。</p><p>噪声指的是学习算法本身固有的误差（系统误差）和数据集的噪声。当保证数据集十分纯净的时候，人为可控的部分就只有偏差和方差了。于是机器学习中存在偏差-方差窘境：<strong>偏差(bias)描述的是模型的拟合能力，偏差过大可以认为是欠拟合；方差(variance)则描述的是数据集的情况，方差过大可以认为是在数据集上过拟合。</strong>二者无法同时达到最小，只能取一个平衡点。    </p><p>总结一下特点：</p><ul><li>高偏差的模型：训练集的错误率高，验证集和训练集的错误率类似。</li><li>高方差的模型：训练集错误率低，验证集高。</li></ul><p>下图描述了一些简单的处理方法：<br><img src="https://www.learnopencv.com/wp-content/uploads/2017/02/Machine-Learning-Workflow.png" alt="img"></p><hr><p><strong>Reference</strong></p><p>[1]. <a href="https://www.learnopencv.com/bias-variance-tradeoff-in-machine-learning/" target="_blank" rel="noopener">https://www.learnopencv.com/bias-variance-tradeoff-in-machine-learning/</a></p>]]></content>
     
     <summary type="html">
     
@@ -492,27 +514,6 @@
     
     
       <category term="线性基" scheme="https://vincentxwd.github.io/blog/tags/%E7%BA%BF%E6%80%A7%E5%9F%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>你好，UCAS</title>
-    <link href="https://vincentxwd.github.io/blog/2018/09/04/Hello-UCAS/"/>
-    <id>https://vincentxwd.github.io/blog/2018/09/04/Hello-UCAS/</id>
-    <published>2018-09-04T09:37:15.000Z</published>
-    <updated>2018-09-04T10:33:16.034Z</updated>
-    
-    <content type="html"><![CDATA[<p>70多公里，坐了一小时左右的车，终于到这里了。</p><p><img src="http://pcoln8jiu.bkt.clouddn.com/tsg.jpg" alt="img"></p><a id="more"></a><p>还真是蛮激动的，毕竟在所里的时候就听师兄师姐们说雁栖湖环境特别好。我来报到的这一天还在下雨，空气极度清晰。</p><p>坐车在学校绕了好久才找到了宿舍，宿舍可以说完全就是在山脚下。。。</p><p>这是宿舍的“客厅”。</p><p><img src="http://pcoln8jiu.bkt.clouddn.com/kt.jpg" alt="img"></p><p>一个屋子里一共有9个套间，每个套间只住一个人（单人间好评）。</p><p>套间是这样的。</p><p><img src="http://pcoln8jiu.bkt.clouddn.com/ss.jpg" alt="img"></p><p>有一个小窗户，我这里的位置不算太好，但是靠近向左看还是可以看到骆驼山的。</p><p><img src="http://pcoln8jiu.bkt.clouddn.com/ch.jpg" alt="img"></p><p>袋子里的全部东西（手写学生证预定）。</p><p><img src="http://pcoln8jiu.bkt.clouddn.com/zb.jpg" alt="img"></p><p>简单收拾了一下 ，于是跑路去买被窝还有一些日常用品了。由于太拥挤，并没有拍食堂。</p><p>下午在学校里转了转，感觉校园有点大啊。。晚上跑回宿舍洗衣服洗澡写论文。</p><hr><p>以上是报到当天的实况，然而最近有点自闭。大概是因为突然到一个新环境，有点不适应吧…</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;70多公里，坐了一小时左右的车，终于到这里了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://pcoln8jiu.bkt.clouddn.com/tsg.jpg&quot; alt=&quot;img&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="只言片语" scheme="https://vincentxwd.github.io/blog/categories/%E5%8F%AA%E8%A8%80%E7%89%87%E8%AF%AD/"/>
-    
     
   </entry>
   
