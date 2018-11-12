@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://vincentxwd.github.io/blog/"/>
-  <updated>2018-11-12T03:34:44.015Z</updated>
+  <updated>2018-11-12T12:08:48.729Z</updated>
   <id>https://vincentxwd.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[读书笔记-西瓜书] EM算法</title>
+    <link href="https://vincentxwd.github.io/blog/2018/11/12/em/"/>
+    <id>https://vincentxwd.github.io/blog/2018/11/12/em/</id>
+    <published>2018-11-11T17:22:12.000Z</published>
+    <updated>2018-11-12T12:08:48.729Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是阅读周志华教授《机器学习》中第七章（贝叶斯分类器）中EM算法部分的笔记，书上总结得很精炼，有很多细枝末节的东西需要填充。</p><a id="more"></a><hr><h2 id="简单总结"><a href="#简单总结" class="headerlink" title="简单总结"></a>简单总结</h2><p>书中将EM算法总结为估计参数隐变量的方法，它是一种迭代式算法：</p><p>若参数$\Theta$已知，则根据训练数据$D$推断出最优隐变量$Z$；若$Z$的值已知，则可对$\Theta$求极大似然估计。</p><p>步骤简单地可以总结为下面两步：<br>E步：利用当前估计的参数值$\Theta$计算对数似然的期望。</p><p>M步：寻找可以使E步产生的似然期望最大的$\Theta$。</p><p>上面两个步骤交替执行，直至收敛。</p><hr><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>隐变量指的是“不能被直接观察到，但是对系统的状态和能观察到的输出存在影响的一种东西”[1]，emmm，虽然不知道是什么影响，但是确实有影响。</p><p>[2]给的例子非常生动形象，EM就是在解决一个在不知道是先有鸡还是先有蛋的情况下，求解鸡的进化过程的方法。放到模型里可以理解为我们既不知道模型的参数是什么，也不知道隐变量的值是多少，但是（通常）我们最后希望找到模型的具体参数是多少。</p><p>设存在数据集$D={x_1,x_2,…,x_n}$，已知模型$M$含有隐变量，且样本$x$的似然是$P(x,z;\theta)$. 正常情况我们求解模型参数$\theta$是使用极大似然，也就是求解：<br>$$<br>argmax_\theta\ \prod_{x\in D}P(x,z;\theta)<br>$$<br>取对数得对数似然：<br>$$<br>argmax_\theta \sum_{x\in D}log\ P(x,z;\theta)<br>$$<br>展开隐变量有：<br>$$<br>argmax_\theta \sum_{x\in D}log\ \sum_{i=1}^{n_z}P(x,z_i;\theta)<br>$$<br>希望直接使用求导的方法计算$\theta$和$z$是非常困难的，因为上式中是对一个复合函数的对数求导，非常复杂[2]。</p><p>EM算法的精髓在于使用Jensen不等式对上式进行处理，<br>$$<br>argmax_\theta \sum_{x\in D}log\ \sum_{i=1}^{n_z}P(x,z_i;\theta)<br>$$</p><p>$$<br>=argmax_\theta \sum_{x\in D}log\ \sum_{i=1}^{n_z}Q_i(z_i)\dfrac{P(x,z_i;\theta)}{Q_i(z_i)}<br>$$</p><p>$$<br>\geq argmax_\theta \sum_{x\in D}\sum_{i=1}^{n_z}Q_i(z_i)log\ \dfrac{P(x,z_i;\theta)}{Q_i(z_i)}<br>$$</p><p>于是我们可以把log内的商拆成对数差的形式，把sum套到最外层，会发现这样我们求导非常简单！<br>$$<br>=argmax_\theta \sum_{x\in D}\sum_{i=1}^{n_z}Q_i(z_i)(log\ P(x,z_i;\theta)-log\ Q_i(z_i))<br>$$</p><h5 id="Jensen不等式"><a href="#Jensen不等式" class="headerlink" title="Jensen不等式"></a>Jensen不等式</h5><p>设$f$是定义域为实数的函数，如果对于所有的实数$x$，$f(x)$的二次导数大于等于0，那么$f是$凸函数。当$x$是向量时，如果其Hessian矩阵H是半正定的，那么$f$是凸函数。如果只大于0，不等于0，那么称$f$是严格凸函数。</p><p>Jensen不等式表述如下：</p><p>如果f是凸函数，$X$是随机变量，那么：$E[f(X)]\geq f(E[X])$，特别地，如果$f$是严格凸函数，当且仅当$X$是常量时，上式取等号。</p><p><img src="http://img.my.csdn.net/uploads/201301/24/1359004230_7889.jpg" alt="img"></p><p>图中，实线$f$是凸函数，$X$是随机变量，有0.5的概率是$a$，有0.5的概率是$b$。$X$的期望值就是$a$和$b$的中值了，图中可以看到$E[f(X)]\geq f(E[X])$成立。</p><p><strong>顺便，中国数学界关于函数凹凸性定义和国外很多定义是反的。国内教材中的凹凸，是指曲线，而不是指函数，图像的凹凸与直观感受一致，却与函数的凹凸性相反[3].</strong></p><p>式$\sum_{x\in D}\sum_{i=1}^{n_z}Q_i(z_i)log\ \dfrac{P(x,z_i;\theta)}{Q_i(z_i)}$中$log(·)$是凹函数，那么Jensen不等式符号取反。使用一下Jensen不等式：<br>$$<br>f(E(·)) \geq E[f(·)]<br>$$<br>于是我们知道如何计算带有隐变量分布的极大似然了，我们也就会了EM算法中的M。</p><p>E步骤就简单了，利用初始值或M求出的参数计算隐变量的期望。</p><hr><p>Reference：</p><p>[1]. <a href="https://www.zhihu.com/question/43216440/answer/156368711" target="_blank" rel="noopener">https://www.zhihu.com/question/43216440/answer/156368711</a></p><p>[2]. <a href="https://blog.csdn.net/zouxy09/article/details/8537620" target="_blank" rel="noopener">https://blog.csdn.net/zouxy09/article/details/8537620</a></p><p>[3]. <a href="https://baike.baidu.com/item/%E5%87%BD%E6%95%B0%E7%9A%84%E5%87%B9%E5%87%B8%E6%80%A7/4583322?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E5%87%BD%E6%95%B0%E7%9A%84%E5%87%B9%E5%87%B8%E6%80%A7/4583322?fr=aladdin</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是阅读周志华教授《机器学习》中第七章（贝叶斯分类器）中EM算法部分的笔记，书上总结得很精炼，有很多细枝末节的东西需要填充。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="https://vincentxwd.github.io/blog/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Machine Learning" scheme="https://vincentxwd.github.io/blog/tags/Machine-Learning/"/>
+    
+  </entry>
   
   <entry>
     <title>[读书笔记-西瓜书] Bayes分类器</title>
@@ -489,31 +511,6 @@
       <category term="dp" scheme="https://vincentxwd.github.io/blog/tags/dp/"/>
     
       <category term="状态压缩" scheme="https://vincentxwd.github.io/blog/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Nowcoder180D] xor序列 (线性基)</title>
-    <link href="https://vincentxwd.github.io/blog/2018/09/08/Nowcoder-180D/"/>
-    <id>https://vincentxwd.github.io/blog/2018/09/08/Nowcoder-180D/</id>
-    <published>2018-09-08T09:43:18.000Z</published>
-    <updated>2018-09-08T12:33:25.566Z</updated>
-    
-    <content type="html"><![CDATA[<p>题目链接：<a href="https://www.nowcoder.com/acm/contest/180/D" target="_blank" rel="noopener">https://www.nowcoder.com/acm/contest/180/D</a></p><p><strong>题意就是给你$n$个数和$q$次询问，每次问你一个数$x$能不能被上述$n$个数之间随意异或得到。</strong></p><a id="more"></a><p>这题可以想到构造一组32个异或方程的方程组，每一个方程代表数位中某一位的异或结果。我们需要判断这个方程组是否有解。考虑方程组有无解实际上就是判断这个方程组的参数矩阵构成的一组基底能否表示每次查询的$x$，因此我们可以用线性基的技术解决这个问题。</p><p>关于线性基可以学习这篇blog：<a href="https://blog.sengxian.com/algorithms/linear-basis" target="_blank" rel="noopener">https://blog.sengxian.com/algorithms/linear-basis</a></p><p>由于我们不关心这组方程中最大线性无关组具体是什么，因此我们可以直接向无关组中判断插入每一个方程（就是每一个数字）。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">33</span>;</span><br><span class="line"><span class="keyword">int</span> n, q, x, y;</span><br><span class="line"><span class="keyword">int</span> a[maxn], b[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n)) &#123;</span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">    <span class="built_in">memset</span>(b, <span class="number">0</span>, <span class="keyword">sizeof</span>(b));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;x);</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">31</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &gt;&gt; j &amp; <span class="number">1</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span>(!a[j]) &#123;</span><br><span class="line">            a[j] = x;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          x ^= a[j];</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;q);</span><br><span class="line">    <span class="keyword">while</span>(q--) &#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y);</span><br><span class="line">      x ^= y;</span><br><span class="line">      <span class="built_in">memcpy</span>(b, a, <span class="keyword">sizeof</span>(a));</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">31</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &gt;&gt; j &amp; <span class="number">1</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span>(!b[j]) &#123;</span><br><span class="line">            b[j] = x;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          x ^= b[j];</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, x == <span class="number">0</span> ? <span class="string">"YES"</span> : <span class="string">"NO"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;题目链接：&lt;a href=&quot;https://www.nowcoder.com/acm/contest/180/D&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.nowcoder.com/acm/contest/180/D&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;题意就是给你$n$个数和$q$次询问，每次问你一个数$x$能不能被上述$n$个数之间随意异或得到。&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="题解" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/"/>
-    
-      <category term="Nowcoder" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/Nowcoder/"/>
-    
-    
-      <category term="线性基" scheme="https://vincentxwd.github.io/blog/tags/%E7%BA%BF%E6%80%A7%E5%9F%BA/"/>
     
   </entry>
   

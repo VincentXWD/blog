@@ -3,6 +3,27 @@
   
     
     <entry>
+      <title>[读书笔记-西瓜书] EM算法</title>
+      <link href="/blog/2018/11/12/em/"/>
+      <url>/blog/2018/11/12/em/</url>
+      <content type="html"><![CDATA[<p>这是阅读周志华教授《机器学习》中第七章（贝叶斯分类器）中EM算法部分的笔记，书上总结得很精炼，有很多细枝末节的东西需要填充。</p><a id="more"></a><hr><h2 id="简单总结"><a href="#简单总结" class="headerlink" title="简单总结"></a>简单总结</h2><p>书中将EM算法总结为估计参数隐变量的方法，它是一种迭代式算法：</p><p>若参数$\Theta$已知，则根据训练数据$D$推断出最优隐变量$Z$；若$Z$的值已知，则可对$\Theta$求极大似然估计。</p><p>步骤简单地可以总结为下面两步：<br>E步：利用当前估计的参数值$\Theta$计算对数似然的期望。</p><p>M步：寻找可以使E步产生的似然期望最大的$\Theta$。</p><p>上面两个步骤交替执行，直至收敛。</p><hr><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>隐变量指的是“不能被直接观察到，但是对系统的状态和能观察到的输出存在影响的一种东西”[1]，emmm，虽然不知道是什么影响，但是确实有影响。</p><p>[2]给的例子非常生动形象，EM就是在解决一个在不知道是先有鸡还是先有蛋的情况下，求解鸡的进化过程的方法。放到模型里可以理解为我们既不知道模型的参数是什么，也不知道隐变量的值是多少，但是（通常）我们最后希望找到模型的具体参数是多少。</p><p>设存在数据集$D={x_1,x_2,…,x_n}$，已知模型$M$含有隐变量，且样本$x$的似然是$P(x,z;\theta)$. 正常情况我们求解模型参数$\theta$是使用极大似然，也就是求解：<br>$$<br>argmax_\theta\ \prod_{x\in D}P(x,z;\theta)<br>$$<br>取对数得对数似然：<br>$$<br>argmax_\theta \sum_{x\in D}log\ P(x,z;\theta)<br>$$<br>展开隐变量有：<br>$$<br>argmax_\theta \sum_{x\in D}log\ \sum_{i=1}^{n_z}P(x,z_i;\theta)<br>$$<br>希望直接使用求导的方法计算$\theta$和$z$是非常困难的，因为上式中是对一个复合函数的对数求导，非常复杂[2]。</p><p>EM算法的精髓在于使用Jensen不等式对上式进行处理，<br>$$<br>argmax_\theta \sum_{x\in D}log\ \sum_{i=1}^{n_z}P(x,z_i;\theta)<br>$$</p><p>$$<br>=argmax_\theta \sum_{x\in D}log\ \sum_{i=1}^{n_z}Q_i(z_i)\dfrac{P(x,z_i;\theta)}{Q_i(z_i)}<br>$$</p><p>$$<br>\geq argmax_\theta \sum_{x\in D}\sum_{i=1}^{n_z}Q_i(z_i)log\ \dfrac{P(x,z_i;\theta)}{Q_i(z_i)}<br>$$</p><p>于是我们可以把log内的商拆成对数差的形式，把sum套到最外层，会发现这样我们求导非常简单！<br>$$<br>=argmax_\theta \sum_{x\in D}\sum_{i=1}^{n_z}Q_i(z_i)(log\ P(x,z_i;\theta)-log\ Q_i(z_i))<br>$$</p><h5 id="Jensen不等式"><a href="#Jensen不等式" class="headerlink" title="Jensen不等式"></a>Jensen不等式</h5><p>设$f$是定义域为实数的函数，如果对于所有的实数$x$，$f(x)$的二次导数大于等于0，那么$f是$凸函数。当$x$是向量时，如果其Hessian矩阵H是半正定的，那么$f$是凸函数。如果只大于0，不等于0，那么称$f$是严格凸函数。</p><p>Jensen不等式表述如下：</p><p>如果f是凸函数，$X$是随机变量，那么：$E[f(X)]\geq f(E[X])$，特别地，如果$f$是严格凸函数，当且仅当$X$是常量时，上式取等号。</p><p><img src="http://img.my.csdn.net/uploads/201301/24/1359004230_7889.jpg" alt="img"></p><p>图中，实线$f$是凸函数，$X$是随机变量，有0.5的概率是$a$，有0.5的概率是$b$。$X$的期望值就是$a$和$b$的中值了，图中可以看到$E[f(X)]\geq f(E[X])$成立。</p><p><strong>顺便，中国数学界关于函数凹凸性定义和国外很多定义是反的。国内教材中的凹凸，是指曲线，而不是指函数，图像的凹凸与直观感受一致，却与函数的凹凸性相反[3].</strong></p><p>式$\sum_{x\in D}\sum_{i=1}^{n_z}Q_i(z_i)log\ \dfrac{P(x,z_i;\theta)}{Q_i(z_i)}$中$log(·)$是凹函数，那么Jensen不等式符号取反。使用一下Jensen不等式：<br>$$<br>f(E(·)) \geq E[f(·)]<br>$$<br>于是我们知道如何计算带有隐变量分布的极大似然了，我们也就会了EM算法中的M。</p><p>E步骤就简单了，利用初始值或M求出的参数计算隐变量的期望。</p><hr><p>Reference：</p><p>[1]. <a href="https://www.zhihu.com/question/43216440/answer/156368711" target="_blank" rel="noopener">https://www.zhihu.com/question/43216440/answer/156368711</a></p><p>[2]. <a href="https://blog.csdn.net/zouxy09/article/details/8537620" target="_blank" rel="noopener">https://blog.csdn.net/zouxy09/article/details/8537620</a></p><p>[3]. <a href="https://baike.baidu.com/item/%E5%87%BD%E6%95%B0%E7%9A%84%E5%87%B9%E5%87%B8%E6%80%A7/4583322?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E5%87%BD%E6%95%B0%E7%9A%84%E5%87%B9%E5%87%B8%E6%80%A7/4583322?fr=aladdin</a></p>]]></content>
+      
+      <categories>
+          
+          <category> 读书笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>[读书笔记-西瓜书] Bayes分类器</title>
       <link href="/blog/2018/11/10/bayes/"/>
       <url>/blog/2018/11/10/bayes/</url>
