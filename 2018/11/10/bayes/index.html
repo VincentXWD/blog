@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="Kirai">
 <meta property="og:description" content="这是阅读周志华教授《机器学习》中第七章（贝叶斯分类器）的笔记。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-11T17:10:38.623Z">
+<meta property="og:updated_time" content="2018-11-12T03:34:44.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[读书笔记-西瓜书] Bayes分类器">
 <meta name="twitter:description" content="这是阅读周志华教授《机器学习》中第七章（贝叶斯分类器）的笔记。">
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-12 01:10:38" itemprop="dateModified" datetime="2018-11-12T01:10:38+08:00">2018-11-12</time>
+                <time title="修改时间：2018-11-12 11:34:44" itemprop="dateModified" datetime="2018-11-12T11:34:44+08:00">2018-11-12</time>
               
             
           </span>
@@ -474,9 +474,22 @@
 <hr>
 <h2 id="半朴素贝叶斯"><a href="#半朴素贝叶斯" class="headerlink" title="半朴素贝叶斯"></a>半朴素贝叶斯</h2><p>适当考虑部分属性的相互依赖信息，半朴素贝叶斯使用<strong>“独依赖估计”</strong>，即每个属性至多依赖于一个其他属性。<br>$$<br>P(c|x) \propto P(c)\prod_{i=1}^dP(x_i|c_,pa_i)<br>$$<br>$pa_i$：$x_i$所依赖的属性（$x_i$的父属性），计算过程就是将任意两个属性之间的依赖信息$I(x_i,x_j)$为边权建图，跑最大生成树。</p>
 <hr>
+<h2 id="贝叶斯网"><a href="#贝叶斯网" class="headerlink" title="贝叶斯网"></a>贝叶斯网</h2><p>贝叶斯网是个有向无环图，用点表示属性，权值为属性发生的概率，边表示依赖关系，边权为条件概率。例如$A$有一条指向$B$的边，点权描述的是$P(A)$、$P(B)$，这条边的权描述的就是$P(B|A)$. 没有边相连的两个点之间是相互独立的。</p>
+<p>有一个笔记[2]中的例子非常形象地描述了相互独立的性质：</p>
+<p>一个聪明人，在一场很难的考试里拿了高分，却得到了一封很烂的推荐信，同时他SAT考试却是高分的概率是多少？</p>
+<p>我们再隐藏一些细节，一个人推荐信很烂，他SAT高分的概率是多少？或者，一个人SAT低分，却手握牛推的概率是多少？</p>
+<p>如果不考虑随机变量之间的依赖关系，上述内容是很难计算的。但是如果有一个构建好的概率图，上面的问题则可以转化为条件概率问题。</p>
+<h4 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h4><p>已知网络结构的话，那么贝叶斯网上的各种信息是很容易统计的，按照网络要求和训练数据统计不同<strong>频率</strong>即可。</p>
+<p>若网络结构未知，将贝叶斯网的学习看作是一个数据压缩任务，目标是<strong>学习到一个能以最短编码长度描述训练数据的模型</strong>。定义评分函数：<br>$$<br>s(B|D)=f(\theta)|B|-L(B|D)<br>$$<br>s(B|D)：在数据集$D$条件下的贝叶斯网$B$的评分函数。</p>
+<p>$|B|$：贝叶斯网的参数个数。</p>
+<p>$f(\theta)$：描述每个参数$\theta$所需字节数</p>
+<p>$L(B|D)$：贝叶斯网的对数似然。</p>
+<p>我们最终的目的是寻找一个$B$使$s$(B|D)最小，$f(\theta)$可以取1或者$\dfrac{1}{2}\mbox{log}\ m$，分别称为AIC和BIC。</p>
+<h4 id="推理"><a href="#推理" class="headerlink" title="推理"></a>推理</h4><p>不能直接根据贝叶斯网定义的联合概率分布来计算后验概率，因为网络节点多的稠密图推理是NP-hard的。于是可以借助<strong>近似推断</strong>，常用Gibbs采样完成，先跳过了= =、</p>
+<hr>
 <p>Reference：</p>
 <p>[1]. <a href="https://blog.csdn.net/lwq1026/article/details/70161857" target="_blank" rel="noopener">https://blog.csdn.net/lwq1026/article/details/70161857</a></p>
-<p>[2]. <a href="https://blog.csdn.net/yzheately/article/details/51164441" target="_blank" rel="noopener">https://blog.csdn.net/yzheately/article/details/51164441</a></p>
+<p>[2].  <a href="https://www.cnblogs.com/ironstark/p/5087081.html" target="_blank" rel="noopener">https://www.cnblogs.com/ironstark/p/5087081.html</a></p>
 
       
     </div>
@@ -866,7 +879,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#贝叶斯决策论"><span class="nav-number">1.</span> <span class="nav-text">贝叶斯决策论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贝叶斯准则"><span class="nav-number">2.</span> <span class="nav-text">贝叶斯准则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#极大似然估计-MLE"><span class="nav-number">3.</span> <span class="nav-text">极大似然估计(MLE)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#朴素贝叶斯分类器"><span class="nav-number">4.</span> <span class="nav-text">朴素贝叶斯分类器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺省值处理"><span class="nav-number">5.</span> <span class="nav-text">缺省值处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#半朴素贝叶斯"><span class="nav-number">6.</span> <span class="nav-text">半朴素贝叶斯</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#贝叶斯决策论"><span class="nav-number">1.</span> <span class="nav-text">贝叶斯决策论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贝叶斯准则"><span class="nav-number">2.</span> <span class="nav-text">贝叶斯准则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#极大似然估计-MLE"><span class="nav-number">3.</span> <span class="nav-text">极大似然估计(MLE)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#朴素贝叶斯分类器"><span class="nav-number">4.</span> <span class="nav-text">朴素贝叶斯分类器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺省值处理"><span class="nav-number">5.</span> <span class="nav-text">缺省值处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#半朴素贝叶斯"><span class="nav-number">6.</span> <span class="nav-text">半朴素贝叶斯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贝叶斯网"><span class="nav-number">7.</span> <span class="nav-text">贝叶斯网</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#学习"><span class="nav-number">7.0.1.</span> <span class="nav-text">学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#推理"><span class="nav-number">7.0.2.</span> <span class="nav-text">推理</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -915,7 +928,7 @@
 </br>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共47.8k字</span>
+  <span class="post-count">博客全站共48.3k字</span>
 </div>
         
 <div class="busuanzi-count">
