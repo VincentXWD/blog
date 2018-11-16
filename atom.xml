@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://vincentxwd.github.io/blog/"/>
-  <updated>2018-11-15T17:43:12.470Z</updated>
+  <updated>2018-11-16T18:06:16.540Z</updated>
   <id>https://vincentxwd.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Codeforces521E] Thematic Contests(贪心)</title>
+    <link href="https://vincentxwd.github.io/blog/2018/11/17/cf521E/"/>
+    <id>https://vincentxwd.github.io/blog/2018/11/17/cf521E/</id>
+    <published>2018-11-16T18:05:11.000Z</published>
+    <updated>2018-11-16T18:06:16.540Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://codeforces.com/contest/1077/problem/E" target="_blank" rel="noopener">http://codeforces.com/contest/1077/problem/E</a></p><p>赛后4min过题的感觉真不爽啊……</p><p>题目链接：<a href="http://codeforces.com/contest/1077/problem/E" target="_blank" rel="noopener">http://codeforces.com/contest/1077/problem/E</a></p><p><strong>题意：要$n$个题出比赛，每一个题有一个类型$a_i$，要求每一天出的比赛都是同一种类型的题，并且每一种类型在这几天内只出现一次，并且当前一天出题数是前一天的2倍，问这些天最多出多少题。</strong></p><a id="more"></a><p>首先维护一下每一种题出现的次数，我们只需要操作这个次数就可以了。</p><p>对题目出现次数从大到小排个序，接下来我们考虑枚举题目的上界，然后往下枚举就行了。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> LL = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"><span class="keyword">const</span> LL maxn = <span class="number">200100</span>;</span><br><span class="line"><span class="built_in">map</span>&lt;LL,LL&gt; vis;</span><br><span class="line">LL n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  LL a;</span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%I64d"</span>, &amp;n)) &#123;</span><br><span class="line">    vis.clear();</span><br><span class="line">    <span class="keyword">for</span>(LL i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">"%I64d"</span>, &amp;a);</span><br><span class="line">      vis[a]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>&lt;LL&gt; cnt;</span><br><span class="line">    LL ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> x : vis) &#123;</span><br><span class="line">      cnt.emplace_back(x.second);</span><br><span class="line">      ret = max(ret, x.second);</span><br><span class="line">    &#125;</span><br><span class="line">    sort(cnt.begin(), cnt.end(), greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = cnt[<span class="number">0</span>]; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">      LL t = i;</span><br><span class="line">      LL tmp = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; cnt.size(); j++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(t &amp; <span class="number">1</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span>(cnt[j] &gt;= t) tmp += t;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(cnt[j] &lt; t) <span class="keyword">break</span>;</span><br><span class="line">        tmp += t;</span><br><span class="line">        t &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      ret = max(ret, tmp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%I64d\n"</span>, ret);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://codeforces.com/contest/1077/problem/E&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://codeforces.com/contest/1077/problem/E&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;赛后4min过题的感觉真不爽啊……&lt;/p&gt;
+&lt;p&gt;题目链接：&lt;a href=&quot;http://codeforces.com/contest/1077/problem/E&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://codeforces.com/contest/1077/problem/E&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;题意：要$n$个题出比赛，每一个题有一个类型$a_i$，要求每一天出的比赛都是同一种类型的题，并且每一种类型在这几天内只出现一次，并且当前一天出题数是前一天的2倍，问这些天最多出多少题。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="题解" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="Codeforces" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/Codeforces/"/>
+    
+    
+      <category term="贪心" scheme="https://vincentxwd.github.io/blog/tags/%E8%B4%AA%E5%BF%83/"/>
+    
+  </entry>
   
   <entry>
     <title>[Codeforces520D] Fun with Integers (规律，并查集)</title>
@@ -481,34 +508,6 @@
     
     
       <category term="最小费用最大流" scheme="https://vincentxwd.github.io/blog/tags/%E6%9C%80%E5%B0%8F%E8%B4%B9%E7%94%A8%E6%9C%80%E5%A4%A7%E6%B5%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[总结] 反素数</title>
-    <link href="https://vincentxwd.github.io/blog/2018/10/05/emirp/"/>
-    <id>https://vincentxwd.github.io/blog/2018/10/05/emirp/</id>
-    <published>2018-10-05T09:23:10.000Z</published>
-    <updated>2018-10-07T16:09:56.868Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>素数</strong>的定义可以为：因子只有2个的数（一个是1，另一个是本身），也就是因子最少的数。</p><p>那么，<strong>反素数</strong>可以定义成<strong>因子数最多的数，假如因子个数相同那么是最小的那个数</strong>，反素数是相对于一个集合来说的（比如在$n$个数以内的数）。</p><p>简而言之，<strong>因素最多并且值最小的数，就是反素数</strong>。</p><a id="more"></a><p>朴素求法：利用整数唯一分解定理若$x=p_1^{k_1}p_2^{k_2}…p_n^{k_n}$，那么$x$就有$(k_1+1)(k_2+1)…(k_n+1)$个因数。给某个集合扫一遍求下$max$即可。</p><p>反素数有两个特点：</p><ol><li>反素数肯定是从$2$开始的连续素数的幂次形式的乘积。</li><li>数值小的素数的幂次大于等于数值大的素数：$x=p_1^{k_1}p_2^{k_2}…p_n^{k_n}$，那么有$k1 \geq k2 \geq…k_n$。    </li></ol><p>解释：</p><ol><li>反证，若存在不从$2$开始的连续素数之积$p$，那么必然存在一个从2开始的连续素数之积$q$，除了一个$2$以外，其他值均与$p$相等，而此时$q &lt; p$。</li><li>若存在$k_i, k_j$，使得$i&lt;j,k_i&gt;k_j$成立。那么我们可以交换一下$p_i$与$p_j$，使得这个数更小。</li></ol><p>想要求给定自然数$n$，求$[1,n]$内的反素数。这个问题似乎没有什么更加牛X的解决方法，实际上还是要通过<strong>枚举</strong>的方法，为了解决这个问题，我们再提出两个问题：</p><ol><li><strong>对于给定的$n$，要枚举到哪一个素数</strong>：枚举到$\leq n$的素数就可以。</li><li><strong>枚举多少次幂</strong>：实际上枚举到最小素数$p$的$k$次幂，使得$p^k&gt;n$，那么枚举到的最大幂次肯定要小于$k$。</li></ol><p>一般这类问题都是DFS+一些分支限界枚举答案的。</p><hr><p>练习1：<a href="http://codeforces.com/contest/27/problem/E" target="_blank" rel="noopener">http://codeforces.com/contest/27/problem/E</a></p><p>题意：找含有$n$个因子的最小的那个数，这个数不超过1E18。</p><p>分析：</p><ol><li>设这个数字是$m$，那么可以设$m=p_1^{k_1}p_2^{k_2}…p_r^{k_r}$，其中$(k_1+1)(k_2+1)…(k_r+1)=n$。我们由上述<strong>结论1</strong>可以求出来$p_i$的上界：取$k_1=$2，那么最多也就是$\lceil log_21000 \rceil=10$个不同的素数，贪心取最小的前10个素数就可以。<del>分析到这里就可以打表了。</del></li><li>再考虑这个数在1E18内的问题，也就是$k$的取值范围。取最小的$p=2$，那么顶多是60层。</li></ol><p>于是我们就可以DFS，在每层（即每个素数）暴力枚举这个数选取次数，然后维护上一层的数值以及因数个数就行了。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> ull = <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">111</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> p[maxn] = &#123;<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">17</span>, <span class="number">19</span>, <span class="number">23</span>, <span class="number">29</span>&#125;;</span><br><span class="line">ull ret;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> depth, ull cur, <span class="keyword">int</span> cnt, <span class="keyword">int</span> hi)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(depth &gt;= <span class="number">11</span> || cnt &gt; n) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">if</span>(cnt == n) &#123;</span><br><span class="line">    ret = min(ret, cur);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= hi; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span>(cnt * (i + <span class="number">1</span>) &gt; n) <span class="keyword">break</span>;</span><br><span class="line">    cur *= (ull)p[depth];</span><br><span class="line">    dfs(depth+<span class="number">1</span>, cur, cnt*(i+<span class="number">1</span>), i);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)) &#123;</span><br><span class="line">    ret = <span class="number">1E18</span>;</span><br><span class="line">    dfs(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">60</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ret &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;素数&lt;/strong&gt;的定义可以为：因子只有2个的数（一个是1，另一个是本身），也就是因子最少的数。&lt;/p&gt;
-&lt;p&gt;那么，&lt;strong&gt;反素数&lt;/strong&gt;可以定义成&lt;strong&gt;因子数最多的数，假如因子个数相同那么是最小的那个数&lt;/strong&gt;，反素数是相对于一个集合来说的（比如在$n$个数以内的数）。&lt;/p&gt;
-&lt;p&gt;简而言之，&lt;strong&gt;因素最多并且值最小的数，就是反素数&lt;/strong&gt;。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="算法总结" scheme="https://vincentxwd.github.io/blog/categories/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/"/>
-    
-    
-      <category term="数学" scheme="https://vincentxwd.github.io/blog/tags/%E6%95%B0%E5%AD%A6/"/>
-    
-      <category term="总结" scheme="https://vincentxwd.github.io/blog/tags/%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="数论" scheme="https://vincentxwd.github.io/blog/tags/%E6%95%B0%E8%AE%BA/"/>
     
   </entry>
   
