@@ -26,6 +26,27 @@
     </entry>
     
     <entry>
+      <title>[读书笔记-西瓜书] 支持向量机（SVM）</title>
+      <link href="/blog/2018/11/16/svm/"/>
+      <url>/blog/2018/11/16/svm/</url>
+      <content type="html"><![CDATA[<p>这是阅读周志华教授《机器学习》中第六章（支持向量机）的笔记。支持向量机最根本的想法是利用数据集找到一个超平面，将两类的样本分隔开，并且这个超平面距离两类数据的支持向量最远。支持向量指的是距离超平面最近的几个点。</p><a id="more"></a><hr><p>HEXO特别坑，我的数学公式在typora中编辑正常，但是生成静态页面时就解析错误了，只好上传图片外加附PDF文件了：<a href="http://pcoln8jiu.bkt.clouddn.com/svm.pdf" target="_blank" rel="noopener">http://pcoln8jiu.bkt.clouddn.com/svm.pdf</a></p><p><img src="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_1.Jpeg" alt="img"><br><img src="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_2.Jpeg" alt="img"><br><img src="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_3.Jpeg" alt="img"><br><img src="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_4.Jpeg" alt="img"><br><img src="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_5.Jpeg" alt="img"><br><img src="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_6.Jpeg" alt="img"></p>]]></content>
+      
+      <categories>
+          
+          <category> 读书笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>[Codeforces520D] Fun with Integers (规律，并查集)</title>
       <link href="/blog/2018/11/16/cf520d/"/>
       <url>/blog/2018/11/16/cf520d/</url>
@@ -838,9 +859,9 @@
       
         <tags>
             
-            <tag> 二分 </tag>
-            
             <tag> 规律 </tag>
+            
+            <tag> 二分 </tag>
             
         </tags>
       
@@ -1042,9 +1063,9 @@
       
         <tags>
             
-            <tag> 二分 </tag>
-            
             <tag> 枚举 </tag>
+            
+            <tag> 二分 </tag>
             
         </tags>
       
@@ -1346,9 +1367,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 枚举 </tag>
+            
+            <tag> 数学 </tag>
             
         </tags>
       
@@ -1709,9 +1730,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 暴力 </tag>
+            
+            <tag> 数学 </tag>
             
             <tag> 并查集 </tag>
             

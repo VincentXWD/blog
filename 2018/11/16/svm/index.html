@@ -108,13 +108,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Kirai">
-<meta property="og:url" content="https://vincentxwd.github.io/blog/categories/HDOJ/2018杭电多校/index.html">
+  <meta name="description" content="这是阅读周志华教授《机器学习》中第六章（支持向量机）的笔记。支持向量机最根本的想法是利用数据集找到一个超平面，将两类的样本分隔开，并且这个超平面距离两类数据的支持向量最远。支持向量指的是距离超平面最近的几个点。">
+<meta name="keywords" content="Machine Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[读书笔记-西瓜书] 支持向量机（SVM）">
+<meta property="og:url" content="https://vincentxwd.github.io/blog/2018/11/16/svm/index.html">
 <meta property="og:site_name" content="Kirai">
+<meta property="og:description" content="这是阅读周志华教授《机器学习》中第六章（支持向量机）的笔记。支持向量机最根本的想法是利用数据集找到一个超平面，将两类的样本分隔开，并且这个超平面距离两类数据的支持向量最远。支持向量指的是距离超平面最近的几个点。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_1.Jpeg">
+<meta property="og:image" content="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_2.Jpeg">
+<meta property="og:image" content="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_3.Jpeg">
+<meta property="og:image" content="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_4.Jpeg">
+<meta property="og:image" content="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_5.Jpeg">
+<meta property="og:image" content="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_6.Jpeg">
+<meta property="og:updated_time" content="2018-11-17T09:01:00.923Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kirai">
+<meta name="twitter:title" content="[读书笔记-西瓜书] 支持向量机（SVM）">
+<meta name="twitter:description" content="这是阅读周志华教授《机器学习》中第六章（支持向量机）的笔记。支持向量机最根本的想法是利用数据集找到一个超平面，将两类的样本分隔开，并且这个超平面距离两类数据的支持向量最远。支持向量指的是距离超平面最近的几个点。">
+<meta name="twitter:image" content="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_1.Jpeg">
 
 
 
@@ -123,7 +135,7 @@
 
 
 
-  <link rel="canonical" href="https://vincentxwd.github.io/blog/categories/HDOJ/2018杭电多校/"/>
+  <link rel="canonical" href="https://vincentxwd.github.io/blog/2018/11/16/svm/"/>
 
 
 
@@ -133,7 +145,7 @@
   };
 </script>
 
-  <title>分类: 2018杭电多校 | Kirai</title>
+  <title>[读书笔记-西瓜书] 支持向量机（SVM） | Kirai</title>
   
 
 
@@ -180,7 +192,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -197,7 +209,7 @@
     </div>
     
       
-        <p class="site-subtitle">我好菜啊 QAQ | I Good Vegetable A QAQ</p>
+        <p class="site-subtitle">Keep going</p>
       
     
   </div>
@@ -245,7 +257,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
     <a href="/blog/categories" rel="section">
       <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
   </li>
@@ -286,169 +298,236 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>2018杭电多校<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://vincentxwd.github.io/blog/blog/2018/11/16/svm/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kirai">
+      <meta itemprop="description" content="I love this world though she hurts me so deep.">
+      <meta itemprop="image" content="/blog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kirai">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/blog/2018/08/06/HDOJ6351-18多校05-Beautiful-Now-暴力，全排列，置换群/" itemprop="url">
-              
-                <span itemprop="name">[HDOJ6351] 18多校05 Beautiful Now (暴力，全排列，置换群)</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">[读书笔记-西瓜书] 支持向量机（SVM）
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-06T22:55:40+08:00"
-              content="2018-08-06" >
-          08-06
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-16 22:16:23" itemprop="dateCreated datePublished" datetime="2018-11-16T22:16:23+08:00">2018-11-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-17 17:01:00" itemprop="dateModified" datetime="2018-11-17T17:01:00+08:00">2018-11-17</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/读书笔记/" itemprop="url" rel="index"><span itemprop="name">读书笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/11/16/svm/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/blog/2018/11/16/svm/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/blog/2018/08/06/HDOJ6354-18多校05-Everything-Has-Changed-计算几何/" itemprop="url">
-              
-                <span itemprop="name">[HDOJ6354] 18多校05 Everything Has Changed (计算几何)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-06T22:51:21+08:00"
-              content="2018-08-06" >
-          08-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/blog/2018/08/03/HDOJ6301-Distinct-Values-莫队算法/" itemprop="url">
-              
-                <span itemprop="name">[HDOJ6301] 18多校01 Distinct Values (莫队算法, 构造)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-03T12:22:10+08:00"
-              content="2018-08-03" >
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/blog/2018/08/03/HDOJ6299-Balanced-Sequence-贪心/" itemprop="url">
-              
-                <span itemprop="name">[HDOJ6299] 18多校01 Balanced Sequence (贪心)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-03T12:18:41+08:00"
-              content="2018-08-03" >
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>这是阅读周志华教授《机器学习》中第六章（支持向量机）的笔记。支持向量机最根本的想法是利用数据集找到一个超平面，将两类的样本分隔开，并且这个超平面距离两类数据的支持向量最远。支持向量指的是距离超平面最近的几个点。</p>
+<a id="more"></a>
+<hr>
+<p>HEXO特别坑，我的数学公式在typora中编辑正常，但是生成静态页面时就解析错误了，只好上传图片外加附PDF文件了：<a href="http://pcoln8jiu.bkt.clouddn.com/svm.pdf" target="_blank" rel="noopener">http://pcoln8jiu.bkt.clouddn.com/svm.pdf</a></p>
+<p><img src="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_1.Jpeg" alt="img"><br><img src="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_2.Jpeg" alt="img"><br><img src="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_3.Jpeg" alt="img"><br><img src="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_4.Jpeg" alt="img"><br><img src="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_5.Jpeg" alt="img"><br><img src="http://pcoln8jiu.bkt.clouddn.com/111716584510_0svm_6.Jpeg" alt="img"></p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/Machine-Learning/" rel="tag"><i class="fa fa-tag"></i>Machine Learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2018/11/16/cf520d/" rel="next" title="[Codeforces520D] Fun with Integers (规律，并查集)">
+                <i class="fa fa-chevron-left"></i> [Codeforces520D] Fun with Integers (规律，并查集)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2018/11/17/cf521E/" rel="prev" title="[Codeforces521E] Thematic Contests(贪心)">
+                [Codeforces521E] Thematic Contests(贪心) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
 
         </div>
         
@@ -479,7 +558,7 @@
                 alt="Kirai" />
             
               <p class="site-author-name" itemprop="name">Kirai</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">I love this world though she hurts me so deep.</p>
           </div>
 
           
@@ -489,7 +568,7 @@
                 
                   <a href="/blog/archives">
                 
-                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-count">76</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -516,7 +595,25 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -573,7 +670,69 @@
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -709,7 +868,7 @@
 </br>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共13.9k字</span>
+  <span class="post-count">博客全站共50.3k字</span>
 </div>
         
 <div class="busuanzi-count">
@@ -825,6 +984,10 @@
 
 
   
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=6.3.0"></script>
+
+
 
   
 
@@ -891,6 +1054,30 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
