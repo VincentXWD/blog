@@ -108,25 +108,18 @@
 
 
 
-  <meta name="description" content="题目链接：https://ac.nowcoder.com/acm/contest/272/B 给定一棵n个点的树，每个点有权值。定义%7D)表示  到  的最短路径上，所有点的点权异或和。   对于，求所有%7D)的异或和。">
+  <meta name="description" content="题目链接：https://ac.nowcoder.com/acm/contest/272/B 给定一棵n个点的树，每个点有权值$A_i$. 定义$path(i,j)$表示$i$到$j$的最短路径上，所有点的点权异或和。对于$i=1\to n-1,j=i+1 \to n$，求所有$path(i,j)$的异或和。">
 <meta name="keywords" content="异或,计数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Nowcoder272B] Xor Path(树，异或，计数)">
 <meta property="og:url" content="https://vincentxwd.github.io/blog/2018/11/30/nowcoder272b/index.html">
 <meta property="og:site_name" content="Kirai">
-<meta property="og:description" content="题目链接：https://ac.nowcoder.com/acm/contest/272/B 给定一棵n个点的树，每个点有权值。定义%7D)表示  到  的最短路径上，所有点的点权异或和。   对于，求所有%7D)的异或和。">
+<meta property="og:description" content="题目链接：https://ac.nowcoder.com/acm/contest/272/B 给定一棵n个点的树，每个点有权值$A_i$. 定义$path(i,j)$表示$i$到$j$的最短路径上，所有点的点权异或和。对于$i=1\to n-1,j=i+1 \to n$，求所有$path(i,j)$的异或和。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://uploadfiles.nowcoder.com/files/20181130/306625_1543559181584_equation?tex=%7BA_i%7D">
-<meta property="og:image" content="https://uploadfiles.nowcoder.com/files/20181130/306625_1543559594073_equation?tex=%7B%5Cmathbb%7Bpath%7D(i%2Cj">
-<meta property="og:image" content="https://uploadfiles.nowcoder.com/files/20181130/306625_1543559134827_equation?tex=%7Bi%7D">
-<meta property="og:image" content="https://uploadfiles.nowcoder.com/files/20181130/306625_1543559164122_equation?tex=%7Bj%7D">
-<meta property="og:image" content="https://uploadfiles.nowcoder.com/files/20181130/306625_1543571848178_equation?tex=%7Bi%3D1%5Csim%20n-1%2C%5C%20j%3Di%2B1%5Csim%20n%7D">
-<meta property="og:image" content="https://uploadfiles.nowcoder.com/files/20181130/306625_1543559594073_equation?tex=%7B%5Cmathbb%7Bpath%7D(i%2Cj">
-<meta property="og:updated_time" content="2018-11-30T14:16:16.150Z">
+<meta property="og:updated_time" content="2018-11-30T14:20:39.427Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Nowcoder272B] Xor Path(树，异或，计数)">
-<meta name="twitter:description" content="题目链接：https://ac.nowcoder.com/acm/contest/272/B 给定一棵n个点的树，每个点有权值。定义%7D)表示  到  的最短路径上，所有点的点权异或和。   对于，求所有%7D)的异或和。">
-<meta name="twitter:image" content="https://uploadfiles.nowcoder.com/files/20181130/306625_1543559181584_equation?tex=%7BA_i%7D">
+<meta name="twitter:description" content="题目链接：https://ac.nowcoder.com/acm/contest/272/B 给定一棵n个点的树，每个点有权值$A_i$. 定义$path(i,j)$表示$i$到$j$的最短路径上，所有点的点权异或和。对于$i=1\to n-1,j=i+1 \to n$，求所有$path(i,j)$的异或和。">
 
 
 
@@ -360,7 +353,7 @@
                 
               
 
-              <time title="创建时间：2018-11-30 22:08:29 / 修改时间：22:16:16" itemprop="dateCreated datePublished" datetime="2018-11-30T22:08:29+08:00">2018-11-30</time>
+              <time title="创建时间：2018-11-30 22:08:29 / 修改时间：22:20:39" itemprop="dateCreated datePublished" datetime="2018-11-30T22:08:29+08:00">2018-11-30</time>
             
 
             
@@ -442,7 +435,7 @@
 
       
         <p>题目链接：<a href="https://ac.nowcoder.com/acm/contest/272/B" target="_blank" rel="noopener">https://ac.nowcoder.com/acm/contest/272/B</a></p>
-<p>给定一棵n个点的树，每个点有权值<img src="https://uploadfiles.nowcoder.com/files/20181130/306625_1543559181584_equation?tex=%7BA_i%7D" alt="img">。定义<img src="https://uploadfiles.nowcoder.com/files/20181130/306625_1543559594073_equation?tex=%7B%5Cmathbb%7Bpath%7D(i%2Cj" alt="img">%7D)表示 <img src="https://uploadfiles.nowcoder.com/files/20181130/306625_1543559134827_equation?tex=%7Bi%7D" alt="img"> 到 <img src="https://uploadfiles.nowcoder.com/files/20181130/306625_1543559164122_equation?tex=%7Bj%7D" alt="img"> 的最短路径上，所有点的点权异或和。   对于<img src="https://uploadfiles.nowcoder.com/files/20181130/306625_1543571848178_equation?tex=%7Bi%3D1%5Csim%20n-1%2C%5C%20j%3Di%2B1%5Csim%20n%7D" alt="img">，求所有<img src="https://uploadfiles.nowcoder.com/files/20181130/306625_1543559594073_equation?tex=%7B%5Cmathbb%7Bpath%7D(i%2Cj" alt="img">%7D)的异或和。</p>
+<p>给定一棵n个点的树，每个点有权值$A_i$. 定义$path(i,j)$表示$i$到$j$的最短路径上，所有点的点权异或和。对于$i=1\to n-1,j=i+1 \to n$，求所有$path(i,j)$的异或和。</p>
 <a id="more"></a>
 <p>考虑到这个问题只和每个点权的出现次数的奇偶有关系，那么我们可以分情况讨论下每个点在任意两点间的路径中都是如何出现的。</p>
 <ul>
