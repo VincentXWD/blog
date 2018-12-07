@@ -3,6 +3,33 @@
   
     
     <entry>
+      <title>[Nowcoder308E] tokitsukaze and Similar String (字符串哈希, 打表)</title>
+      <link href="/blog/2018/12/07/nowcoder308e/"/>
+      <url>/blog/2018/12/07/nowcoder308e/</url>
+      <content type="html"><![CDATA[<p>题目链接：<a href="https://ac.nowcoder.com/acm/contest/308/e" target="_blank" rel="noopener">https://ac.nowcoder.com/acm/contest/308/e</a></p><p>tokitsukaze获得了一个长度为n，由a-z小写字母组成的字符串。<br>我们定义两个字符串是相似的，当且仅当能通过多次以下操作，使得两个字符串相等。并且把需要操作的最小次数，称为两个字符串的相似度。<br>操作是这样的：选择一个字符串，把字符串的每个字母都替换为字母表上的下一个字母，同时，我们认为z的下一个字母为a，比如选择”acdz”，操作一次后变为”bdea”。<br>现在tokitsukaze从字符串中任取两个子串，她想知道它们是不是相似的，如果它们相似，请输出相似度，如果它们不相似，请输出-1。</p><a id="more"></a><hr><p>字符串哈希，好久没见到了。<br>这题可以预处理出变换26次的所有串，我们希望快速查询子串，于是想到用字符串哈希。<br>对于字符串$s$，我们预处理$hash[i]$为$s[1]\to s[i]$这个字符串前缀的哈希值，可以这样求：<br>$$<br>hash[i]=hash[i-1]*M+s[i]<br>$$<br>于是我们希望知道$s[i]\to s[j]$的哈希值，就可以：<br>$$<br>hash[j]-hash[i-1]\times M^{j-i+1}<br>$$<br>不用管hash的具体值，任其自然溢出就好。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> ULL = <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"><span class="keyword">const</span> ULL m1 = <span class="number">131</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100100</span>;</span><br><span class="line"><span class="keyword">int</span> n, q;</span><br><span class="line"><span class="keyword">char</span> s[maxn], t[maxn];</span><br><span class="line">ULL vis[<span class="number">27</span>][maxn];</span><br><span class="line">ULL mul[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  mul[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; maxn; i++) &#123;</span><br><span class="line">    mul[i] = mul[i<span class="number">-1</span>] * m1;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  init();</span><br><span class="line">  <span class="keyword">int</span> x, y, len;</span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n)) &#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, s+<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">strcpy</span>(t+<span class="number">1</span>, s+<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span> vis);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">26</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">        vis[i][j] = vis[i][j<span class="number">-1</span>] * m1 + t[j] - <span class="string">'a'</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">        t[j] = <span class="string">'a'</span> + ((t[j] - <span class="string">'a'</span> + <span class="number">1</span>) % <span class="number">26</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;q);</span><br><span class="line">    <span class="keyword">while</span>(q--) &#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;x,&amp;y,&amp;len);</span><br><span class="line">      <span class="keyword">if</span>(x + len - <span class="number">1</span> &gt; n || y + len - <span class="number">1</span> &gt; n) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"-1\n"</span>);</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">int</span> ret = <span class="number">0x7f7f7f7f</span>;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">26</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(vis[<span class="number">0</span>][x+len<span class="number">-1</span>]-vis[<span class="number">0</span>][x<span class="number">-1</span>]*mul[len] == vis[i][y+len<span class="number">-1</span>]-vis[i][y<span class="number">-1</span>]*mul[len]) &#123;</span><br><span class="line">          ret = min(ret, min(i, <span class="number">26</span>-i));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ret==<span class="number">0x7f7f7f7f</span>?<span class="number">-1</span>:ret);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>供复习使用：<a href="https://blog.csdn.net/richard_for_oi/article/details/79306985" target="_blank" rel="noopener">https://blog.csdn.net/richard_for_oi/article/details/79306985</a></p>]]></content>
+      
+      <categories>
+          
+          <category> 题解 </category>
+          
+          <category> Nowcoder </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 字符串 </tag>
+            
+            <tag> 哈希 </tag>
+            
+            <tag> 打表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>[Nowcoder315E] 勇敢的妞妞 (思维，状压，记忆化搜索)</title>
       <link href="/blog/2018/12/06/nowcoder315e/"/>
       <url>/blog/2018/12/06/nowcoder315e/</url>
@@ -893,9 +920,9 @@
             
             <tag> 数学 </tag>
             
-            <tag> DP </tag>
-            
             <tag> 规律 </tag>
+            
+            <tag> DP </tag>
             
             <tag> 贪心 </tag>
             
@@ -1140,9 +1167,9 @@
             
             <tag> 暴力 </tag>
             
-            <tag> DP </tag>
-            
             <tag> 规律 </tag>
+            
+            <tag> DP </tag>
             
         </tags>
       
