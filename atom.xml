@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://vincentxwd.github.io/blog/"/>
-  <updated>2018-12-09T08:40:07.666Z</updated>
+  <updated>2018-12-11T06:33:52.940Z</updated>
   <id>https://vincentxwd.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Codeforces1084D] The Fair Nut and the Best Path（树DP）</title>
+    <link href="https://vincentxwd.github.io/blog/2018/12/11/cf1084d/"/>
+    <id>https://vincentxwd.github.io/blog/2018/12/11/cf1084d/</id>
+    <published>2018-12-11T03:39:09.000Z</published>
+    <updated>2018-12-11T06:33:52.940Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目链接：<a href="https://codeforces.com/contest/1084/problem/D" target="_blank" rel="noopener">https://codeforces.com/contest/1084/problem/D</a></p><p><strong>有一棵树，每一个点和边都有权值。一个人希望从一个点走到另一个点，要求在走的过程中点权和不小于边权和。求最大的点权和与边权和之差。</strong></p><a id="more"></a><hr><p>首先可以知道的是，如果两个点之间是任意可达的话，那么走这两个点的时候点权和与边权和之差一定比只选中单个点更大；如果两个点中有一个点比边权小，那选最大的那一个点的收益一定会比全选要更大。</p><p>所以实际上不需要考虑某一个点到另一个点不可达的情况，因为反过来即使可达那也不会是最优的，因此实际上路径是没有必要考虑逆方向的。</p><p>根据上述规则，就可以确定考虑将答案拆成两种：</p><p>一种是当前点为端点的一条链的情况，这种情况需要维护随后可以走的差值最大的链。</p><p>另一种是以当前点为中间点，分别从两个子树中走过来的情况，这时候需要同时维护差值最大和次大的链。</p><p>于是我们相当于是在选转折点，这个并且在这个转折点上选两个权值和最大的子链，使得点权和-边权和最大。就有个问题了，选子链的时候，都是从子链走向转折点，而题目中实际上是应该有一个子链走向转折点，而另一个子链是转折点走过去的。考虑最大连续子序列和，当扫到&lt;0的前缀和时，那么会把当前的dp值设为0，和这个问题实际上是一样的，因此不需要考虑方向的问题了。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> LL = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"><span class="keyword">using</span> pii = pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">300300</span>;</span><br><span class="line">LL dp1[maxn], dp2[maxn], d[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;pii&gt; G[maxn];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">  dp1[u] = <span class="number">0</span>, dp2[u] = <span class="number">0</span>;</span><br><span class="line">  LL a = <span class="number">0</span>, b = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">auto</span> x : G[u]) &#123;</span><br><span class="line">    <span class="keyword">int</span> v = x.first, w = x.second;</span><br><span class="line">    <span class="keyword">if</span>(p == v) <span class="keyword">continue</span>;</span><br><span class="line">    dfs(v, u);</span><br><span class="line">    <span class="keyword">if</span>(dp1[v] - w &gt; a) &#123;</span><br><span class="line">      b = a;</span><br><span class="line">      a = dp1[v] - w;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(dp1[v] - w &gt; b) &#123;</span><br><span class="line">      b = dp1[v] - w;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  dp1[u] = max(dp1[u], a+d[u]);</span><br><span class="line">  dp2[u] = max(dp2[u], a+b+d[u]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">"%I64d"</span>, &amp;d[i]);</span><br><span class="line">      G[i].clear();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(dp1, <span class="number">0</span>, <span class="keyword">sizeof</span> dp1);</span><br><span class="line">    <span class="built_in">memset</span>(dp2, <span class="number">0</span>, <span class="keyword">sizeof</span> dp2);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">int</span> u, v, w;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;u,&amp;v,&amp;w);</span><br><span class="line">      G[u].emplace_back(v, w);</span><br><span class="line">      G[v].emplace_back(u, w);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="number">1</span>, <span class="number">-1</span>);</span><br><span class="line">    LL ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      ret = max(ret, dp2[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ret);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目链接：&lt;a href=&quot;https://codeforces.com/contest/1084/problem/D&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://codeforces.com/contest/1084/problem/D&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;有一棵树，每一个点和边都有权值。一个人希望从一个点走到另一个点，要求在走的过程中点权和不小于边权和。求最大的点权和与边权和之差。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="题解" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="Codeforces" scheme="https://vincentxwd.github.io/blog/categories/%E9%A2%98%E8%A7%A3/Codeforces/"/>
+    
+    
+      <category term="dp" scheme="https://vincentxwd.github.io/blog/tags/dp/"/>
+    
+      <category term="树" scheme="https://vincentxwd.github.io/blog/tags/%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>[BZOJ4017] [Noi2008]志愿者招募（单纯形法）</title>
@@ -509,29 +536,6 @@
     <summary type="html">
     
       &lt;p&gt;&lt;strong&gt;线性判别分析（Linear Discriminant Analysis, LDA）又称Fisher判别分析，是一种数据降维的方法，主要思想是使属于同一类的投影点距离尽可能地接近（类内方差小），不同类的中心点距离尽可能地远（类间中点距离大）。&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="读书笔记" scheme="https://vincentxwd.github.io/blog/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Machine Learning" scheme="https://vincentxwd.github.io/blog/tags/Machine-Learning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[读书笔记-西瓜书] 线性模型、Logistic回归</title>
-    <link href="https://vincentxwd.github.io/blog/2018/11/03/logistic/"/>
-    <id>https://vincentxwd.github.io/blog/2018/11/03/logistic/</id>
-    <published>2018-11-03T15:39:00.000Z</published>
-    <updated>2018-11-03T17:56:27.818Z</updated>
-    
-    <content type="html"><![CDATA[<p>这是阅读周志华教授的《机器学习》中关于Logistic回归部分的笔记（在模识老师的安利下，最终还是买了西瓜书）。</p><p><strong>Logistic回归音译为“逻辑回归”实在是太蠢了。</strong></p><a id="more"></a><p>Logistic回归是西瓜书第三章“线性模型”中的内容，首先总结一下在logistic回归之前的知识点。</p><p>所谓线性回归就是定义一个线性函数$f(x)=w^Tx+b$，经过在一个特定数据集上学习后获得参数$w$和$b$的过程。通常需要搭配优化算法使用，例如最小二乘法、梯度下降法、牛顿法、拟牛顿法$^{[1,2]}$等，我将它们的特点总结如下：</p><p>最小二乘法：希望找到一条n维空间上的直线，使得所有数据点到这条线上的欧几里德距离最短（均方差误差最小），因为均方误差损失函数是凸的，所以最小二乘法直接对该损失函数关于$w$和$b$进行求导。</p><p>梯度下降法：这是一种迭代求解最优的算法，方法就是将参数沿着梯度负方向更新。这种算法经常陷入局部最优，而且速度未必快。有很多延伸的优化，比如随机梯度下降、带惯性的梯度下降等。</p><p>牛顿法：对拟合目标函数泰勒展开后求导后迭代，需要计算任意两个变量的二阶偏导的逆（海森矩阵的逆）所以计算复杂度高，但是收敛快。过程一图以蔽之：</p><p><img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/NewtonIteration_Ani.gif" alt="img"></p><p>拟牛顿法：添加了步长的牛顿法。</p><p>但是通常的拟合任务并非是线性的，数据可能是符合某种非线性函数的变化（例如指数），因此有了对数线性回归（log-linear regression）。由于自变量的变化还是$w^Tx+b$，因此还属于线性回归模型。更一般的形式如下：<br>$$<br>g(y)=w^Tx+b<br>$$<br>$$<br>y=g^{-1}(w^Tx+b)<br>$$</p><p>此处$g(\cdot)$是一个非线性函数，这个函数需要“<strong>连续且充分光滑</strong>”。</p><p>分类任务和回归任务最大的区别是，分类需要一个hard-label，而回归通常是一个实数值的soft-label（hard-label和soft-label是我自己起的）。想用回归的方法进行分类，则需要有一个soft-&gt;hard的映射函数。</p><p>可以手动设阈值（阶跃，就是分段函数），但是不满足作为$g(\cdot)$需要的充分条件。于是有人构造了更加光滑的logistic function（对数几率函数）：<br>$$<br>y=\dfrac{1}{1+e^{-z}}<br>$$<br>这是一种sigmoid函数：形似S的函数。我们想表示成$g(y)=w^Tx+b$的形式，可以推：<br>$$<br>y=\dfrac{1}{1+e^{-z}}<br>$$<br>$$<br>y+ye^{-z}=1<br>$$</p><p>$$<br>\dfrac{1-y}{y}=e^{-z}<br>$$</p><p>$$<br>\ln\dfrac{1-y}{y}=-z<br>$$</p><p>$$<br>\ln\dfrac{y}{1-y}=z<br>$$</p><p>其中$z=w^Tx+b$，$y$和$1-y$分别可看作是正反例的可能性（logits），二者的比值取对数称为“对数几率 ”。通常写作：<br>$$<br>\ln\dfrac{p(y=1|x)}{p(y=0|x)}=z<br>$$<br>有：<br>$$<br>p(y=1|x)=\dfrac{e^{z}}{1+e^z}<br>$$<br>由于$p(y=0|x)=1-p(y=1|x)$，则：<br>$$<br>p(y=0|x)=\dfrac{1}{1+e^z}<br>$$<br>使用极大似然估计$w$和$b$，构造损失函数$l(w,b)=\sum_{i=1}^{m}\ln p(y_i|x_i;w,b)$，最大化该函数，整理一下就能得到loss函数的形式，之后就能用上述的最优化算法求它的最优解了。</p><p><strong>Reference</strong></p><p>[1]. <a href="https://www.cnblogs.com/shixiangwan/p/7532830.html" target="_blank" rel="noopener">https://www.cnblogs.com/shixiangwan/p/7532830.html</a></p><p>[2]. <a href="https://www.cnblogs.com/xiaohuahua108/p/6011105.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaohuahua108/p/6011105.html</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这是阅读周志华教授的《机器学习》中关于Logistic回归部分的笔记（在模识老师的安利下，最终还是买了西瓜书）。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Logistic回归音译为“逻辑回归”实在是太蠢了。&lt;/strong&gt;&lt;/p&gt;
     
     </summary>
     

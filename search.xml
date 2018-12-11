@@ -3,6 +3,31 @@
   
     
     <entry>
+      <title>[Codeforces1084D] The Fair Nut and the Best Path（树DP）</title>
+      <link href="/blog/2018/12/11/cf1084d/"/>
+      <url>/blog/2018/12/11/cf1084d/</url>
+      <content type="html"><![CDATA[<p>题目链接：<a href="https://codeforces.com/contest/1084/problem/D" target="_blank" rel="noopener">https://codeforces.com/contest/1084/problem/D</a></p><p><strong>有一棵树，每一个点和边都有权值。一个人希望从一个点走到另一个点，要求在走的过程中点权和不小于边权和。求最大的点权和与边权和之差。</strong></p><a id="more"></a><hr><p>首先可以知道的是，如果两个点之间是任意可达的话，那么走这两个点的时候点权和与边权和之差一定比只选中单个点更大；如果两个点中有一个点比边权小，那选最大的那一个点的收益一定会比全选要更大。</p><p>所以实际上不需要考虑某一个点到另一个点不可达的情况，因为反过来即使可达那也不会是最优的，因此实际上路径是没有必要考虑逆方向的。</p><p>根据上述规则，就可以确定考虑将答案拆成两种：</p><p>一种是当前点为端点的一条链的情况，这种情况需要维护随后可以走的差值最大的链。</p><p>另一种是以当前点为中间点，分别从两个子树中走过来的情况，这时候需要同时维护差值最大和次大的链。</p><p>于是我们相当于是在选转折点，这个并且在这个转折点上选两个权值和最大的子链，使得点权和-边权和最大。就有个问题了，选子链的时候，都是从子链走向转折点，而题目中实际上是应该有一个子链走向转折点，而另一个子链是转折点走过去的。考虑最大连续子序列和，当扫到&lt;0的前缀和时，那么会把当前的dp值设为0，和这个问题实际上是一样的，因此不需要考虑方向的问题了。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> LL = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"><span class="keyword">using</span> pii = pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">300300</span>;</span><br><span class="line">LL dp1[maxn], dp2[maxn], d[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;pii&gt; G[maxn];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">  dp1[u] = <span class="number">0</span>, dp2[u] = <span class="number">0</span>;</span><br><span class="line">  LL a = <span class="number">0</span>, b = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">auto</span> x : G[u]) &#123;</span><br><span class="line">    <span class="keyword">int</span> v = x.first, w = x.second;</span><br><span class="line">    <span class="keyword">if</span>(p == v) <span class="keyword">continue</span>;</span><br><span class="line">    dfs(v, u);</span><br><span class="line">    <span class="keyword">if</span>(dp1[v] - w &gt; a) &#123;</span><br><span class="line">      b = a;</span><br><span class="line">      a = dp1[v] - w;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(dp1[v] - w &gt; b) &#123;</span><br><span class="line">      b = dp1[v] - w;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  dp1[u] = max(dp1[u], a+d[u]);</span><br><span class="line">  dp2[u] = max(dp2[u], a+b+d[u]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">"%I64d"</span>, &amp;d[i]);</span><br><span class="line">      G[i].clear();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(dp1, <span class="number">0</span>, <span class="keyword">sizeof</span> dp1);</span><br><span class="line">    <span class="built_in">memset</span>(dp2, <span class="number">0</span>, <span class="keyword">sizeof</span> dp2);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">int</span> u, v, w;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;u,&amp;v,&amp;w);</span><br><span class="line">      G[u].emplace_back(v, w);</span><br><span class="line">      G[v].emplace_back(u, w);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="number">1</span>, <span class="number">-1</span>);</span><br><span class="line">    LL ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      ret = max(ret, dp2[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ret);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      <categories>
+          
+          <category> 题解 </category>
+          
+          <category> Codeforces </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> dp </tag>
+            
+            <tag> 树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>[BZOJ4017] [Noi2008]志愿者招募（单纯形法）</title>
       <link href="/blog/2018/12/09/bzoj1061/"/>
       <url>/blog/2018/12/09/bzoj1061/</url>
@@ -786,9 +811,9 @@
       
         <tags>
             
-            <tag> bfs </tag>
-            
             <tag> dp </tag>
+            
+            <tag> bfs </tag>
             
             <tag> 状态压缩 </tag>
             
@@ -849,9 +874,9 @@
       
         <tags>
             
-            <tag> 博弈 </tag>
-            
             <tag> 总结 </tag>
+            
+            <tag> 博弈 </tag>
             
         </tags>
       
@@ -1138,9 +1163,9 @@
       
         <tags>
             
-            <tag> 规律 </tag>
-            
             <tag> 二分 </tag>
+            
+            <tag> 规律 </tag>
             
         </tags>
       
@@ -1342,9 +1367,9 @@
       
         <tags>
             
-            <tag> 枚举 </tag>
-            
             <tag> 二分 </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
