@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://vincentxwd.github.io/blog/"/>
-  <updated>2018-12-15T10:59:10.440Z</updated>
+  <updated>2018-12-15T11:02:20.722Z</updated>
   <id>https://vincentxwd.github.io/blog/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>用JS实现UCAS半自动评教代码</title>
+    <title>用JS实现UCAS半自动评教脚本</title>
     <link href="https://vincentxwd.github.io/blog/2018/12/15/ucas-pingjiao/"/>
     <id>https://vincentxwd.github.io/blog/2018/12/15/ucas-pingjiao/</id>
     <published>2018-12-15T10:53:56.000Z</published>
-    <updated>2018-12-15T10:59:10.440Z</updated>
+    <updated>2018-12-15T11:02:20.722Z</updated>
     
     <content type="html"><![CDATA[<p>自用，同学们有需要的话也可以拿去用。是用原生JS和JQuery实现的，很简单。</p><p>打开你的评教页面，chrome按F12调出“检查”，打开Console选项后将下面代码粘贴并回车，保存退出。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> td = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'td'</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; td.length;i++) &#123;</span><br><span class="line">td[i].getElementsByTagName(<span class="string">"input"</span>)[<span class="number">0</span>].checked = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="string">"input[name='starFlag']"</span>).eq(<span class="number">0</span>).attr(<span class="string">"checked"</span>,<span class="string">"checked"</span>);</span><br><span class="line">$(<span class="string">"textarea[id='merit']"</span>).eq(<span class="number">0</span>).attr(<span class="string">"value"</span>,<span class="string">"课程特色鲜明，内容取舍合理，组织严密，逻辑性强。重点突出，难点讲解清楚。拓展学生知识面，培养分析能力，引导创新。"</span>);</span><br><span class="line">$(<span class="string">"textarea[id='flaw']"</span>).eq(<span class="number">0</span>).attr(<span class="string">"value"</span>,<span class="string">"无"</span>);</span><br><span class="line">$(<span class="string">"textarea[id='suggest']"</span>).eq(<span class="number">0</span>).attr(<span class="string">"value"</span>,<span class="string">"无"</span>);</span><br></pre></td></tr></table></figure></p>]]></content>
     
