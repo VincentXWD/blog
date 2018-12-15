@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="自用，同学们有需要的话也可以拿去用。是用原生JS和JQuery实现的，很简单。 打开你的评教页面，chrome按F12调出“检查”，打开Console选项后将下面代码粘贴并回车，保存退出。12345678var td = document.getElementsByTagName(&apos;td&apos;);for(var i = 0; i &amp;lt; td.length;i++) &amp;#123;	td[i].get">
+  <meta name="description" content="自用，同学们有需要的话也可以拿去用。 打开你的评教页面，chrome按F12调出“检查”，打开Console选项后将下面代码粘贴并回车，保存退出。12345678var td = document.getElementsByTagName(&apos;td&apos;);for(var i = 0; i &amp;lt; td.length;i++) &amp;#123;	td[i].getElementsByTagName(&quot;in">
 <meta name="keywords" content="工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用JS实现UCAS半自动评教脚本">
 <meta property="og:url" content="https://vincentxwd.github.io/blog/2018/12/15/ucas-pingjiao/index.html">
 <meta property="og:site_name" content="Kirai">
-<meta property="og:description" content="自用，同学们有需要的话也可以拿去用。是用原生JS和JQuery实现的，很简单。 打开你的评教页面，chrome按F12调出“检查”，打开Console选项后将下面代码粘贴并回车，保存退出。12345678var td = document.getElementsByTagName(&apos;td&apos;);for(var i = 0; i &amp;lt; td.length;i++) &amp;#123;	td[i].get">
+<meta property="og:description" content="自用，同学们有需要的话也可以拿去用。 打开你的评教页面，chrome按F12调出“检查”，打开Console选项后将下面代码粘贴并回车，保存退出。12345678var td = document.getElementsByTagName(&apos;td&apos;);for(var i = 0; i &amp;lt; td.length;i++) &amp;#123;	td[i].getElementsByTagName(&quot;in">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-15T11:02:20.722Z">
+<meta property="og:updated_time" content="2018-12-15T11:02:59.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用JS实现UCAS半自动评教脚本">
-<meta name="twitter:description" content="自用，同学们有需要的话也可以拿去用。是用原生JS和JQuery实现的，很简单。 打开你的评教页面，chrome按F12调出“检查”，打开Console选项后将下面代码粘贴并回车，保存退出。12345678var td = document.getElementsByTagName(&apos;td&apos;);for(var i = 0; i &amp;lt; td.length;i++) &amp;#123;	td[i].get">
+<meta name="twitter:description" content="自用，同学们有需要的话也可以拿去用。 打开你的评教页面，chrome按F12调出“检查”，打开Console选项后将下面代码粘贴并回车，保存退出。12345678var td = document.getElementsByTagName(&apos;td&apos;);for(var i = 0; i &amp;lt; td.length;i++) &amp;#123;	td[i].getElementsByTagName(&quot;in">
 
 
 
@@ -353,7 +353,7 @@
                 
               
 
-              <time title="创建时间：2018-12-15 18:53:56 / 修改时间：19:02:20" itemprop="dateCreated datePublished" datetime="2018-12-15T18:53:56+08:00">2018-12-15</time>
+              <time title="创建时间：2018-12-15 18:53:56 / 修改时间：19:02:59" itemprop="dateCreated datePublished" datetime="2018-12-15T18:53:56+08:00">2018-12-15</time>
             
 
             
@@ -409,7 +409,7 @@
       
 
       
-        <p>自用，同学们有需要的话也可以拿去用。是用原生JS和JQuery实现的，很简单。</p>
+        <p>自用，同学们有需要的话也可以拿去用。</p>
 <p>打开你的评教页面，chrome按F12调出“检查”，打开Console选项后将下面代码粘贴并回车，保存退出。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> td = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'td'</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; td.length;i++) &#123;</span><br><span class="line">	td[i].getElementsByTagName(<span class="string">"input"</span>)[<span class="number">0</span>].checked = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="string">"input[name='starFlag']"</span>).eq(<span class="number">0</span>).attr(<span class="string">"checked"</span>,<span class="string">"checked"</span>);</span><br><span class="line">$(<span class="string">"textarea[id='merit']"</span>).eq(<span class="number">0</span>).attr(<span class="string">"value"</span>,<span class="string">"课程特色鲜明，内容取舍合理，组织严密，逻辑性强。	重点突出，难点讲解清楚。拓展学生知识面，培养分析能力，引导创新。"</span>);</span><br><span class="line">$(<span class="string">"textarea[id='flaw']"</span>).eq(<span class="number">0</span>).attr(<span class="string">"value"</span>,<span class="string">"无"</span>);</span><br><span class="line">$(<span class="string">"textarea[id='suggest']"</span>).eq(<span class="number">0</span>).attr(<span class="string">"value"</span>,<span class="string">"无"</span>);</span><br></pre></td></tr></table></figure></p>
 
       
