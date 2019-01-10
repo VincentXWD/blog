@@ -117,7 +117,7 @@
 <meta property="og:description" content="这是阅读周志华教授的《机器学习》中关于Logistic回归部分的笔记（在模识老师的安利下，最终还是买了西瓜书）。 Logistic回归音译为“逻辑回归”实在是太蠢了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/e/e0/NewtonIteration_Ani.gif">
-<meta property="og:updated_time" content="2018-11-03T17:56:27.818Z">
+<meta property="og:updated_time" content="2019-01-10T15:22:56.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[读书笔记-西瓜书] 线性模型、Logistic回归">
 <meta name="twitter:description" content="这是阅读周志华教授的《机器学习》中关于Logistic回归部分的笔记（在模识老师的安利下，最终还是买了西瓜书）。 Logistic回归音译为“逻辑回归”实在是太蠢了。">
@@ -372,7 +372,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-04 01:56:27" itemprop="dateModified" datetime="2018-11-04T01:56:27+08:00">2018-11-04</time>
+                <time title="修改时间：2019-01-10 23:22:56" itemprop="dateModified" datetime="2019-01-10T23:22:56+08:00">2019-01-10</time>
               
             
           </span>
@@ -450,7 +450,7 @@
 <p>梯度下降法：这是一种迭代求解最优的算法，方法就是将参数沿着梯度负方向更新。这种算法经常陷入局部最优，而且速度未必快。有很多延伸的优化，比如随机梯度下降、带惯性的梯度下降等。</p>
 <p>牛顿法：对拟合目标函数泰勒展开后求导后迭代，需要计算任意两个变量的二阶偏导的逆（海森矩阵的逆）所以计算复杂度高，但是收敛快。过程一图以蔽之：</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/NewtonIteration_Ani.gif" alt="img"></p>
-<p>拟牛顿法：添加了步长的牛顿法。</p>
+<p>拟牛顿法：把海森矩阵用个近似矩阵来代替，为了减少计算的复杂度，同时这个近似矩阵保证是可逆的（感谢HF同学的指正QAQ）。</p>
 <p>但是通常的拟合任务并非是线性的，数据可能是符合某种非线性函数的变化（例如指数），因此有了对数线性回归（log-linear regression）。由于自变量的变化还是$w^Tx+b$，因此还属于线性回归模型。更一般的形式如下：<br>$$<br>g(y)=w^Tx+b<br>$$<br>$$<br>y=g^{-1}(w^Tx+b)<br>$$</p>
 <p>此处$g(\cdot)$是一个非线性函数，这个函数需要“<strong>连续且充分光滑</strong>”。</p>
 <p>分类任务和回归任务最大的区别是，分类需要一个hard-label，而回归通常是一个实数值的soft-label（hard-label和soft-label是我自己起的）。想用回归的方法进行分类，则需要有一个soft-&gt;hard的映射函数。</p>
@@ -462,6 +462,7 @@
 <p><strong>Reference</strong></p>
 <p>[1]. <a href="https://www.cnblogs.com/shixiangwan/p/7532830.html" target="_blank" rel="noopener">https://www.cnblogs.com/shixiangwan/p/7532830.html</a></p>
 <p>[2]. <a href="https://www.cnblogs.com/xiaohuahua108/p/6011105.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaohuahua108/p/6011105.html</a></p>
+<hr>
 
       
     </div>
