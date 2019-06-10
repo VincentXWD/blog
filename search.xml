@@ -3,6 +3,31 @@
   
     
     <entry>
+      <title>[CodeForces572D] Minimization（思维，贪心，DP）</title>
+      <link href="/blog/2019/06/11/CF572D%EF%BC%88%E8%B4%AA%E5%BF%83%EF%BC%8CDP%EF%BC%89/"/>
+      <url>/blog/2019/06/11/CF572D%EF%BC%88%E8%B4%AA%E5%BF%83%EF%BC%8CDP%EF%BC%89/</url>
+      <content type="html"><![CDATA[<p>题目链接：<a href="https://codeforces.com/contest/572/problem/D" target="_blank" rel="noopener">https://codeforces.com/contest/572/problem/D</a></p><p>题意：给你$n$个数的数组$a$，要求你对这个数组重排，使得满足公式值最小：<br>$$<br>\sum_{i=1}^{n-k}|a[i]-a[i+k]|<br>$$<br><a id="more"></a></p><p>如果$k=0$的话那么我们对这个数组排序就好，如果排好序的话答案就是$a_n-a_1$，由此可见实际上中间结果对最终结果是没有影响的。</p><p>我们考虑首先对整个数组进行排序，考虑我们每隔$k$个就取一个数能组成多少数组，只有两种：</p><p>长度为$\dfrac{n}{k}​$的数组，有$n-n\%k​$个；长度为$\dfrac{n}{k}+1​$的数组，有$n\%k​$个。在这种情况下答案是各个数组的最大和最小数之差。我们现在可以考虑dp了，假如某个数$a_i​$放入第一类数组中，那么这个数对答案的贡献就是$a_i-a_{begin}​$，其中$a_{begin}​$是这个数组的开头数字。由于k&lt;=5000，实际上述两种数组最多不超过5000个，定义$f(i,j)​$表示第一类数组有$i​$个，第二类数组有$j​$个时的上述公式的最小值，我们可以根据$i,j​$来计算两类数组分配时的$begin​$值，状态转移方程是：</p><p>$f[i][j] = min(f[i][j], f[i - 1][j] + a[i <em> L1 + j </em> L2] - a[(i - 1) <em> L1 + j </em> L2 + 1])$</p><p>$f[i][j] = min(f[i][j], f[i][j - 1] + a[i <em> L1 + j </em> L2] - a[i <em> L1 + (j - 1) </em> L2 + 1])$</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">using</span> pii = pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;;</span><br><span class="line"><span class="keyword">using</span> LL = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">5050</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxm = <span class="number">300300</span>;</span><br><span class="line"><span class="keyword">int</span> n, k, a[maxm];</span><br><span class="line">LL f[maxn][maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// freopen("in", "r", stdin);</span></span><br><span class="line">  <span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    sort(a + <span class="number">1</span>, a + n + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> L1 = n / k, L2 = n / k + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> n1 = k - n % k, n2 = n % k;</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0x7f</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n1; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n2; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i) f[i][j] = min(f[i][j], f[i - <span class="number">1</span>][j] + a[i * L1 + j * L2] - a[(i - <span class="number">1</span>) * L1 + j * L2 + <span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">if</span> (j) f[i][j] = min(f[i][j], f[i][j - <span class="number">1</span>] + a[i * L1 + j * L2] - a[i * L1 + (j - <span class="number">1</span>) * L2 + <span class="number">1</span>]);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; f[n1][n2] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      <categories>
+          
+          <category> 题解 </category>
+          
+          <category> Codeforces </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> DP </tag>
+            
+            <tag> 贪心 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>[CodeForces1176D] Recover it!（思维，数论）</title>
       <link href="/blog/2019/06/10/CF1176D%EF%BC%88%E6%80%9D%E7%BB%B4%EF%BC%8C%E6%95%B0%E8%AE%BA%EF%BC%89/"/>
       <url>/blog/2019/06/10/CF1176D%EF%BC%88%E6%80%9D%E7%BB%B4%EF%BC%8C%E6%95%B0%E8%AE%BA%EF%BC%89/</url>
@@ -1481,9 +1506,9 @@
       
         <tags>
             
-            <tag> 规律 </tag>
-            
             <tag> 二分 </tag>
+            
+            <tag> 规律 </tag>
             
         </tags>
       
@@ -1989,9 +2014,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 枚举 </tag>
+            
+            <tag> 数学 </tag>
             
         </tags>
       
@@ -2352,9 +2377,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 暴力 </tag>
+            
+            <tag> 数学 </tag>
             
             <tag> 并查集 </tag>
             
